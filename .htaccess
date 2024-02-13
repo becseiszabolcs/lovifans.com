@@ -1,6 +1,7 @@
 options -indexes
 
 RewriteEngine on
-rewriteCond %{request_filename} !-f
-rewriteCond %{request_filename} !-d
-rewriteRule ^(.*)$ index.php?url=$1 [QSA]
+RewriteCond %{request_filename} !-f
+RewriteCond %{request_filename} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA]
+RewriteRule ^friends/(.*)$ /$1 [L,R=301]

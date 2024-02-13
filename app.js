@@ -22,11 +22,37 @@ function fetchMessages() {
 function displayMessages(messages) {
     $('#privmessages').empty();
     messages.forEach(function(message) {
-        $('#privmessages').append(`
-        <div class='mes outgoing'>
-            <div class='details'>${message.message}</div>
-        </div>
-        `);
+        var name = $("#profile_name").text();
+        var mes = "";
+        var direction = "outgoing";
+        var hide="hidden";
+        if(name!=message.from){
+            direction = "incoming";
+            var hide="";
+        } 
+        if(message.message.length >=  30 && !message.message.includes(" ")){
+            mes=`
+            <div class='mes ${direction}' style='line-break: anywhere;'>
+                <img ${hide} src="./image/default.png" alt="">
+                <div class='details'>
+                    <p>${message.message}</p>
+                </div>
+            </div>
+            `;
+        }
+        else{
+            mes=`
+            <div class='mes ${direction}'>
+                <img ${hide} src="./image/default.png" alt="">
+                <div class='details'>
+                    <p>${message.message}</p>
+                </div>
+            </div>
+            `;
+        }
+        
+        $('#privmessages').append(mes);
+
     });
 }
 

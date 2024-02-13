@@ -11,11 +11,11 @@
     $_SESSION['R1'] ="http://localhost/lovifans.com";
     if(!isset($_SESSION["uid"])){
         //loged out
-        $pages = ["login","signup","about","services","contact","send-password-reset",];
+        $pages = ["login","signup","about","services","contact","send-password-reset"];
     }
     else{
         //loged in
-        $pages = ["home","post","friends","finding","profile","about","services","contact",];
+        $pages = ["home","post","friends","finding","profile","about","services","contact"];
     }
     
     $percent=[0,""];
@@ -91,7 +91,7 @@
             
         }
         else {
-            $prof_img = "./image/default_user.png";
+            $prof_img = "./image/default.png";
             if($_SESSION["icid"]){
                 $pfimgid = mysqli_fetch_row($dbase,"select iid from imgconnect where icid = $_SESSION[icid]")["iid"];
                 $pfimg =  mysqli_fetch_row($dbase,"select fnname from image where iid=$pfimgid")["fnname"];
@@ -102,18 +102,18 @@
                     <header>
                         <img class='plogo' src='./image/logo.png'>
                         <nav class ='navigation'>
-                            <a class='link' href='./'>Home</a>
-                            <a class='link' href='./post'>Post</a>
-                            <a class='link' href='./friends'>Friends</a>
-                            <a class='link' href='./finding'>Finding</a>
-                            <a class='link' href='./'>Groups</a>
+                            <a class='link' href='./'>Home              </a>
+                            <a class='link' href='./post'>Post          </a>
+                            <a class='link' href='./friends'>Friends    </a>
+                            <a class='link' href='./finding'>Finding    </a>
+                            <a class='link' href='./'>Groups            </a>
                             <div class='menu'>
-                                <button onclick='window.location.href=\"./profile\"' class='btnprof'><img src='$prof_img' alt=''><a>$_SESSION[uname]</a></button>
+                                <button onclick='window.location.href=\"./profile\"' class='btnprof'><img src='$prof_img' alt=''><a id='profile_name'>$_SESSION[uname]</a></button>
                                 <div class='dropdown'>
-                                    <a href='./profile'><img src='$prof_img' class='profimg' alt=''>Profile Page              </a>
-                                    <a href=''><img src='./image/settings.png' alt=''>Profile Edit                            </a>
-                                    <a href=''><img src='./image/connect.png' alt=''>Help Question                            </a>
-                                    <a href='./pages/loged/logout.php'><img src='./image/logout.png' alt=''> Logout           </a>
+                                    <a href='./profile'>                <img src='$prof_img' class='profimg' alt='Profil image'>        Profile Page            </a>
+                                    <a href=''>                         <img src='./image/settings.png' alt='account settings icon'>    Profile Edit            </a>
+                                    <a href=''>                         <img src='./image/connect.png' alt='connect icon'>              Help Question           </a>
+                                    <a href='./pages/loged/logout.php'> <img src='./image/logout.png' alt='logout icon'>                Logout                  </a>
                                 </div>
                                 
                             </div>
@@ -135,7 +135,6 @@
 
 
     ?>
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </body>
 </html>
 

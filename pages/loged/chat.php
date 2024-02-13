@@ -7,7 +7,7 @@
     }
     
     // Fetch messages from the database
-    $query = "SELECT * FROM message where (uid = $_SESSION[uid] and ustrid='$_SESSION[ustrid]' ) or (mtoid=$_SESSION[uid] and mtostrid='$_SESSION[ustrid]') ORDER BY mdate;";
+    $query = "SELECT * FROM message where (uid = $_SESSION[uid] and ustrid='$_SESSION[ustrid]' ) or (mtoid=$_SESSION[uid] and mtostrid='$_SESSION[ustrid]') ORDER BY  mdate DESC;";
     $result = mysqli_query($dbase,$query); //$dbase->query($query);
 
     
