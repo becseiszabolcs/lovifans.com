@@ -17,13 +17,13 @@
         $to = mysqli_fetch_array(mysqli_query($dbase,"SELECT uname FROM `users` WHERE uid=$row[mtoid]"));
         //$image = mysqli_fetch_array(mysqli_query($dbase,"SELECT iid FROM `imgconnect` WHERE icid=$row[icid]"));
 
-        $name = $from["uname"];
+        $name   = $from["uname"];
         $toname = $to["uname"];
-        $pic = $row["icid"];
-        $label = $row["mlabel"];
-        $stat = $row["mstat"];
-        $eloz = $row["meloz"];
-        $date = $row["mdate"];
+        $pic    = $row["icid"];
+        $label  = $row["mlabel"];
+        $stat   = $row["mstat"];
+        $eloz   = $row["meloz"];
+        $date   = $row["mdate"];
 
 
         $mes[] = ["from"=>$name, "to"=> $toname, "message"=>$label, "picture"=>$pic, "eloz"=>$eloz, "stat"=>$stat, "date"=>$date];
