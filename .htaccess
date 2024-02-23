@@ -1,7 +1,15 @@
-options -indexes
+#options -indexes
 
 RewriteEngine on
-RewriteCond %{request_filename} !-f
-RewriteCond %{request_filename} !-d
-RewriteRule ^(.*)$ index.php?url=$1 [QSA]
+
+# Redirect all requests to the public folder
+
+
+#RewriteCond %{request_filename} !-f
+#RewriteCond %{request_filename} !-d
+#RewriteRule ^(.*)$ index.php?url=$1 [QSA]
+
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L]
+
 #RewriteRule ^/friends/(.*)$ /$1 [L,R=301]

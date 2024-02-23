@@ -1,0 +1,43 @@
+<div class="wrapper signup">
+    <div class="form-box">
+        <h1>Sign Up</h1>
+        <form action="./pages/unloged/regin_ir.php" method="post">
+            
+            <input type="text" name="uname" class="text" placeholder=" username" id="uname" onkeyup="greened(this.value);"><br>
+            <input type="email" name="umail" class="text" placeholder=" email" id="email"><br>
+
+            <div id="dpass">
+                <input type="password" name="upass1" class="text" id="ptext1" placeholder=" password" onkeyup="passwordStrength(this.value);">
+                <a class="aeye" id="eyea" onclick="apper('#ptext1','#eye1')">
+                    <img class="eye" id="eye1"  src="./image/eye.png" alt="">
+                </a><br>
+                
+                <div id="slidetext"></div>
+                <div id="slide"></div>
+                
+            </div>
+
+
+            <input type="password" name="upass2" class="text" id="ptext2" placeholder=" repeat password">
+            <a class="aeye" id="eyeb" onclick="apper('#ptext2','#eye2')">
+                <img class="eye" id="eye2"  src="./image/eye.png" alt="">
+            </a><br>
+
+            <input type="submit" value="Sign Up" class="sub" id="signup"><br><br>
+            <div id="conditions">
+                <p id="1">The username must contain<br>letters.</p>
+                <p id="2">The password must be at least 8 characters long.</p>
+                <p id="3">Password must contain letters.</p>
+                <p id="4">Password must contain numbers.</p>
+                <p id="check"><span ><input type="checkbox" name="" id="accepted"> by checked this you accept our <br><a>Terms Services</a> and <a>Privacy Policy</a>.</span></p>
+                
+            </div>
+            <div class="spanbox">
+            <span>Have you registered yet? </span><a href="./">Log in</a><br>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+
