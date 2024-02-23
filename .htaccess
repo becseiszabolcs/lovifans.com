@@ -4,4 +4,4 @@ RewriteEngine on
 RewriteCond %{request_filename} !-f
 RewriteCond %{request_filename} !-d
 RewriteRule ^(.*)$ index.php?url=$1 [QSA]
-RewriteRule ^friends/(.*)$ /$1 [L,R=301]
+#RewriteRule ^/friends/(.*)$ /$1 [L,R=301]

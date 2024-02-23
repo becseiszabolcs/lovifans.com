@@ -557,10 +557,10 @@ form .sub:hover{
     align-items: center;
     justify-content: space-between;
 }
-#flist form .searchtxt{
+ form .searchtxt{
     position: relative;
     height: 42px;
-    width: calc(100% - 80px);
+    width: calc(100% - 100px);
     border: 1px solid black;
     padding: 0 13px;
     margin-left: 10px;
@@ -570,12 +570,12 @@ form .sub:hover{
     outline: none;
 
 }
-#flist form .searchtxt:focus{
+form .searchtxt:focus{
     outline: none;
 
 }
 
-#flist form #but{
+form #but{
     width: 75px;
     height: 42px;
     color: white;
@@ -586,7 +586,7 @@ form .sub:hover{
     margin-right: 10px;
     margin-left: 0px;
 }
-#flist .list{
+.list{
     position: relative;
     padding:10px;
     overflow-y: auto;
@@ -596,7 +596,7 @@ form .sub:hover{
 #flist .list::-webkit-scrollbar{
     width:0px;
 }
-#flist .list a{
+.list a{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -610,7 +610,7 @@ form .sub:hover{
     border: 3.5px solid white ;
 
 }
-#flist .list a:hover{
+.list a:hover{
     background-color: rgba(0,0,0,0.27);
     color: white;
     & .content p{
@@ -618,20 +618,20 @@ form .sub:hover{
     }
 }
 
-#flist .list a .content {
+.list a .content {
     display: flex;
     align-items: center;
 }
-#flist .list a .content span{
+.list a .content span{
     font-size: 18px;
     font-weight: 400;
 }
-#flist .list a .content p{
+.list a .content p{
     font-size: 13px;
     color: gray;
 }
 
-#flist .list a .content img{
+.list a .content img{
     border-radius: 50%;
     border: 2px solid black;
     width: 50px;
@@ -742,26 +742,15 @@ form .sub:hover{
 
 
 #chat form {
-
+    
     justify-content: space-between;
     min-height: 60px;
-    max-height: 200px;
+    max-height: 175px;
+    width: 100%;
+    margin-bottom: 25px;
 
     padding: 10px 20px;
 
-}
-#chat form .text{
-    padding: 5px 10px;
-    margin: 5px 0;
-    font-size: 18px;
-    width: 70%;
-    min-height: 50px;
-    max-height: 180px;
-    border-radius: 50px ;
-    border: 2px solid black
-}
-#chat form .text:focus{
-    outline: none;
 }
 #chat form button{
     padding: 5px 10px;
@@ -785,5 +774,57 @@ form .sub:hover{
 
 
 }
+.flex-container {
+    align-items: center;
+    display: flex;
+    align-items: flex-start; 
+    transition: opacity 0.3s;
+}
 
+.flex-item{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 5px 20px;
+    display: flex;
+    align-items: flex-start;
+    border:2px solid black ;
+    border-radius: 30px;
+   
+}
+
+form textarea {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 35px;
+    max-height: 100px;
+    padding: 0px;
+    margin-top: 5px;
+    font-size: 16px;
+    resize: none;
+    overflow-y: hidden;
+    border: none;
+}
+textarea:focus{
+    outline: none;
+}
+#fileInput{
+    display: none;
+}
+
+
+/*finding page*/
+#finding #options{
+    display: block;
+    width: 15%;
+    min-width: 120px;
+    height: 95%;
+    padding: 10px;
+    margin: 10px;
+    min-width: 300px;
+    max-width: 450px;
+    background-color: rgba(209, 158, 17,0.8);
+    border-radius: 10px;
+}
 

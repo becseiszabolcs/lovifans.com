@@ -35,11 +35,18 @@
         </div>
 
         <form action="pages/loged/send.php" method="post" class="send" enctype="multipart/form-data">
-            <label for="">
-                <input type="text " class="text"  name="text" id="text">
-                
+            <div class="flex-container ">
+            <!-- Your content goes here -->
+                <div class="flex-item">
+                    <!--<input type="file" id="file" name="file" multiple>-->
+                    <div class="file-list">
+                    </div>
+                    <textarea id="message" name="message" rows="1" oninput="textheight()" placeholder="Type something..."></textarea>
+                    
+                </div>
                 <button onclick="sendMessage()">Send</button>
-            </label>
+            </div>
+
             <!--<input type="file" name="file" id="file" multiple>-->
             <!--<input type="submit" value="send">-->
         </form>

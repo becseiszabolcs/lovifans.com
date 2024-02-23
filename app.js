@@ -55,6 +55,15 @@ function displayMessages(messages) {
 
     });
 }
+function textheight() {
+    const rows = $("#message").val().split('\n').length;
+
+    var formh = Math.min(rows, 5);
+
+    $("#message").css("height", `${formh * 20}px`);
+    $("#send_mes").css("height", `${formh * 20}px`);
+}
+
 
 function sendMessage() {
     var message = $('#message').val();
@@ -75,4 +84,5 @@ function sendMessage() {
         });
     }
 }
+
  
