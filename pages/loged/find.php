@@ -8,7 +8,7 @@
             <a href="./finding?p=all">
                 <div class="content">
                     <div class="details">
-                        <span>all</span>
+                        <span>All</span>
 
                     </div>
                 </div>
@@ -16,46 +16,36 @@
             <a href="./finding?p=friendsof">
                 <div class="content">
                     <div class="details">
-                        <span>friends of my friends</span>
+                        <span>Friends of my Friends</span>
                     </div>
                 </div>
             </a>
             <a href="./finding?p=unknown">
                 <div class="content">
                     <div class="details">
-                        <span>are still unknown</span>
+                        <span>Are still unknown?</span>
                     </div>
                 </div>
             </a>
             <a href="./finding?p=friends">
                 <div class="content">
                     <div class="details">
-                        <span>my friends' profiles</span>
-
+                        <span>My friend's profiles</span>
                     </div>
                 </div>
             </a>
-
-            
+            <a href="./finding?p=request">
+                <div class="content">
+                    <div class="details">
+                        <span>Friend requests</span>
+                    </div>
+                </div>
+            </a>          
         </div>
     </div>
 
     <div id="profiles">
-        <div class="profile">
-            <img src='./image/default.png' alt=''><a id='profile_name'>
-            <p>Profile Name</p>
-            <div class="buttons">
 
-                <form method="post">
-                    <input disabled hidden type="text" name="profile" id="profile" value="ustrid">
-                    <button>Add friend</button>
-                    <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
-                    <button>Profile</button>
-                </form>
-
-            </div>
-
-        </div>
         
     </div>
     

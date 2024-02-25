@@ -7,7 +7,7 @@
     }
     
     // Fetch messages from the database
-    $query = "SELECT * FROM users where uid != $_SESSION[uid]";
+    $query = "SELECT * FROM users where uid != $_SESSION[uid] and ustat like 'A%' ";
     $result = mysqli_query($dbase,$query); //$dbase->query($query);
 
     
