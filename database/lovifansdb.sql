@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2024 at 07:09 PM
+-- Generation Time: Feb 25, 2024 at 03:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -169,7 +169,14 @@ INSERT INTO `login` (`lid`, `uid`, `ldate`, `lip`) VALUES
 (13, 1, '2024-01-26 16:59:01', '127.0.0.1'),
 (14, 1, '2024-01-27 12:51:38', '127.0.0.1'),
 (15, 1, '2024-01-27 14:06:56', '127.0.0.1'),
-(16, 1, '2024-01-28 12:03:47', '127.0.0.1');
+(16, 1, '2024-01-28 12:03:47', '127.0.0.1'),
+(17, 10, '2024-02-25 10:49:38', '127.0.0.1'),
+(18, 11, '2024-02-25 11:13:11', '127.0.0.1'),
+(19, 10, '2024-02-25 15:17:41', '127.0.0.1'),
+(20, 10, '2024-02-25 15:19:54', '127.0.0.1'),
+(21, 10, '2024-02-25 15:22:09', '127.0.0.1'),
+(22, 10, '2024-02-25 15:26:22', '127.0.0.1'),
+(23, 10, '2024-02-25 15:30:06', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -180,14 +187,25 @@ INSERT INTO `login` (`lid`, `uid`, `ldate`, `lip`) VALUES
 CREATE TABLE `message` (
   `mid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
+  `ustrid` varchar(100) NOT NULL,
   `mtoid` int(11) NOT NULL,
+  `mtostrid` varchar(100) NOT NULL,
   `mlabel` text NOT NULL,
   `icid` int(11) DEFAULT NULL,
-  `meloz` varchar(100) NOT NULL,
+  `meloz` varchar(100) DEFAULT NULL,
   `mstat` varchar(1) NOT NULL COMMENT 'aktive, deleted, suspensed',
   `mdate` datetime NOT NULL DEFAULT current_timestamp(),
   `mip` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`mid`, `uid`, `ustrid`, `mtoid`, `mtostrid`, `mlabel`, `icid`, `meloz`, `mstat`, `mdate`, `mip`) VALUES
+(1, 11, 'YuBoERrLuGElKbmAhzlpeqydJCxiAlTyLT5FcgsdeKGQYMfT4SHgWNLctHrjqduma7Bhkkgg3HF8ra56wUW9HvpzsP92tO6KzAoT', 10, 'RVz9tHMIM1h3Gro1VJly', 'hello world', NULL, NULL, 'A', '2024-02-25 11:56:40', ''),
+(2, 11, 'YuBoERrLuGElKbmAhzlpeqydJCxiAlTyLT5FcgsdeKGQYMfT4SHgWNLctHrjqduma7Bhkkgg3HF8ra56wUW9HvpzsP92tO6KzAoT', 10, 'RVz9tHMIM1h3Gro1VJly', 'hello world', NULL, NULL, 'A', '2024-02-25 11:56:49', ''),
+(3, 11, 'YuBoERrLuGElKbmAhzlpeqydJCxiAlTyLT5FcgsdeKGQYMfT4SHgWNLctHrjqduma7Bhkkgg3HF8ra56wUW9HvpzsP92tO6KzAoT', 10, 'RVz9tHMIM1h3Gro1VJly', 'hello world', NULL, NULL, 'A', '2024-02-25 11:58:15', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -230,7 +248,21 @@ INSERT INTO `note` (`nid`, `lid`, `nurl`, `ndate`, `nip`) VALUES
 (20, 14, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-27 12:51:38', '127.0.0.1'),
 (21, 15, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-27 14:06:56', '127.0.0.1'),
 (22, 16, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-28 12:03:47', '127.0.0.1'),
-(23, 16, '/lovifans.com/pages/loged/logout.php', '2024-01-28 14:28:09', '127.0.0.1');
+(23, 16, '/lovifans.com/pages/loged/logout.php', '2024-01-28 14:28:09', '127.0.0.1'),
+(24, 17, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 10:49:38', '127.0.0.1'),
+(25, 17, '/lovifans.com/pages/loged/logout.php', '2024-02-25 11:12:14', '127.0.0.1'),
+(26, 18, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 11:13:11', '127.0.0.1'),
+(27, 18, '/lovifans.com/pages/loged/logout.php', '2024-02-25 15:17:28', '127.0.0.1'),
+(28, 19, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 15:17:41', '127.0.0.1'),
+(29, 19, '/lovifans.com/pages/loged/logout.php', '2024-02-25 15:18:21', '127.0.0.1'),
+(30, 20, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 15:19:54', '127.0.0.1'),
+(31, 20, '/lovifans.com/pages/loged/logout.php', '2024-02-25 15:20:01', '127.0.0.1'),
+(32, 21, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 15:22:09', '127.0.0.1'),
+(33, 21, '/lovifans.com/pages/loged/logout.php', '2024-02-25 15:22:11', '127.0.0.1'),
+(34, 22, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 15:26:22', '127.0.0.1'),
+(35, 22, '/lovifans.com/pages/loged/logout.php', '2024-02-25 15:26:25', '127.0.0.1'),
+(36, 23, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 15:30:06', '127.0.0.1'),
+(37, 23, '/lovifans.com/pages/loged/logout.php', '2024-02-25 15:30:36', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -314,7 +346,7 @@ CREATE TABLE `reaction` (
 CREATE TABLE `users` (
   `uid` int(11) NOT NULL,
   `icid` int(11) DEFAULT NULL,
-  `ustrid` varchar(20) NOT NULL,
+  `ustrid` varchar(100) NOT NULL,
   `uname` varchar(30) NOT NULL,
   `umail` varchar(50) NOT NULL,
   `upass` varchar(60) NOT NULL,
@@ -330,11 +362,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`uid`, `icid`, `ustrid`, `uname`, `umail`, `upass`, `ustat`, `udate`, `ucom`, `uip`) VALUES
 (1, NULL, 'AmIEBqm06lHerdvIlt9h', 'helloka', 'becsei.szabi@gmail.com', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', 'A, NLI', '2024-01-04 01:36:50', NULL, '127.0.0.1'),
-(5, NULL, '8NSGWAVrF8J5DKHvn51u', 'kakukosmadár', 'mr.vendeg748@gmail.com', '$2y$12$IL5mGjffdleDWml11rak2.2mV6YHIR4OHJpDI0PlADVOr9d3fseqW', 'A, NLI', '2024-01-05 18:00:47', NULL, '127.0.0.1'),
-(6, NULL, 'fE9m9Oy603NLQyGh15xP', 'kauk', 'mr.vendeg748@gmail.com', '$2y$12$rzll7uHm9R2EkN7qgN2Eo.DA8gf5tt/iGwdHTRq54To2o1num5LMi', 'A, NLI', '2024-01-05 18:02:09', NULL, '127.0.0.1'),
-(7, NULL, '6Hs11RMF2n4QMdamKkCz', 'kakukos', 'mr.vendeg748@gmail.com', '$2y$12$GyQPbd7odhbGeopQSsRmxO736t4CIFRcJlJPqwyJkKFnppurZOHL2', 'A, NLI', '2024-01-05 18:05:00', NULL, '127.0.0.1'),
 (8, NULL, 'Yuzv1GC0wlgV5m9s3oVQ', 'kukac', 'mr.vendeg748@gmail.com', '$2y$12$AGAhVER3kt4bL.5rWuWbaexoE.R2Xin38yOv8KhTiwWM723I.ZNlC', 'A, NLI', '2024-01-05 18:08:41', NULL, '127.0.0.1'),
-(9, NULL, 'IDMouIORZxEQFRfYhBvs', 'kkkkkkk', 'kkkkkkkkkkkk@gmail.com', '$2y$12$R1PoT/1vH0iJTAnZyf0fbOJhXu6xDivehm26V2Ll2XUgBwEeAnooi', 'A, NLI', '2024-01-05 18:12:52', NULL, '127.0.0.1');
+(9, NULL, 'IDMouIORZxEQFRfYhBvs', 'kkkkkkk', 'kkkkkkkkkkkk@gmail.com', '$2y$12$R1PoT/1vH0iJTAnZyf0fbOJhXu6xDivehm26V2Ll2XUgBwEeAnooi', 'A, NLI', '2024-01-05 18:12:52', NULL, '127.0.0.1'),
+(10, NULL, 'RVz9tHMIM1h3Gro1VJly', 'teszt1', 'subject@test1.com', '$2y$12$Xh/PI.lXOXYUqA0z/Gdf5e9zIijHy8gjhNg4xswKmqxy5Vw.g8bVG', 'A,2024.02.36 15:30:36', '2024-02-25 10:49:25', NULL, '127.0.0.1'),
+(11, NULL, 'YuBoERrLuGElKbmAhzlpeqydJCxiAlTyLT5FcgsdeKGQYMfT4SHgWNLctHrjqduma7Bhkkgg3HF8ra56wUW9HvpzsP92tO6KzAoT', 'cicafiju', 'anyad@gmail.com', '$2y$12$YFcKJ/6KS0Vg5sJdeWArfuAicivjIRYbgZG3rD5/oXcbnJ9cDM0eq', 'A, NLI', '2024-02-25 11:12:51', NULL, '127.0.0.1');
 
 --
 -- Indexes for dumped tables
@@ -486,19 +517,19 @@ ALTER TABLE `imgconnect`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `note`
 --
 ALTER TABLE `note`
-  MODIFY `nid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `nid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `pass_reset`
@@ -522,7 +553,7 @@ ALTER TABLE `reaction`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

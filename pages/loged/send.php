@@ -35,7 +35,7 @@
     if($bool){
         mysqli_query($dbase,"
         INSERT INTO  message  ( mid ,  uid ,  ustrid ,  mtoid ,  mtostrid ,  mlabel ,  icid ,  meloz ,  mstat ,  mdate ,  mip ) 
-        VALUES (NULL, $_SESSION[uid], '$_SESSION[ustrid]', 11, '6qkRHd5Wv3OiEqqSJXyP', '$text', NULL, NULL, 'A', current_timestamp(), '$_SERVER[REMOTE_ADDR]')
+        VALUES (NULL, $_SESSION[uid], '$_SESSION[ustrid]', 10, 'RVz9tHMIM1h3Gro1VJly', '$text', NULL, NULL, 'A', current_timestamp(), '$_SERVER[REMOTE_ADDR]')
         ");
     }
 

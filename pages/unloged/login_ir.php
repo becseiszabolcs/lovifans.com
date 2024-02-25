@@ -3,6 +3,7 @@
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $userid = $_POST["uname"];
         $pass = $_POST["upass"];
+        $bool = true;
 
         if((!empty($userid)) & (!empty($pass)) & (!is_numeric($userid))){             
             $Udata = mysqli_fetch_assoc(mysqli_query($dbase, "select * from users where uname = '$userid' or umail = '$userid'"));
@@ -14,7 +15,12 @@
                 $_SESSION["uname"]  = $Udata["uname"]   ;
                 $_SESSION["umail"]  = $Udata["umail"]   ;
                 $_SESSION["upw"]    = $Udata["upass"]   ;
-                $_SESSION["stat"]   = $Udata["ustat"]   ;
+                mysqli_query($dbase,"UPDATE  users  SET  ustat  = 'A,Online' WHERE  users . uid  = $_SESSION[uid]");
+                if(!str_contains($Udata["ustat"],"D") && !str_contains($Udata["ustat"],"S")){
+                    $_SESSION["stat"]   = "A, Online";
+                    $bool = false;
+                } 
+                
                 
 
                 mysqli_query($dbase,"
@@ -29,6 +35,8 @@
                 ");
                 
                 mysqli_close($dbase);
+                if(!$bool) include("./logaut.php");
+
                 header("Location: $_SESSION[R1]");
                 die();
 

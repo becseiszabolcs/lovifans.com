@@ -18,6 +18,8 @@ if(isset($_SESSION["lid"])){
 
 session_start();
 if(isset($_SESSION["uid"])) {
+    $date = date("Y.m.s H:i:s");
+    mysqli_query($dbase,"UPDATE  users  SET  ustat  = 'A,$date' WHERE  users . uid  = $_SESSION[uid]");
     unset($_SESSION["uid"]    );
     unset($_SESSION["ustrid"] );
     unset($_SESSION["icid"]   );

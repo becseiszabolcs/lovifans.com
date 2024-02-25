@@ -6,7 +6,21 @@
         $umail = $_POST["umail"];
         $options = ["cost" => 12];
         $pass = password_hash($_POST["upass1"],PASSWORD_BCRYPT,$options);
-        $usrtid = randoms();
+        $uids = mysqli_fetch_array(mysqli_query($dbase,"select ustrid from users"));
+
+        while(true){
+            $bool = false;
+            $usrtid = randoms();
+            foreach($uids as $id){
+                if($id == $usrtid){
+                    $bool = true;
+                    break;
+                }
+            }
+            if(!$bool) break;
+        }
+
+        
         
         //$yes = mysqli_fetch_array(mysqli_query($dbase,"select * from users umail='$umail'"));
         //if($yes) die("<script>alert('Sorry, someone already registered with this email address.');window.location.href='$_SESSION[R1]/?page=reg'</script>");
