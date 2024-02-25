@@ -8,7 +8,7 @@
         <div class="list">
             <a href="">
                 <div class="content">
-                    <img src="./image/default.png" alt="">
+                    <img src=" /lovifans.com/image/default.png" alt="">
                     <div class="details">
                         <span>Frank Friend</span>
                         <p>this is a test message.</p>
@@ -23,7 +23,7 @@
     </div>
     <div id="chat">
         <div id="header">
-            <img src="./image/default.png" alt="">
+            <img src=" /lovifans.com/image/default.png" alt="">
             <span>Frank Friend <br> <p>Online</p></span>
             
 

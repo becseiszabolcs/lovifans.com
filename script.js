@@ -2,12 +2,12 @@ function apper(id,eye){
     var eye  = document.querySelector(eye);
     var pw = document.querySelector(id);
     
-    if(eye.getAttribute("src") === "./image/eye.png") {
-        eye.setAttribute("src","./image/eye-off.png");
+    if(eye.getAttribute("src") === " /lovifans.com/image/eye.png") {
+        eye.setAttribute("src"," /lovifans.com/image/eye-off.png");
         pw.setAttribute("type","text");
     }
     else {
-        eye.setAttribute("src","./image/eye.png"); 
+        eye.setAttribute("src"," /lovifans.com/image/eye.png"); 
         pw.setAttribute("type","password");
     }
     

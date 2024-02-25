@@ -20,7 +20,7 @@ function displayMembers(members) {
     $('#profiles').empty();
     members.forEach(function(member) {
         var profil = "";
-        var img_root = "./image/default.png";
+        var img_root = " /lovifans.com/image/default.png";
         if(member.profil_pic != null) img_root = member.profil_pic;
         
         profil=`
@@ -77,7 +77,7 @@ function displayMessages(messages) {
         if(message.message.length >=  30 && !message.message.includes(" ")){
             mes=`
             <div class='mes ${direction}' style='line-break: anywhere;'>
-                <img ${hide} src="./image/default.png" alt="">
+                <img ${hide} src=" /lovifans.com/image/default.png" alt="">
                 <div class='details'>
                     <p>${message.message}</p>
                 </div>
@@ -87,7 +87,7 @@ function displayMessages(messages) {
         else{
             mes=`
             <div class='mes ${direction}'>
-                <img ${hide} src="./image/default.png" alt="">
+                <img ${hide} src=" /lovifans.com/image/default.png" alt="">
                 <div class='details'>
                     <p>${message.message}</p>
                 </div>
