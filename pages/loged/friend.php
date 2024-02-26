@@ -1,7 +1,7 @@
 
 <div id="chatsite" class="sites">
     <div id="flist">
-        <form action="" method="post" class="search">
+        <form method="get" class="search">
             <input type="text" name="" class="searchtxt">
             <input type="submit" value="search" id="but">
         </form>
@@ -38,7 +38,7 @@
             <div class="flex-container ">
             <!-- Your content goes here -->
                 <div class="flex-item">
-                    <!--<input type="file" id="file" name="file" multiple>-->
+                    <input hidden type="file" id="file" name="file" multiple>
                     <div class="file-list">
                     </div>
                     <textarea id="message" name="message" rows="1" oninput="textheight()" placeholder="Type something..."></textarea>

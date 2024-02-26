@@ -26,11 +26,6 @@
         $str .= substr($text, $n) . "<br>";
         $text = $str;
     }
-
-
-
-
-
     
     if($bool){
         mysqli_query($dbase,"

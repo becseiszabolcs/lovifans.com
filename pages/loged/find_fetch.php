@@ -1,16 +1,14 @@
 <?php
     session_start();
     include("../../connect.php");
-    
-    if ($dbase->connect_error) {
-        die("Connection failed: " . $dbase->connect_error);
-    }
-    
+       
     // Fetch messages from the database
-    $query = "SELECT * FROM users where uid != $_SESSION[uid] and ustat like 'A%' ";
-    $result = mysqli_query($dbase,$query); //$dbase->query($query);
+    if(isset($_GET["search"])) $query = "SELECT * FROM users where uid != $_SESSION[uid] and ustat like 'A%' and (uname like '%$_GET[search]%' or )";
+    else $query = "SELECT * FROM users where uid != $_SESSION[uid] and ustat like 'A%' ";
 
     
+    $result = mysqli_query($dbase,$query); //$dbase->query($query);
+
     $profil = [];
     while ($row = $result->fetch_assoc()) {
         if($row["icid"]){

@@ -872,7 +872,9 @@ textarea:focus{
     display: flex;
 
 }
-.profile .buttons form button{
+.profile .buttons form .button{
+    display: block;
+    text-align: center;
     margin: 5px;
     width: 100px;
     height: 40px;
@@ -882,10 +884,10 @@ textarea:focus{
     border-radius: 20px;
     transition: all 0.3s;
 }
-.profile .buttons form button:hover{
+.profile .buttons form .button:hover{
     background-color: #ddd;
 }
-.profile .buttons form button:active{
+.profile .buttons form .button:active{
     background-color: #333;
     color: white;
 }

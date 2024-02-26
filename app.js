@@ -16,6 +16,7 @@ function fetchMembers() {
         }
     });
 }
+
 function displayMembers(members) {
     $('#profiles').empty();
     members.forEach(function(member) {
@@ -28,11 +29,11 @@ function displayMembers(members) {
             <img src='${img_root}' alt='${member.pic_alt}'><a id='profile_name'>
             <p>${member.name}</p>
             <div class="buttons">
-                <form method="post">
+                <form id="friendRequestForm" method="post">
                     <input disabled hidden type="text" name="profile" id="profile" value="${member.profil_id}">
-                    <button>Add friend</button>
+                    <button id="friendAdd" class="button">Add friend</button>
                     <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
-                    <button>Profile</button>
+                    <button class="button">Profile</button>
                 </form>
             </div>
         </div>
@@ -42,6 +43,29 @@ function displayMembers(members) {
 
     });
 }
+
+$(document).ready(function() {
+
+    $("#friendAdd").click(function(event) {
+        event.preventDefault(); 
+
+        var profileId = $("#profile").val();
+
+        $.ajax({
+            url: r1 + 'pages/loged/friend_req.php', 
+            method: 'POST',
+            data: { profile: profileId },
+            success: function() {
+                console.log('Friend request sent successfully');
+                
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error sending friend request:', errorThrown);
+
+            }
+        });
+    });
+});
 
 
 
@@ -111,22 +135,34 @@ function textheight() {
 
 function sendMessage() {
     var message = $('#message').val();
-    var file = $("#file").val();
-    var sendr = r1+'pages/loged/send.php';
-    if ( message) {
+    var fileInput = document.getElementById('file'); // get the file input element
+
+
+    var sendr = r1 + 'pages/loged/send.php';
+
+    if (message || fileInput) {
+        var formData = new FormData();
+        if(message) formData.append('message', message);
+        if(fileInput)    formData.append('file', fileInput);
+
         $.ajax({
-            url: sendr, // Create this file to handle message sending
+            url: sendr,
             method: 'POST',
-            data: { message: message , file: file},
-            success: function() {
-                fetchMessages(); // Refresh messages after sending
-                $('#message').val(''); // Clear the input field
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function () {
+                fetchMessages();
+                $('#message').val('');
+                // Optionally, clear the file input if needed
+                $('#file').val('');
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 console.error('Error sending message:', errorThrown);
             }
         });
     }
 }
+
 
  

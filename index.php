@@ -45,7 +45,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="/lovifans.com/app.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro">
     
@@ -67,9 +67,9 @@
                         <img class='plogo' src='/lovifans.com/image/logo.png'>
                         <h1 class='logo'>LoviFans</h1>
                         <nav class ='navigation'>
-                            <a class='link' href='about'>About</a>
-                            <a class='link' href='services'>Services</a>
-                            <a class='link' href='contact'>Contact</a>
+                            <a class='link' href='about/'>About</a>
+                            <a class='link' href='services/'>Services</a>
+                            <a class='link' href='contact/'>Contact</a>
                             <button onclick='window.location.href=\"./\"' class='btnLogin-pop'>Login</button>
                         </nav>
                     </header>
@@ -85,7 +85,7 @@
             elseif($p == "about")               include("./pages/about.html");
             elseif($p == "services")            include("./pages/services.html");
             elseif($p == "contact")             include("./pages/contact.html");
-            else                                    include("./pages/404.php");
+            else                                include("./pages/404.php");
             
             
             
@@ -103,14 +103,14 @@
                         <img class='plogo' src=' /lovifans.com/image/logo.png'>
                         <nav class ='navigation'>
                             <a class='link' href=' /lovifans.com/'>Home              </a>
-                            <a class='link' href=' /lovifans.com/post'>Post          </a>
-                            <a class='link' href=' /lovifans.com/friends'>Friends    </a>
-                            <a class='link' href=' /lovifans.com/finding'>Finding    </a>
-                            <a class='link' href=' /lovifans.com/'>Groups            </a>
+                            <a class='link' href=' /lovifans.com/post/'>Post          </a>
+                            <a class='link' href=' /lovifans.com/friends/'>Friends    </a>
+                            <a class='link' href=' /lovifans.com/finding/'>Finding    </a>
+                            <a class='link' href=' /lovifans.com/groups/'>Groups            </a>
                             <div class='menu'>
                                 <button onclick='window.location.href=\" /lovifans.com/profile\"' class='btnprof'><img src='$prof_img' alt=''><a id='profile_name'>$_SESSION[uname]</a></button>
                                 <div class='dropdown'>
-                                    <a href=' /lovifans.com/profile'>                <img src='$prof_img' class='profimg' alt='Profil image'>        Profile Page            </a>
+                                    <a href=' /lovifans.com/profile/'>  <img src='$prof_img' class='profimg' alt='Profil image'>                     Profile Page            </a>
                                     <a href=''>                         <img src=' /lovifans.com/image/settings.png' alt='account settings icon'>    Profile Edit            </a>
                                     <a href=''>                         <img src=' /lovifans.com/image/connect.png' alt='connect icon'>              Help Question           </a>
                                     <a href='./pages/loged/logout.php'> <img src=' /lovifans.com/image/logout.png' alt='logout icon'>                Logout                  </a>

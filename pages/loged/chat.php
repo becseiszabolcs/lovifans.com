@@ -2,10 +2,6 @@
     session_start();
     include("../../connect.php");
     
-    if ($dbase->connect_error) {
-        die("Connection failed: " . $dbase->connect_error);
-    }
-    
     // Fetch messages from the database
     $query = "SELECT * FROM message where ustrid='$_SESSION[ustrid]' or  mtostrid='$_SESSION[ustrid]' ORDER BY  mdate DESC";
     $result = mysqli_query($dbase,$query); //$dbase->query($query);
