@@ -87,7 +87,7 @@
 
 
         fetchMembers();
-        setInterval(fetchMembers, 5000);
+        setInterval(fetchMembers, 10000);
     </script>
     </div>
 </div>
