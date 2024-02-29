@@ -34,7 +34,7 @@
 
         </div>
 
-        <form action="pages/loged/send.php" method="post" class="send" enctype="multipart/form-data">
+        <form method="post" class="send" enctype="multipart/form-data">
             <div class="flex-container ">
             <!-- Your content goes here -->
                 <div class="flex-item">
@@ -42,7 +42,6 @@
                     <div class="file-list">
                     </div>
                     <textarea id="message" name="message" rows="1" oninput="textheight()" placeholder="Type something..."></textarea>
-                    
                 </div>
                 <button onclick="sendMessage()">Send</button>
             </div>

@@ -44,15 +44,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="/lovifans.com/app.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro">
-    
     <link rel="icon" href="/lovifans.com/image/logo.png" type="image/x-icon">
+    
     <title><?=ucfirst($p)?> > LoviFans</title>
+
     <link rel="stylesheet" href="/lovifans.com/style.css">
-    <script src="/lovifans.com/script.js"></script>
+    <script src="<?=$_SESSION['R1']?>/js/jquery.js"></script>
+    <script src="<?=$_SESSION['R1']?>/js/script.js"></script>
+    <script src="<?=$_SESSION['R1']?>/js/app.js"></script>
 
 </head>
 <body>

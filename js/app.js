@@ -49,14 +49,14 @@ function displayMembers(members) {
 function addFriend(id) {
 
     var profil = $(`#profile${id}`).val();
-    var sendr = r1+'pages/loged/friend_req.php';
+    var reqr = r1+'pages/loged/friend_req.php';
     var reqData = new FormData();
 
     if(profil){
         reqData.append('profile', profil);
 
         $.ajax({
-            url: sendr,
+            url: reqr,
             method: 'POST',
             data: reqData,
             processData: false,

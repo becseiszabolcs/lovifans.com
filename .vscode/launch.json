@@ -7,12 +7,12 @@
         
         {
             "name": "Attach",
-            "type": "firefox",
+            "type": "chrome",
             "request": "attach"
         },
         {
             "name": "Launch localhost",
-            "type": "firefox",
+            "type": "chrome",
             "request": "launch",
             "url": "http://localhost/lovifans.com/"
         }
