@@ -12,26 +12,26 @@ function fetchMembers() {
             displayMembers(data);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error fetching messages:', errorThrown);
+            console.error('Error fetching members:', errorThrown);
         }
     });
 }
 
 function displayMembers(members) {
     $('#profiles').empty();
+    var id = 0; 
     members.forEach(function(member) {
         var profil = "";
-        var img_root = " /lovifans.com/image/default.png";
+        var img_root = "/lovifans.com/image/default.png";
         if(member.profil_pic != null) img_root = member.profil_pic;
-        
         profil=`
         <div class="profile">
             <img src='${img_root}' alt='${member.pic_alt}'><a id='profile_name'>
             <p>${member.name}</p>
             <div class="buttons">
-                <form id="friendRequestForm" method="post">
-                    <input disabled hidden type="text" name="profile" id="profile" value="${member.profil_id}">
-                    <button id="friendAdd" class="button">Add friend</button>
+                <form id="friendRequest${id}"  method="post">
+                    <input disable hidden type="text" name="profile" id="profile${id}" value="${member.profile_id}">
+                    <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">Add friend</button>
                     <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
                     <button class="button">Profile</button>
                 </form>
@@ -39,33 +39,39 @@ function displayMembers(members) {
         </div>
         `;
         
-        $('#profiles').append(profil);
-
+        $(`#profiles`).append(profil);
+        id++;
     });
+
 }
 
-$(document).ready(function() {
 
-    $("#friendAdd").click(function(event) {
-        event.preventDefault(); 
+function addFriend(id) {
 
-        var profileId = $("#profile").val();
+    var profil = $(`#profile${id}`).val();
+    var sendr = r1+'pages/loged/friend_req.php';
+    var reqData = new FormData();
+
+    if(profil){
+        reqData.append('profile', profil);
 
         $.ajax({
-            url: r1 + 'pages/loged/friend_req.php', 
+            url: sendr,
             method: 'POST',
-            data: { profile: profileId },
-            success: function() {
-                console.log('Friend request sent successfully');
-                
+            data: reqData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log('Friend request sent successfully:', data);
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 console.error('Error sending friend request:', errorThrown);
-
             }
         });
-    });
-});
+    }
+}   
+
+
 
 
 
