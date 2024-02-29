@@ -67,17 +67,14 @@
                         <img class='plogo' src='/lovifans.com/image/logo.png'>
                         <h1 class='logo'>LoviFans</h1>
                         <nav class ='navigation'>
-                            <a class='link' href='about/'>About</a>
-                            <a class='link' href='services/'>Services</a>
-                            <a class='link' href='contact/'>Contact</a>
+                            <a class='link' href='about'>About</a>
+                            <a class='link' href='services'>Services</a>
+                            <a class='link' href='contact'>Contact</a>
                             <button onclick='window.location.href=\"./\"' class='btnLogin-pop'>Login</button>
                         </nav>
                     </header>
-            ";
-            
-            
+            ";   
 
-            
             if    ($p == "login")               include("./pages/unloged/login.html");
             elseif($p == "password-reset")      header("Location: ./password-reset.php");
             elseif($p == "send-password-reset") header("Location: ./send-password-reset.html");
@@ -86,8 +83,6 @@
             elseif($p == "services")            include("./pages/services.html");
             elseif($p == "contact")             include("./pages/contact.html");
             else                                include("./pages/404.php");
-            
-            
             
         }
         else {
@@ -103,10 +98,10 @@
                         <img class='plogo' src=' /lovifans.com/image/logo.png'>
                         <nav class ='navigation'>
                             <a class='link' href=' /lovifans.com/'>Home              </a>
-                            <a class='link' href=' /lovifans.com/post/'>Post          </a>
-                            <a class='link' href=' /lovifans.com/friends/'>Friends    </a>
-                            <a class='link' href=' /lovifans.com/finding/'>Finding    </a>
-                            <a class='link' href=' /lovifans.com/groups/'>Groups            </a>
+                            <a class='link' href=' /lovifans.com/post'>Post          </a>
+                            <a class='link' href=' /lovifans.com/friends'>Friends    </a>
+                            <a class='link' href=' /lovifans.com/finding'>Finding    </a>
+                            <a class='link' href=' /lovifans.com/groups'>Groups            </a>
                             <div class='menu'>
                                 <button onclick='window.location.href=\" /lovifans.com/profile\"' class='btnprof'><img src='$prof_img' alt=''><a id='profile_name'>$_SESSION[uname]</a></button>
                                 <div class='dropdown'>
