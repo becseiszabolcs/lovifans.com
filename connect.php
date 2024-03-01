@@ -39,7 +39,7 @@ ini_set('dispalay_errors',0);
 
  }
 
- function randoms($len = 100){
+ function randoms($len = 20){
          $c = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
          $rnd = "";
          for($i=1;$i<=$len;$i++) $rnd.= $c[rand(0,61)];

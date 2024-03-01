@@ -7,11 +7,13 @@
     $result = mysqli_query($dbase,$query); //$dbase->query($query);
 
     
+    
     $mes = [];
     while ($row = $result->fetch_assoc()) {
         $from = mysqli_fetch_array(mysqli_query($dbase,"SELECT uname FROM `users` WHERE uid=$row[uid]"));
         $to = mysqli_fetch_array(mysqli_query($dbase,"SELECT uname FROM `users` WHERE uid=$row[mtoid]"));
         //$image = mysqli_fetch_array(mysqli_query($dbase,"SELECT iid FROM `imgconnect` WHERE icid=$row[icid]"));
+        
 
         $name   = $from["uname"];
         $toname = $to["uname"];

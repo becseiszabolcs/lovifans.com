@@ -300,7 +300,7 @@ header form .text:focus{
     margin-top: 5px;
     margin-bottom: 0;
     margin-left: 5%;
-    border-radius: 50px;
+    border-radius: 5px;
     padding: auto;
     padding-left: 12px;
     padding-top: 2px;
@@ -443,21 +443,18 @@ form .sub:hover{
     color: black;
     border-color: rgb(209, 158, 17);
 }
-.signup form .sub{
+.signup form #signup{
     margin-left: 160px;
 }
 #signup:disabled,
 #signup[disabled]{
-    margin: 5px;
-    margin-left: 180px;
+    margin-left: 160px;
     color: grey;
     font-size: 14px;
     font-weight: bold;
     background: none;
-    width: 90px;
-    height: 40px;
     border-radius: 7px;
-    border: 2px solid gray;
+    border: 2px solid grey;
 }
 .form-box form .spanbox{
     text-shadow: 2px 2px 5px black;

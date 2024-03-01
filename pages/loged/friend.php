@@ -51,6 +51,8 @@
         </form>
 
         <script>
+            //fetchfriends();
+            //setInterval(fetchfriends, 5000);
             fetchMessages();
             setInterval(fetchMessages, 5000);
         </script>

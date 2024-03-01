@@ -15,6 +15,7 @@
                 $_SESSION["uname"]  = $Udata["uname"]   ;
                 $_SESSION["umail"]  = $Udata["umail"]   ;
                 $_SESSION["upw"]    = $Udata["upass"]   ;
+                $_SESSION["key"]    = randoms(60)       ;
                 mysqli_query($dbase,"UPDATE  users  SET  ustat  = 'A,Online' WHERE  users . uid  = $_SESSION[uid]");
                 if(!str_contains($Udata["ustat"],"D") && !str_contains($Udata["ustat"],"S")){
                     $_SESSION["stat"]   = "A, Online";
@@ -42,7 +43,7 @@
 
             }
             else{
-                die("<script>
+                echo("<script>
                     alert('email or username or password not valid');
                     window.location.href = '$_SESSION[R1]/';
                 </script>");

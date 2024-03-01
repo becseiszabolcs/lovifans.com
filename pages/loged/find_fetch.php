@@ -21,13 +21,13 @@
                 $pic = NULL;
             }
         } $pic = $row["icid"];
+
         $name   = $row["uname"];
         $profil_id = $row["ustrid"];
         $stat   = $row["ustat"];
-
-
-
-        $profil[] = ["name"=>$name,"profile_id"=> $profil_id, "profil_pic"=>$pic,"pic_alt"=>"$name's image", "stat"=>$stat];
+        $fstat = mysqli_fetch_assoc(mysqli_query($dbase,"select fstat from friends where ($_SESSION[uid] = uid and fuid = $row[uid]) or ($row[uid] = uid and fuid = $_SESSION[uid])"));
+        if($fstat) $fstat=  $fstat['fstat'];
+        $profil[] = ["name"=>$name,"profile_id"=> $profil_id, "profil_pic"=>$pic,"pic_alt"=>"$name's image", "stat"=>$stat, "fstat"=>$fstat];
     }
     
     // Return JSON response

@@ -81,20 +81,6 @@ function linewidth(n){
     divlin.width = w+"px";
 }
 
-function dsubmit(){
-    var sub = document.getElementById("signup").disabled
-    var p1 = document.getElementById("1").color == "green";
-    var p2 = document.getElementById("2").color == "green";
-    var p3 = document.getElementById("3").color == "green";
-    var p4 = document.getElementById("4").color == "green";
-
-    if(p1 & p2 & p3 & p4){
-        sub = false;
-    }
-    else{
-        sub = true;
-    }
-}
 function isNotNumeric(str){
     var num = ['0','1','2','3','4','5','6','7','8','9']
     var yes = false;

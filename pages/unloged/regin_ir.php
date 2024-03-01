@@ -19,9 +19,6 @@
             }
             if(!$bool) break;
         }
-
-        
-        
         //$yes = mysqli_fetch_array(mysqli_query($dbase,"select * from users umail='$umail'"));
         //if($yes) die("<script>alert('Sorry, someone already registered with this email address.');window.location.href='$_SESSION[R1]/?page=reg'</script>");
         if(!empty($usern) && !empty($pass) && !is_numeric($usern)){

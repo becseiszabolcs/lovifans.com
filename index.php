@@ -67,10 +67,10 @@
                         <img class='plogo' src='/lovifans.com/image/logo.png'>
                         <h1 class='logo'>LoviFans</h1>
                         <nav class ='navigation'>
-                            <a class='link' href='about'>About</a>
-                            <a class='link' href='services'>Services</a>
-                            <a class='link' href='contact'>Contact</a>
-                            <button onclick='window.location.href=\"./\"' class='btnLogin-pop'>Login</button>
+                            <a class='link' href='$_SESSION[R1]/about'>About</a>
+                            <a class='link' href='$_SESSION[R1]/services'>Services</a>
+                            <a class='link' href='$_SESSION[R1]/contact'>Contact</a>
+                            <button onclick='window.location.href=\"$_SESSION[R1]/\"' class='btnLogin-pop'>Login</button>
                         </nav>
                     </header>
             ";   
@@ -90,7 +90,7 @@
             if($_SESSION["icid"]){
                 $pfimgid = mysqli_fetch_row($dbase,"select iid from imgconnect where icid = $_SESSION[icid]")["iid"];
                 $pfimg =  mysqli_fetch_row($dbase,"select fnname from image where iid=$pfimgid")["fnname"];
-                $prof_img = " /lovifans.com/uploads/" . $pfimg;
+                $prof_img = "$_SESSION[R1]/uploads/" . $pfimg;
             }
             print"
                 <div class='container' id='loged'>
@@ -105,10 +105,10 @@
                             <div class='menu'>
                                 <button onclick='window.location.href=\" /lovifans.com/profile\"' class='btnprof'><img src='$prof_img' alt=''><a id='profile_name'>$_SESSION[uname]</a></button>
                                 <div class='dropdown'>
-                                    <a href=' /lovifans.com/profile/'>  <img src='$prof_img' class='profimg' alt='Profil image'>                     Profile Page            </a>
-                                    <a href=''>                         <img src=' /lovifans.com/image/settings.png' alt='account settings icon'>    Profile Edit            </a>
-                                    <a href=''>                         <img src=' /lovifans.com/image/connect.png' alt='connect icon'>              Help Question           </a>
-                                    <a href='./pages/loged/logout.php'> <img src=' /lovifans.com/image/logout.png' alt='logout icon'>                Logout                  </a>
+                                    <a href='$_SESSION[R1]/profile/'>  <img src='$prof_img' class='profimg' alt='Profil image'>                     Profile Page            </a>
+                                    <a href='$_SESSION[R1]/'>                         <img src=' $_SESSION[R1]/image/settings.png' alt='account settings icon'>    Profile Edit            </a>
+                                    <a href='$_SESSION[R1]/'>                         <img src=' $_SESSION[R1]/image/connect.png' alt='connect icon'>              Help Question           </a>
+                                    <a href='$_SESSION[R1]/pages/loged/logout.php'> <img src=' $_SESSION[R1]/image/logout.png' alt='logout icon'>                Logout                  </a>
                                 </div>
                                 
                             </div>
