@@ -71,10 +71,6 @@ function addFriend(id) {
     }
 }   
 
-
-
-
-
 //friends site
 
 function fetchMessages() {
@@ -148,8 +144,8 @@ function sendMessage() {
 
     if (message || fileInput) {
         var formData = new FormData();
-        if(message) formData.append('message', message);
-        if(fileInput)    formData.append('file', fileInput);
+        if(message)   formData.append('message', message);
+        if(fileInput) formData.append('file', fileInput);
 
         $.ajax({
             url: sendr,
@@ -160,7 +156,6 @@ function sendMessage() {
             success: function () {
                 fetchMessages();
                 $('#message').val('');
-                // Optionally, clear the file input if needed
                 $('#file').val('');
             },
             error: function (jqXHR, textStatus, errorThrown) {

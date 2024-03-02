@@ -245,6 +245,7 @@ header form .text{
 header form .text:focus{
     outline: none;
 }
+/*header end*/
 #un .wrapper{
     position: relative;
     background: transparent;
@@ -344,7 +345,6 @@ header form .text:focus{
     text-shadow: 2px 2px 5px black;
     font-size: 40px;
 }
-.login
 .password_reset1 h1{
     font-size: 34px;
 }
@@ -361,6 +361,25 @@ header form .text:focus{
     padding-left: 0px;
     align-items: 10px;
 }
+.form-box form .error{
+    position: absolute;
+    font-weight: unset;
+    font-size: 14px;
+    top: 90px;
+    left: 37.5px;
+    background-color: rgba(155, 0, 0, 1);;
+    color: red;
+    border: 2px solid red;
+    border-radius: 10px;
+    padding: 10px;
+    width: 275px;
+    
+
+}
+.form-box form .d-done{
+    display: none;
+}
+
 .form-box form .text{
     margin: 5px;
     margin-left: 20px;

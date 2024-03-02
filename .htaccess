@@ -7,7 +7,7 @@ RewriteEngine on
 
 RewriteCond %{request_filename} !-f 
 RewriteCond %{request_filename} !-d
-RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+RewriteRule ^(.*)$ index.php?url=$1 [QSA]
 
 # Ellenőrizzük, hogy a kérés egy létező fájlt vagy mappát céloz-e
 #RewriteCond %{REQUEST_FILENAME} -f [OR]
