@@ -367,7 +367,7 @@ header form .text:focus{
     font-size: 14px;
     top: 90px;
     left: 37.5px;
-    background-color: rgba(155, 0, 0, 1);;
+    background-color: rgba(100, 0, 0, 1);
     color: red;
     border: 2px solid red;
     border-radius: 10px;

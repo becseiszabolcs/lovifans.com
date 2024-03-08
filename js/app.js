@@ -24,20 +24,70 @@ function displayMembers(members) {
         var profil = "";
         var img_root = "/lovifans.com/image/default.png";
         if(member.profil_pic != null) img_root = member.profil_pic;
-        profil=`
-        <div class="profile">
-            <img src='${img_root}' alt='${member.pic_alt}'><a id='profile_name'>
-            <p>${member.name}</p>
-            <div class="buttons">
-                <form id="friendRequest${id}"  method="post">
-                    <input disable hidden type="text" name="profile" id="profile${id}" value="${member.profile_id}">
-                    <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">Add friend</button>
-                    <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
-                    <button class="button">Profile</button>
-                </form>
+        if(member.fstat==null){
+            profil=`
+            <div class="profile">
+                <img src='${img_root}' alt='${member.pic_alt}'><a id='profile_name'>
+                <p>${member.name}</p>
+                <div class="buttons">
+                    <form id="friendRequest${id}"  method="post">
+                        <input disable hidden type="text" name="profile" id="profile${id}" value="${member.profile_id}">
+                        <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">Add friend</button>
+                        <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
+                        <button class="button">Profile</button>
+                    </form>
+                </div>
             </div>
-        </div>
-        `;
+            `;
+        } else if(member.fstat=="D1"){
+            profil=`
+            <div class="profile">
+                <img src='${img_root}' alt='${member.pic_alt}'><a id='profile_name'>
+                <p>${member.name}</p>
+                <div class="buttons">
+                    <form id="friendRequest${id}"  method="post">
+                        <input disable hidden type="text" name="profile" id="profile${id}" value="${member.profile_id}">
+                        <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">cancel adding</button>
+                        <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
+                        <button class="button">Profile</button>
+                    </form>
+                </div>
+            </div>
+            `;
+        } else if(member.fstat=="D2"){
+            profil=`
+            <div class="profile">
+                <img src='${img_root}' alt='${member.pic_alt}'><a id='profile_name'>
+                <p>${member.name}</p>
+                <div class="buttons">
+                    <form id="friendRequest${id}"  method="post">
+                        <input disable hidden type="text" name="profile" id="profile${id}" value="${member.profile_id}">
+                        <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">cancel adding</button>
+                        <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
+                        <button class="button">Profile</button>
+                    </form>
+                </div>
+            </div>
+            `;
+        } else if(member.fstat=="A"){
+            profil=`
+            <div class="profile">
+                <img src='${img_root}' alt='${member.pic_alt}'><a id='profile_name'>
+                <p>${member.name}</p>
+                <div class="buttons">
+                    <form id="friendRequest${id}"  method="post">
+                        <input disable hidden type="text" name="profile" id="profile${id}" value="${member.profile_id}">
+                        <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">Delete friend</button>
+                        <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
+                        <button class="button">Profile</button>
+                    </form>
+                </div>
+            </div>
+            `;
+
+        } else profil="";
+
+
         
         $(`#profiles`).append(profil);
         id++;
