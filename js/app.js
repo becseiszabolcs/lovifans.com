@@ -32,7 +32,7 @@ function displayMembers(members) {
                 <div class="buttons">
                     <form id="friendRequest${id}"  method="post">
                         <input disable hidden type="text" name="profile" id="profile${id}" value="${member.profile_id}">
-                        <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">Add friend</button>
+                        <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">send friend request</button>
                         <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
                         <button class="button">Profile</button>
                     </form>
@@ -47,7 +47,7 @@ function displayMembers(members) {
                 <div class="buttons">
                     <form id="friendRequest${id}"  method="post">
                         <input disable hidden type="text" name="profile" id="profile${id}" value="${member.profile_id}">
-                        <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">cancel adding</button>
+                        <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">cancel request</button>
                         <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
                         <button class="button">Profile</button>
                     </form>
@@ -60,9 +60,10 @@ function displayMembers(members) {
                 <img src='${img_root}' alt='${member.pic_alt}'><a id='profile_name'>
                 <p>${member.name}</p>
                 <div class="buttons">
+                
                     <form id="friendRequest${id}"  method="post">
                         <input disable hidden type="text" name="profile" id="profile${id}" value="${member.profile_id}">
-                        <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">cancel adding</button>
+                        <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">accept friend request</button>
                         <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
                         <button class="button">Profile</button>
                     </form>
@@ -85,7 +86,7 @@ function displayMembers(members) {
             </div>
             `;
 
-        } else profil="";
+        }else profil="";
 
 
         
@@ -111,11 +112,9 @@ function addFriend(id) {
             data: reqData,
             processData: false,
             contentType: false,
-            success: function (data) {
-                console.log('Friend request sent successfully:', data);
-            },
+            success: function (data){},
             error: function (jqXHR, textStatus, errorThrown) {
-                console.error('Error sending friend request:', errorThrown);
+                console.error('Error in request process');
             }
         });
     }

@@ -21,7 +21,7 @@ if($any){
 
     $mail = mailing($email);
 
-    $mail->setFrom("support@lovifans.com");
+    $mail->setFrom("support.team@lovifans.com");
     $mail->addAddress($email);
     $mail->Subject = "Password Reset";
     $mail->Body = <<<END

@@ -24,6 +24,7 @@
                     $_SESSION["upw"]    = $Udata["upass"]   ;
                     $_SESSION["key"]    = randoms(60)       ;
                     $_SESSION["sid"]    = session_id()      ;
+                    $_SESSION["appering"] = "sites";
                     mysqli_query($dbase,"UPDATE  users  SET  ustat  = 'A,Online' WHERE  users . uid  = $_SESSION[uid]");
                     if(!str_contains($Udata["ustat"],"D") && !str_contains($Udata["ustat"],"S")){
                         $_SESSION["stat"]   = "A, Online";
@@ -40,6 +41,30 @@
                         INSERT INTO  note  ( nid, lid,  nurl,  ndate,  nip  ) 
                         VALUES ( NULL, '$_SESSION[lid]', '$_SERVER[REQUEST_URI]', current_timestamp(), '$_SERVER[REMOTE_ADDR]')
                     ");
+                    //$_SERVER[REMOTE_ADDR]
+
+                    /*
+                    $before_log = mysqli_fetch_array(mysqli_query($dbase,"select * from login where '0.0.0.0' == lip"));
+                    if(empty($before_log)) {
+
+                            $stmt = mysqli_query($dbase,$query);
+                        
+                            $mail = mailing($_SESSION["umail"]);
+                        
+                            $mail->setFrom("support@lovifans.com");
+                            $mail->addAddress($_SESSION["umail"]);
+                            $mail->Subject = "Password Reset";
+                            $mail->Body = <<<END
+                            
+                            We have detected a new login from this place if you were not then asked to notify us
+                        
+                            END;
+                        
+                            echo"<script>window.location.href='http://localhost/lovifans.com/'</script>";
+                            $mail->send();
+                    }
+                    */
+
                     
                     mysqli_close($dbase);
                     //if(!$bool) include("./logout.php");
