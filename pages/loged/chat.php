@@ -1,14 +1,16 @@
 <?php
     session_start();
     include("../../connect.php");
-    
+    //    
     // Fetch messages from the database
-    $query = "SELECT * FROM message where ustrid='$_SESSION[ustrid]' or  mtostrid='$_SESSION[ustrid]' ORDER BY  mdate DESC";
+    $id = $_GET['id'];
+    $query = "SELECT * FROM message where (ustrid='$_SESSION[ustrid]' or  mtostrid='$_SESSION[ustrid]') and (ustrid='$id' or  mtostrid='$id') ORDER BY  mdate DESC";
     $result = mysqli_query($dbase,$query); //$dbase->query($query);
 
     
     
     $mes = [];
+
     while ($row = $result->fetch_assoc()) {
         $from = mysqli_fetch_array(mysqli_query($dbase,"SELECT uname FROM `users` WHERE uid=$row[uid]"));
         $to = mysqli_fetch_array(mysqli_query($dbase,"SELECT uname FROM `users` WHERE uid=$row[mtoid]"));

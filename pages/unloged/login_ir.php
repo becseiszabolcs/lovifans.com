@@ -19,12 +19,12 @@
                     $_SESSION["uid"]    = $Udata["uid"]     ;
                     $_SESSION["ustrid"] = $Udata["ustrid"]  ;
                     $_SESSION["icid"]   = $Udata["icid"]    ;
+                    $_SESSION["bicid"]   = $Udata["bicid"]  ;
                     $_SESSION["uname"]  = $Udata["uname"]   ;
                     $_SESSION["umail"]  = $Udata["umail"]   ;
                     $_SESSION["upw"]    = $Udata["upass"]   ;
                     $_SESSION["key"]    = randoms(60)       ;
                     $_SESSION["sid"]    = session_id()      ;
-                    $_SESSION["appering"] = "sites";
                     mysqli_query($dbase,"UPDATE  users  SET  ustat  = 'A,Online' WHERE  users . uid  = $_SESSION[uid]");
                     if(!str_contains($Udata["ustat"],"D") && !str_contains($Udata["ustat"],"S")){
                         $_SESSION["stat"]   = "A, Online";

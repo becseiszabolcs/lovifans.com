@@ -5,26 +5,15 @@
             <input type="text" name="" class="searchtxt">
             <input type="submit" value="search" id="but">
         </form>
-        <div class="list">
-            <a href="">
-                <div class="content">
-                    <img src=" /lovifans.com/image/default.png" alt="">
-                    <div class="details">
-                        <span>Frank Friend</span>
-                        <p>this is a test message.</p>
-                    </div>
-                </div>
-                
+        <div class="list" id="friendslist">
 
-                <span>Online</span>
-            </a>
             
         </div>
     </div>
     <div id="chat">
         <div id="header">
             <img src=" /lovifans.com/image/default.png" alt="">
-            <span>Frank Friend <br> <p>Online</p></span>
+            <span id="sel_profil"></span>
             
 
         </div>
@@ -41,6 +30,7 @@
                     <input hidden type="file" id="file" name="file" multiple>
                     <div class="file-list">
                     </div>
+                    <input hidden type="text" name="soup" id="soup" value="<?=url(1).",".url(2)?>">
                     <textarea id="message" name="message" rows="1" oninput="textheight()" placeholder="Type something..."></textarea>
                 </div>
                 <button onclick="sendMessage()">Send</button>
@@ -51,10 +41,14 @@
         </form>
 
         <script>
-            //fetchfriends();
-            //setInterval(fetchfriends, 5000);
-            fetchMessages();
-            setInterval(fetchMessages, 5000);
+            fetchfriends();
+            setInterval(fetchfriends, 5000);
+            fetchMessages("<?=url(2)?>");
+            setInterval(fetchMessages("<?=url(2)?>"), 2500);
+
+
+
+
         </script>
     </div>
 </div>

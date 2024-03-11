@@ -1,7 +1,7 @@
 <?php
     session_start();
     include("../../connect.php");
-
+    $profil = explode(",",$_POST["soup"]);
     $text = $_POST["message"];
     $bool = str_replace(" ", "", $text);
     $bool = str_replace("\r\n", "", $bool);
@@ -26,11 +26,12 @@
         $str .= substr($text, $n) . "<br>";
         $text = $str;
     }
-    
+    $friend = mysqli_fetch_array(mysqli_query($dbase,"select * from users where '$profil[1]'=ustrid and '$profil[0]'=uname"));
+ 
     if($bool){
         mysqli_query($dbase,"
         INSERT INTO  message  ( mid ,  uid ,  ustrid ,  mtoid ,  mtostrid ,  mlabel ,  icid ,  meloz ,  mstat ,  mdate ,  mip ) 
-        VALUES (NULL, $_SESSION[uid], '$_SESSION[ustrid]', 10, 'RVz9tHMIM1h3Gro1VJly', '$text', NULL, NULL, 'A', current_timestamp(), '$_SERVER[REMOTE_ADDR]')
+        VALUES (NULL, $_SESSION[uid], '$_SESSION[ustrid]', $friend[uid], '$friend[ustrid]', '$text', NULL, NULL, 'A', current_timestamp(), '$_SERVER[REMOTE_ADDR]')
         ");
     }
 
@@ -38,5 +39,5 @@
 
     mysqli_close($dbase);
 
-    header("location: $_SESSION[R1]/friends");
+    //header("location: $_SESSION[R1]/friends");
 ?>

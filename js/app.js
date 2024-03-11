@@ -121,9 +121,47 @@ function addFriend(id) {
 }   
 
 //friends site
+function fetchfriends(){
+    var chatr = r1+'pages/loged/friend_fetch.php';
+    $.ajax({
+        url: chatr,
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            displayfriends(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error fetching messages:', errorThrown);
+        }
+    });
+}
+function displayfriends(friends) {
+    $('#friendslist').empty();
+    friends.forEach(function(friend) {
+        var fri = "";
+        
+        fri=`        
+            <a href="${r1+`friends/${friend.name}/${friend.id}`}" class='friprofile'>
+                <div class="content">
+                    <img src=" /lovifans.com/image/default.png" alt="">
+                    <div class="details">
+                        <span>${friend.name}</span>
+                        <p>this is a test message.</p>
+                    </div>
+                </div>
+                
 
-function fetchMessages() {
-    var chatr = r1+'pages/loged/chat.php';
+                <span>${friend.stat}</span>
+            </a>`;
+        
+        $('#friendslist').append(fri);
+
+    });
+}
+
+
+function fetchMessages(soup) {
+    var chatr = r1+`pages/loged/chat.php?id=${soup}`;
     $.ajax({
         url: chatr,
         method: 'GET',
@@ -140,6 +178,7 @@ function fetchMessages() {
 function displayMessages(messages) {
     $('#privmessages').empty();
     messages.forEach(function(message) {
+
         var name = $("#profile_name").text();
         var mes = "";
         var direction = "outgoing";
@@ -185,6 +224,7 @@ function textheight() {
 
 
 function sendMessage() {
+    var soup = $('#soup').val();
     var message = $('#message').val();
     var fileInput = document.getElementById('file'); // get the file input element
 
@@ -195,6 +235,7 @@ function sendMessage() {
         var formData = new FormData();
         if(message)   formData.append('message', message);
         if(fileInput) formData.append('file', fileInput);
+        if(soup)      formData.append('soup', soup);
 
         $.ajax({
             url: sendr,

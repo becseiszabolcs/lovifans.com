@@ -24,8 +24,8 @@
         if(!empty($usern) && !empty($pass) && !is_numeric($usern)){
             if($_POST["upass1"] == $_POST["upass2"]){
                 mysqli_query($dbase, "
-                INSERT INTO  users  ( uid ,  icid ,  ustrid ,  uname ,  umail ,  upass ,  ustat ,  udate ,  ucom ,  uip )
-                VALUES (NULL, NULL, '$usrtid', '$usern', '$umail', '$pass', 'A, NLI', current_timestamp(), NULL, '$_SERVER[REMOTE_ADDR]')
+                INSERT INTO  users  ( uid ,  icid, bicid ,  ustrid ,  uname ,  umail ,  upass ,  ustat ,  udate ,  ucom ,  uip )
+                VALUES (NULL, NULL, NULL, '$usrtid', '$usern', '$umail', '$pass', 'A, NLI', current_timestamp(), NULL, '$_SERVER[REMOTE_ADDR]')
                 ");
     
 
