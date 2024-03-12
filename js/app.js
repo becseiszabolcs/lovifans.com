@@ -146,7 +146,7 @@ function displayfriends(friends) {
                     <img src=" /lovifans.com/image/default.png" alt="">
                     <div class="details">
                         <span>${friend.name}</span>
-                        <p>this is a test message.</p>
+                        <p>${friend.lmes}</p>
                     </div>
                 </div>
                 
@@ -177,6 +177,7 @@ function fetchMessages(soup) {
 
 function displayMessages(messages) {
     $('#privmessages').empty();
+    
     messages.forEach(function(message) {
 
         var name = $("#profile_name").text();

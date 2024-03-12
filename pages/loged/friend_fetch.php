@@ -27,15 +27,30 @@
         if($stat) $stat="Online";
         else      $stat="Offline";
 
-        $last_mess = mysqli_fetch_assoc(mysqli_query($dbase,"select mlabel from message where (ustrid='$_SESSION[ustrid]' or mtostrid='$_SESSION[ustrid]') and (ustrid='$friend[ustrid]' or mtostrid='$friend[ustrid]') ORDER BY mdate DESC LIMIT 1;"))["mlabel"];
+        $last_mess = mysqli_fetch_assoc(mysqli_query($dbase,"select * from message where (ustrid='$_SESSION[ustrid]' or mtostrid='$_SESSION[ustrid]') and (ustrid='$friend[ustrid]' or mtostrid='$friend[ustrid]') ORDER BY mdate DESC LIMIT 1;"));
+        if($last_mess){
+            $who = "";
+            if($last_mess["ustrid"] == $_SESSION["ustrid"]) $who ="you: ";
+            $last_mess = $last_mess["mlabel"];
+    
+            if(strlen($last_mess)>=20) {
+                if($last_mess[20]!=" "){
+                    $i= 0;
+                    foreach(str_split($last_mess) as $ch){
+                        if($i > 15 & $ch==" ") break;
+                        if($i > 20)            break;
+                        $i+=1;
+                    }
+                    $last_mess = substr($last_mess,0,$i) . " ...";
+    
+                } else $last_mess = substr($last_mess,0,10);
+    
+            }
+            $last_mess = $who . $last_mess;
+        } else $last_mess = "";
 
-        if(strlen($lasst_mess)>30){
-            if(substr($lasst_mess,0,31)!=" "){
 
-            } else substr($lasst_mess,0,30);
-
-        }
-        $friends[] = ['id' => $friend['ustrid'],'name'=>$friend['uname'],'profil_pic'=>$pic,'stat'=>$stat];
+        $friends[] = ['id' => $friend['ustrid'],'name'=>$friend['uname'],'profil_pic'=>$pic,"lmes"=>$last_mess,'stat'=>$stat];
     }
     
     // Return JSON response
