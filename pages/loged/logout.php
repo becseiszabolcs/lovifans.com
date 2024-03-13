@@ -42,5 +42,5 @@ mysqli_close($dbase);
 
 header("location: $_SESSION[R1]");
 
-?>
+
 

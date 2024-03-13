@@ -23,6 +23,7 @@
                 $pic = NULL;
             }
         } $pic = $friend["icid"];
+        if($pic == NULL) $pic="$_SESSION[R1]/image/default.png" ;
         $stat = str_contains($friend["ustat"],"Online");
         if($stat) $stat="Online";
         else      $stat="Offline";

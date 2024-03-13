@@ -19,7 +19,7 @@
         </div>
         
         <div id="privmessages">
-
+            <!--<p>select someone to chat whit</p-->
 
         </div>
 
@@ -41,16 +41,10 @@
         </form>
 
         <script>
-            loadfriend("<?=url(2)?>");
-            setInterval(loadfriend("<?=url(2)?>"), 2500);
-            fetchfriends();
-            setInterval(fetchfriends, 5000);
+            fetchfriends("<?=url(2)?>");
+            setInterval(fetchfriends("<?=url(2)?>"), 5000);
             fetchMessages("<?=url(2)?>");
-            setInterval(fetchMessages("<?=url(2)?>"), 2500);
-
-
-
-
+            setInterval(fetchMessages("<?=url(2)?>"), 5000);
         </script>
     </div>
 </div>

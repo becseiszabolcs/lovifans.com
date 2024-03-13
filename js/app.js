@@ -121,54 +121,49 @@ function addFriend(id) {
 }   
 
 //friends site
-function loadfriend(soup){
-    var chatr ="";
-    if(soup!="") chatr = r1+`pages/loged/friend_load.php?soup=${soup}`;
-    else chatr = r1+'pages/loged/friend_load.php';
-    $.ajax({
-        url: chatr,
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            displayfriends(data);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error fetching messages:', errorThrown);
-        }
-    });
-}
-function loadfriend(friend) {
-
-}
-function fetchfriends(){
+function fetchfriends(soup){
     var chatr = r1+'pages/loged/friend_fetch.php';
     $.ajax({
         url: chatr,
         method: 'GET',
         dataType: 'json',
         success: function(data) {
-            displayfriends(data);
+            displayfriends(data,soup);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.error('Error fetching messages:', errorThrown);
         }
     });
 }
-function displayfriends(friends) {
+function displayfriends(friends,soup) {
     $('#friendslist').empty();
+    $('#header').empty();
     friends.forEach(function(friend) {
         var fri = "";
+        var head ="";
+        if(soup != "" & soup == friend.id) {
+            head=`
+                <img src="${friend.profil_pic}" alt="${friend.name} is picture">
+                <span>${friend.name}<br><p>${friend.stat}</p></span>
+            `;
+            $('#header').html(head);
+        } else{
+            head=`
+                <img src=" /lovifans.com/image/default.png" alt="">
+                <span></span>
+            `;
+            $('#header').html(head);
+        }
         
         fri=`        
             <a href="${r1+`friends/${friend.name}/${friend.id}`}" class='friprofile'>
                 <div class="content">
-                    <img src=" /lovifans.com/image/default.png" alt="">
+                    <img src="${friend.profil_pic}" alt="${friend.name} is picture">
                     <div class="details">
                         <span>${friend.name}</span>
                         <p>${friend.lmes}</p>
                     </div>
                 </div>
-                
 
                 <span>${friend.stat}</span>
             </a>`;

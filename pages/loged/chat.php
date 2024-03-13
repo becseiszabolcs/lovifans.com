@@ -36,4 +36,3 @@
     // Close the connection
 
     mysqli_close($dbase);
-?>
