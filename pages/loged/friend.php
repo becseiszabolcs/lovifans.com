@@ -41,6 +41,8 @@
         </form>
 
         <script>
+            loadfriend("<?=url(2)?>");
+            setInterval(loadfriend("<?=url(2)?>"), 2500);
             fetchfriends();
             setInterval(fetchfriends, 5000);
             fetchMessages("<?=url(2)?>");

@@ -121,6 +121,25 @@ function addFriend(id) {
 }   
 
 //friends site
+function loadfriend(soup){
+    var chatr ="";
+    if(soup!="") chatr = r1+`pages/loged/friend_load.php?soup=${soup}`;
+    else chatr = r1+'pages/loged/friend_load.php';
+    $.ajax({
+        url: chatr,
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            displayfriends(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error fetching messages:', errorThrown);
+        }
+    });
+}
+function loadfriend(friend) {
+
+}
 function fetchfriends(){
     var chatr = r1+'pages/loged/friend_fetch.php';
     $.ajax({
@@ -177,7 +196,7 @@ function fetchMessages(soup) {
 
 function displayMessages(messages) {
     $('#privmessages').empty();
-    
+
     messages.forEach(function(message) {
 
         var name = $("#profile_name").text();
