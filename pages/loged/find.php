@@ -1,3 +1,7 @@
+<?php  
+
+if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
+?>
 <div id="finding" class="sites">
     <div id="options">
         <form method="get" class="search">
@@ -51,8 +55,8 @@
     </div>
 
     <script>
-        fetchMembers();
-        setInterval(fetchMembers, 10000);
+        fetchMembers("<?url(1)?>","");
+        setInterval(fetchMembers("<?url(1)?>",""), 1000);
     </script>
     </div>
 </div>

@@ -1,4 +1,7 @@
+<?php  
 
+if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
+?>
 <div id="chatsite" class="sites">
     <div id="flist">
         <form method="get" class="search">
@@ -42,9 +45,9 @@
 
         <script>
             fetchfriends("<?=url(2)?>");
-            setInterval(fetchfriends("<?=url(2)?>"), 5000);
+            setInterval(fetchfriends("<?=url(2)?>"), 1000);
             fetchMessages("<?=url(2)?>");
-            setInterval(fetchMessages("<?=url(2)?>"), 5000);
+            setInterval(fetchMessages("<?=url(2)?>"), 1000);
         </script>
     </div>
 </div>

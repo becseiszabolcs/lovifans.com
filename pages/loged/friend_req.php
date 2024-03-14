@@ -2,6 +2,7 @@
 <?php
     session_start();
     include("../../connect.php");
+    if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
     $fustrid = $_POST["profile"]; //"SCcDccIOEdf5RyAI5400";
     $fuid = mysqli_fetch_assoc(mysqli_query($dbase,"select uid from users where ustrid='$fustrid'"))["uid"];
 

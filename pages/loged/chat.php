@@ -1,9 +1,10 @@
 <?php
     session_start();
+    if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
     include("../../connect.php");
     //    
     // Fetch messages from the database
-    $id = $_GET['id'];
+    $id = isset($_GET["id"]) ? $_GET["id"] : "";
     $query = "SELECT * FROM message where (ustrid='$_SESSION[ustrid]' or  mtostrid='$_SESSION[ustrid]') and (ustrid='$id' or  mtostrid='$id') ORDER BY  mdate DESC";
     $result = mysqli_query($dbase,$query); //$dbase->query($query);
 

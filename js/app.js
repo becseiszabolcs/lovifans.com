@@ -2,7 +2,7 @@ var r1 = 'http://localhost/lovifans.com/';
 
 //find site
 
-function fetchMembers() {
+function fetchMembers(sel,search) {
     var chatr = r1+'pages/loged/find_fetch.php';
     $.ajax({
         url: chatr,
@@ -122,7 +122,7 @@ function addFriend(id) {
 
 //friends site
 function fetchfriends(soup){
-    var chatr = r1+'pages/loged/friend_fetch.php';
+    var chatr = r1+`pages/loged/friend_fetch.php?timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`;
     $.ajax({
         url: chatr,
         method: 'GET',
@@ -137,23 +137,21 @@ function fetchfriends(soup){
 }
 function displayfriends(friends,soup) {
     $('#friendslist').empty();
-    $('#header').empty();
+    var head=`
+        <img src=" /lovifans.com/image/default.png" alt="">
+        <span></span>
+    `;
+    $('#header').html(head);
     friends.forEach(function(friend) {
         var fri = "";
-        var head ="";
+
         if(soup != "" & soup == friend.id) {
             head=`
                 <img src="${friend.profil_pic}" alt="${friend.name} is picture">
-                <span>${friend.name}<br><p>${friend.stat}</p></span>
+                <span>${friend.name}<br><p>${friend.from_last_log}</p></span>
             `;
             $('#header').html(head);
-        } else{
-            head=`
-                <img src=" /lovifans.com/image/default.png" alt="">
-                <span></span>
-            `;
-            $('#header').html(head);
-        }
+        } 
         
         fri=`        
             <a href="${r1+`friends/${friend.name}/${friend.id}`}" class='friprofile'>

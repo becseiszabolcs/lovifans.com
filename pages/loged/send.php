@@ -1,5 +1,7 @@
 <?php
     session_start();
+    if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
+
     include("../../connect.php");
     $profil = explode(",",$_POST["soup"]);
     $text = $_POST["message"];

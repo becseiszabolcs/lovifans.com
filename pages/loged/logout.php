@@ -8,17 +8,12 @@
     $_SESSION["Ujog"]  
     $_SESSION["lid"] 
 */
-include("../../connect.php");
-
-
-if(isset($_SESSION["lid"])){
-
-}
-
-
 session_start();
+include("../../connect.php");
+if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
+
 if(isset($_SESSION["uid"])) {
-    $date = date("Y-m-s H:i:s");
+    $date = date("Y-m-d H:i:s");
     mysqli_query($dbase,"UPDATE  users  SET  ustat  = 'A,$date' WHERE  users . uid  = $_SESSION[uid]");
     unset($_SESSION["uid"]    );
     unset($_SESSION["ustrid"] );

@@ -1,6 +1,7 @@
 <?php
     session_start();
     include("../../connect.php");
+    if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
        
     // Fetch messages from the database
     if(isset($_GET["search"])) $query = "SELECT * FROM users where uid != $_SESSION[uid] and ustat like 'A%' and (uname like '%$_GET[search]%' or )";
