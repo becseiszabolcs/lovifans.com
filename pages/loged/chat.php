@@ -1,15 +1,13 @@
 <?php
     session_start();
     if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
-    include("../../connect.php");
+    include("$_SESSION[priv]/connect.php");
     //    
     // Fetch messages from the database
     $id = isset($_GET["id"]) ? $_GET["id"] : "";
     $query = "SELECT * FROM message where (ustrid='$_SESSION[ustrid]' or  mtostrid='$_SESSION[ustrid]') and (ustrid='$id' or  mtostrid='$id') ORDER BY  mdate DESC";
     $result = mysqli_query($dbase,$query); //$dbase->query($query);
 
-    
-    
     $mes = [];
 
     while ($row = $result->fetch_assoc()) {
