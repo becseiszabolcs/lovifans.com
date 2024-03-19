@@ -3,7 +3,7 @@
 if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
 ?>
 
-<div class="prof sites">
+<div class="prof sites" id="prof">
     <div class="bar">
 
         <h1>Friends</h1>
@@ -37,7 +37,7 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
     <div class="sections">
         <div class="header">
             <div class="cont">
-                <img src="/lovifans.com/image/bc_background.jpg"  id="bcimage">
+                <img src=""  id="bcimage">
             </div>
             
             <div class="details">
@@ -47,7 +47,7 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
                     <?=$_SESSION['uname']?>
                     <p>110 Views</p>
                 </h1>
-                <button onclick="">Options</button>
+                <button onclick="showset()">Options</button>
             </div>
             <hr style="border: 2px solid #ddd; width:100%; border-radius:2px;">
 
@@ -81,7 +81,7 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
                             <hr style="border: 1px solid #ddd;">
                             <button>send</button>
                         </div>
-
+                        
 
                     </form>
 

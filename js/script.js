@@ -1,3 +1,5 @@
+var r1 = 'http://localhost/lovifans.com/';
+
 function apper(id,eye){
     var eye  = document.querySelector(eye);
     var pw = document.querySelector(id);
@@ -11,10 +13,23 @@ function apper(id,eye){
         pw.setAttribute("type","password");
     }
     
-    
+}
+var bool = false;
+function showset(){
+    if(!bool){
+        $("#prof").append(`
+            <div id="settings" onclick="showset()">
+                <iframe src="${r1+"/pages/loged/settings.php"}" frameborder="2"></iframe>
+            </div>
+        `);
+        bool = true;
+    }
+    else{
+        $("#settings").remove();
+        bool = false;
+    }
 
 }
-
 
 function passwordStrength( pw )
 {
