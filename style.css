@@ -117,7 +117,8 @@ header{
 }
 .menu{
     position: relative;
-    margin-left: 30px;
+    right: -70px;
+    margin-left: -30px;
     min-width: 240px;
     max-height: 50px;
     &:hover .dropdown{
@@ -772,21 +773,29 @@ form #but{
     padding: 5px 10px;
     margin: 5px 0;
     width: 100px;
-    min-height: 50px;
-    max-height: 180px;
+    height: 50px;
     border-radius: 50px ;
-    background: black;
+    background: white;
     border: 2px solid #777;
-    color: white;
+    color: black;
     font-weight: bold;
     font-size: 14px;
     transition: all 0.3s;
-
+    overflow: hidden;
+    img{
+        position: relative;
+        top: -5px;
+        width:50px;
+        height: 50px;
+    }
 }
 #chat form button:hover{
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: white;
     border: 3.5px solid rgba(209, 158, 17,0.8);
+    &:hover img{
+        filter: invert(100%);
+    }
 
 
 }
@@ -911,5 +920,210 @@ textarea:focus{
 #profile_id{
     display: none;
 }
+/*profil site*/
+.prof{
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: auto;
 
+}
+.prof::-webkit-scrollbar{
+    width:0px;
+}
+.prof .bar{
+    position: fixed;
+    width: 390px;
+    height: 100%;
+
+    border: 2px solid #eee;
+    padding: 15px;
+    border-radius: 7.5px  7.5px 0 0;
+    border-bottom: none;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+.prof .bar button{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(209, 158, 17);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+.prof .bar .friends{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px;
+}
+.prof .bar .friends a{
+    width: 100px;
+    margin: 0px;
+    overflow: hidden;
+
+}
+.prof .bar .friends a img{
+    width: 100%;
+
+}
+.prof .bar .profildata{
+    padding: 15px;
+    font-size: 12px;
+
+}
+.prof .sections{
+    min-width: 70%;
+    margin-right: 10px;
+    margin-left: 410px;
+}
+.prof .sections .header{
+    position: relative;
+    width:100%;
+    
+    
+}
+.prof .sections .header .cont {
+    min-width:100%;
+    height: 30%;
+    max-height: 450px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 7.5px;
+
+}
+.prof .sections .header .cont #bcimage{
+    height: 100%;
+    position: relative;
+    top: -150px;
+}
+.prof .sections .header .details{
+    position: relative;
+    top: -50px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    height: 60px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-top: 5px solid #333;
+}
+.prof .sections .header .details h1 p{
+    font-size: 16px;
+    color: grey;
+}
+.prof .sections .header .details button{
+    margin-left: auto;
+    margin-right: 20px;
+    background-color: rgb(209, 158, 17);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    width: 120px;
+    height: 40px;
+    border-radius: 20px;
+}
+.prof .sections .header .details #profimg{
+    height: 180px;
+    width: 180px;
+    margin: 5px;
+    border-radius: 50%;
+    border: 5px solid rgba(0,0,0,0.7);
+}
+.prof .sections .header .details .profilname{
+    margin-left: 20px;
+    margin-top: 15px;
+}
+.posts{
+    position: relative;
+    width:50%;
+}
+.posts .post{
+    
+    width: 100%;
+    margin-top: 25px;
+    border: 3px solid #333;
+    border-radius: 20px;
+    padding: 15px;
+    
+}
+.posts .post .header{
+    height: 70px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    
+}
+.posts .post .header img{
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    border: 2px solid black;
+    margin: 5px;
+    margin-right: 20px;
+
+}
+.posts .post .header h1{
+    font-size: 20px;
+}
+.posts .post .postimg{
+    overflow: hidden;
+    height: 70%;
+    max-height: 500px;
+
+}
+.posts .post p{
+    min-height: 30px;
+    margin: 10px;
+
+}
+.posts .post .postimg img{
+    width: 100%;
+
+}
+.posts .post .footer{
+    min-height: 70px;
+}
+.posts .post .footer textarea{
+   border: 2px solid black;
+   border-radius: 30px;
+   padding: 10px;
+   padding-left: 20px;
+   
+}
+.posts .post .footer .button{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.posts .post .footer .button button{
+    width: 25%;
+    height: 40px;
+    margin-left: 1%;
+    margin-right: 1%;
+    border-radius: 20px;
+    border:none;
+    font-size: 16px;
+    background-color: unset;
+}
+.posts .post .footer .button label{
+    width: 25%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.posts .post .footer .button label button{
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    border:none;
+    font-size: 16px;
+    background-color: unset;
+}
+.posts .post .footer .button button:hover{
+    background-color: #ddd;
+}
 

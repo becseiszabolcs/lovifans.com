@@ -24,7 +24,7 @@ function displayMembers(members) {
         var profil = "";
         var img_root = "/lovifans.com/image/default.png";
         if(member.profil_pic != null) img_root = member.profil_pic;
-        if(member.fstat==null){
+        if(member.fstat==null | member.fstat =="I"){
             profil=`
             <div class="profile">
                 <img src='${img_root}' alt='${member.pic_alt}'><a id='profile_name'>
@@ -34,7 +34,7 @@ function displayMembers(members) {
                         <input disable hidden type="text" name="profile" id="profile${id}" value="${member.profile_id}">
                         <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">send friend request</button>
                         <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
-                        <button class="button">Profile</button>
+                        <button onclick="window.location.href = ${r1}profile/${member.name}/${member.profile_id}" class="button">Profile</button>
                     </form>
                 </div>
             </div>
@@ -49,7 +49,7 @@ function displayMembers(members) {
                         <input disable hidden type="text" name="profile" id="profile${id}" value="${member.profile_id}">
                         <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">cancel request</button>
                         <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
-                        <button class="button">Profile</button>
+                        <button onclick="window.location.href = '${r1}profile/${member.name}/${member.profile_id}'" class="button">Profile</button>
                     </form>
                 </div>
             </div>
@@ -65,7 +65,7 @@ function displayMembers(members) {
                         <input disable hidden type="text" name="profile" id="profile${id}" value="${member.profile_id}">
                         <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">accept friend request</button>
                         <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
-                        <button class="button">Profile</button>
+                        <button onclick="window.location.href = '${r1}profile/${member.name}/${member.profile_id}'" class="button">Profile</button>
                     </form>
                 </div>
             </div>
@@ -80,7 +80,7 @@ function displayMembers(members) {
                         <input disable hidden type="text" name="profile" id="profile${id}" value="${member.profile_id}">
                         <button onclick="addFriend(${id})" id="friendAdd${id}" class="button">Delete friend</button>
                         <hr style="border: 1px solid #ddd;margin:10px 0 10px 0">
-                        <button class="button">Profile</button>
+                        <button onclick="window.location.href = '${r1}profile/${member.name}/${member.profile_id}'" class="button">Profile</button>
                     </form>
                 </div>
             </div>

@@ -36,14 +36,18 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
                     <input hidden type="text" name="soup" id="soup" value="<?=url(1).",".url(2)?>">
                     <textarea id="message" name="message" rows="1" oninput="textheight()" placeholder="Type something..."></textarea>
                 </div>
-                <button onclick="sendMessage()">Send</button>
+                <input hidden type="file" name="file" id="file" multiple>
+                <button id="photos"><img src="<?=$_SESSION["R1"]."/image/photo.png"?>" alt="photo"></button>
+                <button onclick="sendMessage()">send</button>
+                
+                
             </div>
-
-            <!--<input type="file" name="file" id="file" multiple>-->
-            <!--<input type="submit" value="send">-->
         </form>
 
         <script>
+            document.getElementById('photos').addEventListener('click', function() {
+                document.getElementById('file').click();
+            });
             fetchfriends("<?=url(2)?>");
             setInterval(fetchfriends("<?=url(2)?>"), 1000);
             fetchMessages("<?=url(2)?>");

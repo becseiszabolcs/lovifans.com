@@ -101,14 +101,13 @@
                             <a class='link' href=' /lovifans.com/post'>Post          </a>
                             <a class='link' href=' /lovifans.com/friends'>Friends    </a>
                             <a class='link' href=' /lovifans.com/finding'>Finding    </a>
-                            <a class='link' href=' /lovifans.com/groups'>Groups            </a>
+                            <a class='link' href=' /lovifans.com/groups'>Groups      </a>
                             <div class='menu'>
                                 <button onclick='window.location.href=\" /lovifans.com/profile\"' class='btnprof'><img src='$prof_img' alt=''><a id='profile_name'>$_SESSION[uname]</a></button>
                                 <div class='dropdown'>
-                                    <a href='$_SESSION[R1]/profile/'>  <img src='$prof_img' class='profimg' alt='Profil image'>                     Profile Page            </a>
-                                    <a href='$_SESSION[R1]/'>                         <img src=' $_SESSION[R1]/image/settings.png' alt='account settings icon'>    Profile Edit            </a>
-                                    <a href='$_SESSION[R1]/'>                         <img src=' $_SESSION[R1]/image/connect.png' alt='connect icon'>              Help Question           </a>
-                                    <a href='$_SESSION[R1]/pages/loged/logout.php'> <img src=' $_SESSION[R1]/image/logout.png' alt='logout icon'>                Logout                  </a>
+                                    <a href='$_SESSION[R1]/profile/'>               <img src='$prof_img' class='profimg' alt='Profil image'>         Profile Page            </a>
+                                    <a href='$_SESSION[R1]/contact/'>               <img src='$_SESSION[R1]/image/connect.png' alt='connect icon'>   Help & Question         </a>
+                                    <a href='$_SESSION[R1]/pages/loged/logout.php'> <img src='$_SESSION[R1]/image/logout.png' alt='logout icon'>     Logout                  </a>
                                 </div>
                                 
                             </div>
@@ -121,6 +120,7 @@
             else if($p == "friends")    include("./pages/loged/friend.php");
             else if($p == "finding")    include("./pages/loged/find.php");
             else if($p == "profile")    include("./pages/loged/profil.php");
+            else if($p == "contact")    include("./pages/loged/contact.html");
             else                        include("./pages/404.php");
             
         }
