@@ -2,7 +2,7 @@
     session_start();
     if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
 
-    include("../../connect.php");
+    include("$_SESSION[priv]/connect.php");
     $profil = explode(",",$_POST["soup"]);
     $text = $_POST["message"];
     $bool = str_replace(" ", "", $text);

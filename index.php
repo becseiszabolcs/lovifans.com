@@ -9,6 +9,7 @@
         else return $array[$key] ?? '';
     }
     $_SESSION['R1'] ="http://localhost/lovifans.com";
+    $_SESSION["priv"]="../../../private";
     if(!isset($_SESSION["uid"])){
         //loged out
         $pages = ["login","signup","about","services","contact","send-password-reset"];

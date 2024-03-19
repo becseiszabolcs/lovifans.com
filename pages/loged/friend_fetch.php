@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include("../../connect.php");
+    include("$_SESSION[priv]/connect.php");
     if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
 
     $clientTimezone = isset($_GET['timezone']) ? $_GET['timezone'] : 'UTC';

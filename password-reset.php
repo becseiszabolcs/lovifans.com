@@ -7,7 +7,7 @@ if(array_count_values($isvalid) > 1 ){
 */
 
 
-include("./connect.php");
+include("../private/connect.php");
 
 if(isset($_GET["token"])){
     $token = hash("sha256",$_GET["token"]);

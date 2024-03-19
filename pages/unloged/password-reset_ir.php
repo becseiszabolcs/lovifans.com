@@ -1,5 +1,5 @@
 <?php
-include("../../connect.php");
+include("$_SESSION[priv]/connect.php");
 
 $options = ["cost" => 12];
 $pass = password_hash($_POST["upass1"],PASSWORD_BCRYPT,$options);

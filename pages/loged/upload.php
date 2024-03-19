@@ -1,5 +1,6 @@
 <?php
-include("./connect.php");
+session_start();
+include("$_SESSION[priv]/connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

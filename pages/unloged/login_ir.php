@@ -3,7 +3,7 @@
 
 <?php
     session_start();
-    include("../../connect.php");
+    include("$_SESSION[priv]/connect.php");
     
 
     //header('Content-Type: application/json');

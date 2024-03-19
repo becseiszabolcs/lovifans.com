@@ -1,5 +1,5 @@
 <?php
-include("../../connect.php");
+include("$_SESSION[priv]/connect.php");
 
 $email = $_POST["email"];
 $any = mysqli_fetch_array(mysqli_query($dbase,"select ustrid,upass from users where umail='$email'"));
