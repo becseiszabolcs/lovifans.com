@@ -16,7 +16,7 @@
     }
     else{
         //loged in
-        $pages = ["home","post","friends","finding","profile","about","services","contact"];
+        $pages = ["settings","home","post","friends","finding","profile","about","services","contact"];
     }
     
     $percent=[0,""];
@@ -87,15 +87,10 @@
             
         }
         else {
-            $prof_img = " /lovifans.com/image/default.png";
-            if($_SESSION["icid"]){
-                $pfimgid = mysqli_fetch_row($dbase,"select iid from imgconnect where icid = $_SESSION[icid]")["iid"];
-                $pfimg =  mysqli_fetch_row($dbase,"select fnname from image where iid=$pfimgid")["fnname"];
-                $prof_img = "$_SESSION[R1]/uploads/" . $pfimg;
-            }
+            $prof_img = "$_SESSION[profilimg]";
             print"
                 <div class='container' id='loged'>
-                    <header>
+                    <header id='first_header'>
                         <img class='plogo' src=' /lovifans.com/image/logo.png'>
                         <nav class ='navigation'>
                             <a class='link' href=' /lovifans.com/'>Home              </a>
@@ -122,6 +117,7 @@
             else if($p == "finding")    include("./pages/loged/find.php");
             else if($p == "profile")    include("./pages/loged/profil.php");
             else if($p == "contact")    include("./pages/loged/contact.html");
+            else if($p == "settings")   include("./pages/loged/settings.php");
             else                        include("./pages/404.php");
             
         }

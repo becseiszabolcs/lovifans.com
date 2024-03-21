@@ -19,7 +19,7 @@ function showset(){
     if(!bool){
         $("#prof").append(`
             <div id="settings" onclick="showset()">
-                <iframe src="${r1+"/pages/loged/settings.php"}" frameborder="2"></iframe>
+                <iframe src="${r1+"/settings/"}" frameborder="2"></iframe>
             </div>
         `);
         bool = true;

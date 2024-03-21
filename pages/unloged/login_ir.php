@@ -16,16 +16,31 @@
             $Udata = mysqli_fetch_assoc(mysqli_query($dbase, "select * from users where uname = '$userid' or umail = '$userid'"));
             if(!empty($Udata)){
                 if(password_verify($pass,$Udata["upass"])){
+                    $bc = "";
+                    $pi = "$_SESSION[R1]/image/default.png";
+                    
+                    if($Udata["icid"]) {
+                        $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $Udata[icid] == fcid"))["fiid"];
+                        $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select * from files where $pi == fiid"))["finname"]; 
+                        $day = DateTime::createFromFormat('Y-m-d', $pi["fidate"]);
+                        $pi = "$_SESSION[priv]/uploads/image/$day/$pi[finname]";
+                    }
+                    if($Udata["bicid"]) {
+                        $bc = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $Udata[bicid] == fcid"))["fiid"];
+                        $bc = mysqli_fetch_assoc(mysqli_query($dbase,"select * from files where $pi == fiid"))["finname"];
+                        $day = DateTime::createFromFormat('Y-m-d', $bc["fidate"]);
+                        $bc = "$_SESSION[priv]/uploads/image/$day/$bc[finname]"; 
+                    }
    
-                    $_SESSION["uid"]    = $Udata["uid"]     ;
-                    $_SESSION["ustrid"] = $Udata["ustrid"]  ;
-                    $_SESSION["icid"]   = $Udata["icid"]    ;
-                    $_SESSION["bicid"]   = $Udata["bicid"]  ;
-                    $_SESSION["uname"]  = $Udata["uname"]   ;
-                    $_SESSION["umail"]  = $Udata["umail"]   ;
-                    $_SESSION["upw"]    = $Udata["upass"]   ;
-                    $_SESSION["key"]    = randoms(60)       ;
-                    $_SESSION["sid"]    = session_id()      ;
+                    $_SESSION["uid"]            = $Udata["uid"]     ;
+                    $_SESSION["ustrid"]         = $Udata["ustrid"]  ;
+                    $_SESSION["profilimg"]      = $pi               ;
+                    $_SESSION["profilbc"]       = $bc               ;
+                    $_SESSION["uname"]          = $Udata["uname"]   ;
+                    $_SESSION["umail"]          = $Udata["umail"]   ;
+                    $_SESSION["upw"]            = $Udata["upass"]   ;
+                    $_SESSION["key"]            = randoms(60)       ;
+                    $_SESSION["sid"]            = session_id()      ;
                     mysqli_query($dbase,"UPDATE  users  SET  ustat  = 'A,Online' WHERE  users . uid  = $_SESSION[uid]");
                     if(!str_contains($Udata["ustat"],"D") && !str_contains($Udata["ustat"],"S")){
                         $_SESSION["stat"]   = "A, Online";

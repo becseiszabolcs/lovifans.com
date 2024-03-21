@@ -42,12 +42,12 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
             
             <div class="details">
             
-                <img src="/lovifans.com/image/default.png" alt="profil image" id="profimg">
+                <img src="<?=$_SESSION["profilimg"]?>" alt="profil image" id="profimg">
                 <h1 class="profilname">
                     <?=$_SESSION['uname']?>
                     <p>110 Views</p>
                 </h1>
-                <button onclick="showset()">Options</button>
+                <button onclick="showset()">Account Settings</button>
             </div>
             <hr style="border: 2px solid #ddd; width:100%; border-radius:2px;">
 
