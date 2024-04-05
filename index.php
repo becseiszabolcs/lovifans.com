@@ -16,7 +16,7 @@
     }
     else{
         //loged in
-        $pages = ["settings","home","post","friends","finding","profile","about","services","contact"];
+        $pages = ["settings","home","friends","finding","profile","about","services","contact"];
     }
     
     $percent=[0,""];
@@ -94,7 +94,6 @@
                         <img class='plogo' src=' /lovifans.com/image/logo.png'>
                         <nav class ='navigation'>
                             <a class='link' href=' /lovifans.com/'>Home              </a>
-                            <a class='link' href=' /lovifans.com/post'>Post          </a>
                             <a class='link' href=' /lovifans.com/friends'>Friends    </a>
                             <a class='link' href=' /lovifans.com/finding'>Finding    </a>
                             <a class='link' href=' /lovifans.com/groups'>Groups      </a>
@@ -112,7 +111,6 @@
                     </header>
             ";
             if($p == "home")            include("./pages/loged/home.php");
-            else if($p == "post")       include("./pages/loged/post.php");
             else if($p == "friends")    include("./pages/loged/friend.php");
             else if($p == "finding")    include("./pages/loged/find.php");
             else if($p == "profile")    include("./pages/loged/profil.php");

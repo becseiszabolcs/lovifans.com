@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2024 at 03:31 PM
+-- Generation Time: Apr 05, 2024 at 03:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,13 +43,55 @@ CREATE TABLE `comment` (
   `cid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
   `pid` int(11) NOT NULL,
+  `fcid` text NOT NULL,
   `clabel` text NOT NULL,
-  `icid` int(11) NOT NULL,
   `celoz` varchar(100) NOT NULL,
   `cstat` varchar(1) NOT NULL COMMENT 'aktive, deleted, supensed',
   `cdate` datetime NOT NULL DEFAULT current_timestamp(),
   `cip` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fconnect`
+--
+
+CREATE TABLE `fconnect` (
+  `fcid` int(11) NOT NULL,
+  `fiid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `fconnect`
+--
+
+INSERT INTO `fconnect` (`fcid`, `fiid`) VALUES
+(6, 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `files`
+--
+
+CREATE TABLE `files` (
+  `fiid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `finame` varchar(150) NOT NULL,
+  `finname` varchar(50) NOT NULL,
+  `fitype` varchar(5) NOT NULL COMMENT 'image, video, audio, docs',
+  `fistat` varchar(1) NOT NULL COMMENT 'deleted, aktive, suspended',
+  `fidate` datetime NOT NULL DEFAULT current_timestamp(),
+  `fiip` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `files`
+--
+
+INSERT INTO `files` (`fiid`, `uid`, `finame`, `finname`, `fitype`, `fistat`, `fidate`, `fiip`) VALUES
+(7, 1, 'retro-gaming.jpg', '150903AmIEBqm06lHerdvIlt9h0.jpg', 'image', 'A', '2024-04-05 15:09:03', '::1');
 
 -- --------------------------------------------------------
 
@@ -62,8 +104,23 @@ CREATE TABLE `friends` (
   `uid` int(11) NOT NULL,
   `fuid` int(11) NOT NULL,
   `fdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `fstat` varchar(1) NOT NULL COMMENT 'dependent, aktive, banned'
+  `fstat` varchar(1) NOT NULL COMMENT 'dependent, active, inactive, banned',
+  `fip` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `friends`
+--
+
+INSERT INTO `friends` (`fid`, `uid`, `fuid`, `fdate`, `fstat`, `fip`) VALUES
+(47, 1, 10, '2024-03-11 10:46:36', 'A', '::1'),
+(48, 1, 16, '2024-03-11 12:07:42', 'A', '::1'),
+(49, 1, 17, '2024-03-13 17:27:28', 'A', '::1'),
+(50, 1, 18, '2024-03-13 17:27:29', 'A', '::1'),
+(53, 19, 10, '2024-03-13 17:31:24', 'A', '::1'),
+(54, 19, 16, '2024-03-13 17:31:25', 'A', '::1'),
+(57, 1, 19, '2024-03-18 21:19:34', 'A', '::1'),
+(58, 1, 20, '2024-03-22 14:57:23', 'D', '::1');
 
 -- --------------------------------------------------------
 
@@ -86,6 +143,7 @@ CREATE TABLE `gpconnect` (
 CREATE TABLE `group` (
   `gid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
+  `fcid` int(11) NOT NULL,
   `gname` varchar(30) NOT NULL,
   `gimg` int(11) NOT NULL,
   `gback` int(11) NOT NULL,
@@ -112,33 +170,6 @@ CREATE TABLE `groupmember` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `image`
---
-
-CREATE TABLE `image` (
-  `iid` int(11) NOT NULL,
-  `uid` int(11) NOT NULL,
-  `iname` varchar(150) NOT NULL,
-  `inname` varchar(50) NOT NULL,
-  `istat` varchar(1) NOT NULL COMMENT 'deleted, aktive, suspended',
-  `idate` datetime NOT NULL DEFAULT current_timestamp(),
-  `iip` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `imgconnect`
---
-
-CREATE TABLE `imgconnect` (
-  `icid` int(11) NOT NULL,
-  `iid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `login`
 --
 
@@ -154,29 +185,115 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`lid`, `uid`, `ldate`, `lip`) VALUES
-(1, 1, '2024-01-04 02:59:45', '127.0.0.1'),
-(2, 1, '2024-01-05 13:23:49', '::1'),
-(3, 1, '2024-01-05 17:27:00', '127.0.0.1'),
-(4, 2, '2024-01-05 17:43:17', '::1'),
-(5, 1, '2024-01-22 21:18:01', '127.0.0.1'),
-(6, 1, '2024-01-22 22:18:57', '127.0.0.1'),
-(7, 1, '2024-01-22 23:03:11', '127.0.0.1'),
-(8, 1, '2024-01-23 00:33:28', '127.0.0.1'),
-(9, 1, '2024-01-23 01:48:44', '127.0.0.1'),
-(10, 1, '2024-01-23 01:50:41', '127.0.0.1'),
-(11, 1, '2024-01-26 16:51:20', '127.0.0.1'),
-(12, 1, '2024-01-26 16:57:38', '127.0.0.1'),
-(13, 1, '2024-01-26 16:59:01', '127.0.0.1'),
-(14, 1, '2024-01-27 12:51:38', '127.0.0.1'),
-(15, 1, '2024-01-27 14:06:56', '127.0.0.1'),
-(16, 1, '2024-01-28 12:03:47', '127.0.0.1'),
-(17, 10, '2024-02-25 10:49:38', '127.0.0.1'),
-(18, 11, '2024-02-25 11:13:11', '127.0.0.1'),
-(19, 10, '2024-02-25 15:17:41', '127.0.0.1'),
-(20, 10, '2024-02-25 15:19:54', '127.0.0.1'),
-(21, 10, '2024-02-25 15:22:09', '127.0.0.1'),
-(22, 10, '2024-02-25 15:26:22', '127.0.0.1'),
-(23, 10, '2024-02-25 15:30:06', '127.0.0.1');
+(227, 1, '2024-03-09 11:11:58', '::1'),
+(228, 10, '2024-03-11 11:33:00', '::1'),
+(229, 10, '2024-03-11 11:46:02', '::1'),
+(230, 1, '2024-03-11 11:50:57', '::1'),
+(231, 1, '2024-03-11 11:53:44', '::1'),
+(232, 1, '2024-03-11 11:56:52', '::1'),
+(233, 1, '2024-03-11 11:59:16', '::1'),
+(234, 16, '2024-03-11 12:08:29', '::1'),
+(235, 1, '2024-03-11 13:30:36', '::1'),
+(236, 1, '2024-03-11 13:32:11', '::1'),
+(237, 1, '2024-03-11 13:54:56', '::1'),
+(238, 16, '2024-03-11 14:18:17', '::1'),
+(239, 1, '2024-03-11 14:29:47', '::1'),
+(240, 1, '2024-03-11 14:34:49', '::1'),
+(241, 10, '2024-03-11 14:38:50', '127.0.0.1'),
+(242, 1, '2024-03-11 15:11:07', '::1'),
+(243, 16, '2024-03-11 15:29:34', '127.0.0.1'),
+(244, 10, '2024-03-11 15:30:42', '::1'),
+(245, 16, '2024-03-11 15:31:49', '::1'),
+(246, 10, '2024-03-11 15:34:03', '127.0.0.1'),
+(247, 1, '2024-03-11 15:51:52', '::1'),
+(248, 1, '2024-03-11 15:55:59', '::1'),
+(249, 1, '2024-03-11 15:58:06', '::1'),
+(250, 16, '2024-03-11 15:59:22', '::1'),
+(251, 10, '2024-03-11 16:01:42', '::1'),
+(252, 1, '2024-03-11 17:19:14', '::1'),
+(253, 1, '2024-03-11 17:40:03', '::1'),
+(254, 1, '2024-03-11 17:46:34', '::1'),
+(255, 1, '2024-03-11 17:48:50', '::1'),
+(256, 1, '2024-03-12 17:07:05', '::1'),
+(257, 1, '2024-03-12 17:08:19', '::1'),
+(258, 1, '2024-03-12 17:28:57', '::1'),
+(259, 1, '2024-03-12 17:29:36', '::1'),
+(260, 1, '2024-03-12 17:46:33', '::1'),
+(261, 10, '2024-03-12 17:48:00', '::1'),
+(262, 1, '2024-03-12 17:50:04', '::1'),
+(263, 10, '2024-03-12 17:50:28', '::1'),
+(264, 1, '2024-03-12 17:50:43', '::1'),
+(265, 16, '2024-03-13 17:18:48', '::1'),
+(266, 1, '2024-03-13 17:19:15', '::1'),
+(267, 1, '2024-03-13 17:20:06', '::1'),
+(268, 17, '2024-03-13 17:28:25', '::1'),
+(269, 18, '2024-03-13 17:30:25', '::1'),
+(270, 19, '2024-03-13 17:31:05', '::1'),
+(271, 20, '2024-03-13 17:31:59', '::1'),
+(272, 1, '2024-03-13 18:15:09', '::1'),
+(273, 1, '2024-03-13 18:18:24', '::1'),
+(274, 10, '2024-03-13 18:27:43', '::1'),
+(275, 1, '2024-03-13 18:28:27', '::1'),
+(276, 1, '2024-03-13 19:52:50', '::1'),
+(277, 1, '2024-03-13 20:13:56', '::1'),
+(278, 1, '2024-03-13 20:15:00', '::1'),
+(279, 1, '2024-03-13 20:24:20', '::1'),
+(280, 16, '2024-03-13 20:25:00', '::1'),
+(281, 1, '2024-03-13 20:25:28', '::1'),
+(282, 18, '2024-03-13 20:26:32', '::1'),
+(283, 19, '2024-03-13 20:27:00', '::1'),
+(284, 1, '2024-03-13 20:49:16', '::1'),
+(285, 1, '2024-03-13 22:12:57', '::1'),
+(286, 10, '2024-03-13 22:21:41', '::1'),
+(287, 10, '2024-03-13 22:24:04', '::1'),
+(288, 1, '2024-03-13 22:25:32', '::1'),
+(289, 1, '2024-03-13 22:40:41', '::1'),
+(290, 1, '2024-03-13 22:47:25', '::1'),
+(291, 10, '2024-03-13 22:51:48', '::1'),
+(292, 1, '2024-03-13 22:52:26', '::1'),
+(293, 1, '2024-03-18 18:06:12', '::1'),
+(294, 1, '2024-03-18 18:31:36', '::1'),
+(295, 1, '2024-03-18 18:40:53', '::1'),
+(296, 1, '2024-03-18 18:46:27', '::1'),
+(297, 1, '2024-03-18 18:49:07', '::1'),
+(298, 1, '2024-03-18 19:15:13', '::1'),
+(299, 1, '2024-03-18 20:47:37', '::1'),
+(300, 1, '2024-03-18 21:02:57', '::1'),
+(301, 1, '2024-03-18 21:03:57', '::1'),
+(302, 1, '2024-03-18 21:10:22', '::1'),
+(303, 1, '2024-03-18 21:27:36', '::1'),
+(304, 1, '2024-03-18 21:35:25', '::1'),
+(305, 1, '2024-03-19 00:55:11', '::1'),
+(306, 1, '2024-03-19 14:52:52', '::1'),
+(307, 1, '2024-03-19 15:14:04', '::1'),
+(308, 1, '2024-03-19 20:59:16', '::1'),
+(309, 1, '2024-03-19 21:06:47', '::1'),
+(310, 1, '2024-03-19 21:29:33', '::1'),
+(311, 1, '2024-03-19 21:48:56', '::1'),
+(312, 1, '2024-03-19 22:24:39', '::1'),
+(313, 1, '2024-03-20 15:00:01', '::1'),
+(314, 1, '2024-03-20 15:02:48', '::1'),
+(315, 1, '2024-03-20 15:42:48', '::1'),
+(316, 1, '2024-03-20 18:10:10', '::1'),
+(317, 1, '2024-03-22 13:25:10', '::1'),
+(318, 1, '2024-03-23 14:43:11', '::1'),
+(319, 1, '2024-03-24 15:54:49', '::1'),
+(320, 1, '2024-04-04 19:22:56', '::1'),
+(321, 1, '2024-04-04 19:47:49', '::1'),
+(322, 19, '2024-04-04 20:18:43', '::1'),
+(323, 1, '2024-04-04 20:20:52', '::1'),
+(324, 10, '2024-04-04 20:23:14', '::1'),
+(325, 1, '2024-04-04 21:04:12', '::1'),
+(326, 1, '2024-04-04 22:55:12', '::1'),
+(327, 1, '2024-04-04 22:59:14', '::1'),
+(328, 1, '2024-04-05 09:08:52', '::1'),
+(329, 1, '2024-04-05 09:47:53', '::1'),
+(330, 1, '2024-04-05 10:45:59', '::1'),
+(331, 1, '2024-04-05 10:48:06', '::1'),
+(332, 1, '2024-04-05 11:01:15', '::1'),
+(333, 1, '2024-04-05 11:02:05', '::1'),
+(334, 1, '2024-04-05 14:56:38', '::1'),
+(335, 1, '2024-04-05 15:02:42', '::1');
 
 -- --------------------------------------------------------
 
@@ -190,8 +307,8 @@ CREATE TABLE `message` (
   `ustrid` varchar(100) NOT NULL,
   `mtoid` int(11) NOT NULL,
   `mtostrid` varchar(100) NOT NULL,
+  `fcid` text NOT NULL,
   `mlabel` text NOT NULL,
-  `icid` int(11) DEFAULT NULL,
   `meloz` varchar(100) DEFAULT NULL,
   `mstat` varchar(1) NOT NULL COMMENT 'aktive, deleted, suspensed',
   `mdate` datetime NOT NULL DEFAULT current_timestamp(),
@@ -202,10 +319,11 @@ CREATE TABLE `message` (
 -- Dumping data for table `message`
 --
 
-INSERT INTO `message` (`mid`, `uid`, `ustrid`, `mtoid`, `mtostrid`, `mlabel`, `icid`, `meloz`, `mstat`, `mdate`, `mip`) VALUES
-(1, 11, 'YuBoERrLuGElKbmAhzlpeqydJCxiAlTyLT5FcgsdeKGQYMfT4SHgWNLctHrjqduma7Bhkkgg3HF8ra56wUW9HvpzsP92tO6KzAoT', 10, 'RVz9tHMIM1h3Gro1VJly', 'hello world', NULL, NULL, 'A', '2024-02-25 11:56:40', ''),
-(2, 11, 'YuBoERrLuGElKbmAhzlpeqydJCxiAlTyLT5FcgsdeKGQYMfT4SHgWNLctHrjqduma7Bhkkgg3HF8ra56wUW9HvpzsP92tO6KzAoT', 10, 'RVz9tHMIM1h3Gro1VJly', 'hello world', NULL, NULL, 'A', '2024-02-25 11:56:49', ''),
-(3, 11, 'YuBoERrLuGElKbmAhzlpeqydJCxiAlTyLT5FcgsdeKGQYMfT4SHgWNLctHrjqduma7Bhkkgg3HF8ra56wUW9HvpzsP92tO6KzAoT', 10, 'RVz9tHMIM1h3Gro1VJly', 'hello world', NULL, NULL, 'A', '2024-02-25 11:58:15', '127.0.0.1');
+INSERT INTO `message` (`mid`, `uid`, `ustrid`, `mtoid`, `mtostrid`, `fcid`, `mlabel`, `meloz`, `mstat`, `mdate`, `mip`) VALUES
+(49, 1, 'AmIEBqm06lHerdvIlt9h', 16, 'upqiliFaNQ0RztCfNvjf', '0', 'hi', NULL, 'A', '2024-03-12 18:03:20', '::1'),
+(50, 1, 'AmIEBqm06lHerdvIlt9h', 10, 'RVz9tHMIM1h3Gro1VJly', '0', 'hi', NULL, 'A', '2024-03-13 17:20:25', '::1'),
+(51, 20, 'z65t4DJVD8K5Bt5OTogI', 1, 'AmIEBqm06lHerdvIlt9h', '0', 'hi', NULL, 'A', '2024-03-13 17:32:15', '::1'),
+(52, 1, 'AmIEBqm06lHerdvIlt9h', 20, 'z65t4DJVD8K5Bt5OTogI', '0', 'hi', NULL, 'A', '2024-03-19 01:52:43', '::1');
 
 -- --------------------------------------------------------
 
@@ -226,43 +344,154 @@ CREATE TABLE `note` (
 --
 
 INSERT INTO `note` (`nid`, `lid`, `nurl`, `ndate`, `nip`) VALUES
-(1, 1, '/lovifans.com/pages/login_ir.php', '2024-01-04 02:59:45', '127.0.0.1'),
-(2, 1, '/lovifans.com/pages/logout.php', '2024-01-04 02:59:55', '127.0.0.1'),
-(3, 2, '/lovifans.com/pages/login_ir.php', '2024-01-05 13:23:49', '::1'),
-(4, 3, '/lovifans.com/pages/login_ir.php', '2024-01-05 17:27:00', '127.0.0.1'),
-(5, 3, '/lovifans.com/pages/logout.php', '2024-01-05 17:27:06', '127.0.0.1'),
-(6, 4, '/lovifans.com/pages/login_ir.php', '2024-01-05 17:43:17', '::1'),
-(7, 4, '/lovifans.com/pages/logout.php', '2024-01-05 17:43:47', '::1'),
-(8, 5, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-22 21:18:01', '127.0.0.1'),
-(9, 6, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-22 22:18:57', '127.0.0.1'),
-(10, 7, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-22 23:03:11', '127.0.0.1'),
-(11, 8, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-23 00:33:28', '127.0.0.1'),
-(12, 9, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-23 01:48:44', '127.0.0.1'),
-(13, 9, '/lovifans.com/pages/loged/logout.php', '2024-01-23 01:48:47', '127.0.0.1'),
-(14, 10, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-23 01:50:41', '127.0.0.1'),
-(15, 10, '/lovifans.com/pages/loged/logout.php', '2024-01-23 01:50:45', '127.0.0.1'),
-(16, 11, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-26 16:51:20', '127.0.0.1'),
-(17, 11, '/lovifans.com/pages/loged/logout.php', '2024-01-26 16:57:12', '127.0.0.1'),
-(18, 12, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-26 16:57:38', '127.0.0.1'),
-(19, 13, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-26 16:59:01', '127.0.0.1'),
-(20, 14, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-27 12:51:38', '127.0.0.1'),
-(21, 15, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-27 14:06:56', '127.0.0.1'),
-(22, 16, '/lovifans.com/pages/unloged/login_ir.php', '2024-01-28 12:03:47', '127.0.0.1'),
-(23, 16, '/lovifans.com/pages/loged/logout.php', '2024-01-28 14:28:09', '127.0.0.1'),
-(24, 17, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 10:49:38', '127.0.0.1'),
-(25, 17, '/lovifans.com/pages/loged/logout.php', '2024-02-25 11:12:14', '127.0.0.1'),
-(26, 18, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 11:13:11', '127.0.0.1'),
-(27, 18, '/lovifans.com/pages/loged/logout.php', '2024-02-25 15:17:28', '127.0.0.1'),
-(28, 19, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 15:17:41', '127.0.0.1'),
-(29, 19, '/lovifans.com/pages/loged/logout.php', '2024-02-25 15:18:21', '127.0.0.1'),
-(30, 20, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 15:19:54', '127.0.0.1'),
-(31, 20, '/lovifans.com/pages/loged/logout.php', '2024-02-25 15:20:01', '127.0.0.1'),
-(32, 21, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 15:22:09', '127.0.0.1'),
-(33, 21, '/lovifans.com/pages/loged/logout.php', '2024-02-25 15:22:11', '127.0.0.1'),
-(34, 22, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 15:26:22', '127.0.0.1'),
-(35, 22, '/lovifans.com/pages/loged/logout.php', '2024-02-25 15:26:25', '127.0.0.1'),
-(36, 23, '/lovifans.com/pages/unloged/login_ir.php', '2024-02-25 15:30:06', '127.0.0.1'),
-(37, 23, '/lovifans.com/pages/loged/logout.php', '2024-02-25 15:30:36', '127.0.0.1');
+(337, 227, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-09 11:11:58', '::1'),
+(338, 228, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 11:33:00', '::1'),
+(339, 228, '/lovifans.com/pages/loged/logout.php', '2024-03-11 11:43:09', '::1'),
+(340, 229, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 11:46:02', '::1'),
+(341, 229, '/lovifans.com/pages/loged/logout.php', '2024-03-11 11:46:09', '::1'),
+(342, 230, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 11:50:57', '::1'),
+(343, 231, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 11:53:44', '::1'),
+(344, 232, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 11:56:52', '::1'),
+(345, 233, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 11:59:16', '::1'),
+(346, 234, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 12:08:29', '::1'),
+(347, 235, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 13:30:36', '::1'),
+(348, 236, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 13:32:11', '::1'),
+(349, 237, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 13:54:56', '::1'),
+(350, 238, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 14:18:17', '::1'),
+(351, 238, '/lovifans.com/pages/loged/logout.php', '2024-03-11 14:18:24', '::1'),
+(352, 239, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 14:29:47', '::1'),
+(353, 240, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 14:34:49', '::1'),
+(354, 241, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 14:38:50', '127.0.0.1'),
+(355, 242, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 15:11:07', '::1'),
+(356, 243, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 15:29:34', '127.0.0.1'),
+(357, 244, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 15:30:42', '::1'),
+(358, 244, '/lovifans.com/pages/loged/logout.php', '2024-03-11 15:31:24', '::1'),
+(359, 245, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 15:31:49', '::1'),
+(360, 243, '/lovifans.com/pages/loged/logout.php', '2024-03-11 15:33:54', '127.0.0.1'),
+(361, 246, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 15:34:03', '127.0.0.1'),
+(362, 247, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 15:51:52', '::1'),
+(363, 248, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 15:55:59', '::1'),
+(364, 249, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 15:58:06', '::1'),
+(365, 245, '/lovifans.com/pages/loged/logout.php', '2024-03-11 15:58:49', '::1'),
+(366, 250, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 15:59:22', '::1'),
+(367, 250, '/lovifans.com/pages/loged/logout.php', '2024-03-11 16:01:33', '::1'),
+(368, 251, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 16:01:42', '::1'),
+(369, 252, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 17:19:14', '::1'),
+(370, 253, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 17:40:03', '::1'),
+(371, 254, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 17:46:34', '::1'),
+(372, 255, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-11 17:48:50', '::1'),
+(373, 256, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-12 17:07:05', '::1'),
+(374, 256, '/lovifans.com/pages/loged/logout.php', '2024-03-12 17:07:38', '::1'),
+(375, 257, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-12 17:08:19', '::1'),
+(376, 257, '/lovifans.com/pages/loged/logout.php', '2024-03-12 17:28:06', '::1'),
+(377, 258, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-12 17:28:57', '::1'),
+(378, 258, '/lovifans.com/pages/loged/logout.php', '2024-03-12 17:29:26', '::1'),
+(379, 259, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-12 17:29:36', '::1'),
+(380, 260, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-12 17:46:33', '::1'),
+(381, 261, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-12 17:48:00', '::1'),
+(382, 261, '/lovifans.com/pages/loged/logout.php', '2024-03-12 17:48:03', '::1'),
+(383, 262, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-12 17:50:04', '::1'),
+(384, 262, '/lovifans.com/pages/loged/logout.php', '2024-03-12 17:50:21', '::1'),
+(385, 263, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-12 17:50:28', '::1'),
+(386, 263, '/lovifans.com/pages/loged/logout.php', '2024-03-12 17:50:35', '::1'),
+(387, 264, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-12 17:50:43', '::1'),
+(388, 265, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 17:18:48', '::1'),
+(389, 265, '/lovifans.com/pages/loged/logout.php', '2024-03-13 17:19:04', '::1'),
+(390, 266, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 17:19:15', '::1'),
+(391, 267, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 17:20:06', '::1'),
+(392, 268, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 17:28:25', '::1'),
+(393, 268, '/lovifans.com/pages/loged/logout.php', '2024-03-13 17:29:13', '::1'),
+(394, 269, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 17:30:25', '::1'),
+(395, 269, '/lovifans.com/pages/loged/logout.php', '2024-03-13 17:30:43', '::1'),
+(396, 270, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 17:31:05', '::1'),
+(397, 270, '/lovifans.com/pages/loged/logout.php', '2024-03-13 17:31:38', '::1'),
+(398, 271, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 17:31:59', '::1'),
+(399, 271, '/lovifans.com/pages/loged/logout.php', '2024-03-13 17:41:37', '::1'),
+(400, 272, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 18:15:09', '::1'),
+(401, 273, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 18:18:24', '::1'),
+(402, 273, '/lovifans.com/pages/loged/logout.php', '2024-03-13 18:27:37', '::1'),
+(403, 274, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 18:27:43', '::1'),
+(404, 274, '/lovifans.com/pages/loged/logout.php', '2024-03-13 18:28:21', '::1'),
+(405, 275, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 18:28:27', '::1'),
+(406, 276, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 19:52:50', '::1'),
+(407, 277, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 20:13:56', '::1'),
+(408, 278, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 20:15:00', '::1'),
+(409, 279, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 20:24:20', '::1'),
+(410, 279, '/lovifans.com/pages/loged/logout.php', '2024-03-13 20:24:34', '::1'),
+(411, 280, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 20:25:00', '::1'),
+(412, 278, '/lovifans.com/pages/loged/logout.php', '2024-03-13 20:25:21', '::1'),
+(413, 281, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 20:25:28', '::1'),
+(414, 280, '/lovifans.com/pages/loged/logout.php', '2024-03-13 20:25:53', '::1'),
+(415, 282, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 20:26:32', '::1'),
+(416, 282, '/lovifans.com/pages/loged/logout.php', '2024-03-13 20:26:38', '::1'),
+(417, 283, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 20:27:00', '::1'),
+(418, 283, '/lovifans.com/pages/loged/logout.php', '2024-03-13 20:27:02', '::1'),
+(419, 284, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 20:49:16', '::1'),
+(420, 285, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 22:12:57', '::1'),
+(421, 286, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 22:21:41', '::1'),
+(422, 286, '/lovifans.com/pages/loged/logout.php', '2024-03-13 22:22:35', '::1'),
+(423, 287, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 22:24:04', '::1'),
+(424, 288, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 22:25:32', '::1'),
+(425, 287, '/lovifans.com/pages/loged/logout.php', '2024-03-13 22:25:50', '::1'),
+(426, 288, '/lovifans.com/pages/loged/logout.php', '2024-03-13 22:29:06', '::1'),
+(427, 289, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 22:40:41', '::1'),
+(428, 290, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 22:47:25', '::1'),
+(429, 290, '/lovifans.com/pages/loged/logout.php', '2024-03-13 22:50:07', '::1'),
+(430, 291, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 22:51:48', '::1'),
+(431, 292, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-13 22:52:26', '::1'),
+(432, 291, '/lovifans.com/pages/loged/logout.php', '2024-03-13 22:53:08', '::1'),
+(433, 293, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-18 18:06:12', '::1'),
+(434, 294, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-18 18:31:36', '::1'),
+(435, 295, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-18 18:40:53', '::1'),
+(436, 296, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-18 18:46:27', '::1'),
+(437, 297, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-18 18:49:07', '::1'),
+(438, 298, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-18 19:15:13', '::1'),
+(439, 299, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-18 20:47:37', '::1'),
+(440, 300, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-18 21:02:57', '::1'),
+(441, 301, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-18 21:03:57', '::1'),
+(442, 302, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-18 21:10:22', '::1'),
+(443, 302, '/lovifans.com/pages/loged/logout.php', '2024-03-18 21:27:26', '::1'),
+(444, 303, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-18 21:27:36', '::1'),
+(445, 304, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-18 21:35:25', '::1'),
+(446, 304, '/lovifans.com/pages/loged/logout.php', '2024-03-19 00:54:58', '::1'),
+(447, 305, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-19 00:55:11', '::1'),
+(448, 306, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-19 14:52:52', '::1'),
+(449, 307, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-19 15:14:04', '::1'),
+(450, 307, '/lovifans.com/pages/loged/logout.php', '2024-03-19 19:35:56', '::1'),
+(451, 308, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-19 20:59:16', '::1'),
+(452, 309, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-19 21:06:47', '::1'),
+(453, 310, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-19 21:29:33', '::1'),
+(454, 310, '/lovifans.com/pages/loged/logout.php', '2024-03-19 21:42:06', '::1'),
+(455, 308, '/lovifans.com/pages/loged/logout.php', '2024-03-19 21:43:19', '::1'),
+(456, 311, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-19 21:48:56', '::1'),
+(457, 312, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-19 22:24:39', '::1'),
+(458, 313, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-20 15:00:01', '::1'),
+(459, 313, '/lovifans.com/pages/loged/logout.php', '2024-03-20 15:02:42', '::1'),
+(460, 314, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-20 15:02:48', '::1'),
+(461, 315, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-20 15:42:48', '::1'),
+(462, 316, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-20 18:10:10', '::1'),
+(463, 317, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-22 13:25:10', '::1'),
+(464, 318, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-23 14:43:11', '::1'),
+(465, 319, '/lovifans.com/pages/unloged/login_ir.php', '2024-03-24 15:54:49', '::1'),
+(466, 320, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-04 19:22:56', '::1'),
+(467, 320, '/lovifans.com/pages/loged/logout.php', '2024-04-04 19:46:09', '::1'),
+(468, 321, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-04 19:47:49', '::1'),
+(469, 321, '/lovifans.com/pages/loged/logout.php', '2024-04-04 20:18:23', '::1'),
+(470, 322, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-04 20:18:43', '::1'),
+(471, 322, '/lovifans.com/pages/loged/logout.php', '2024-04-04 20:20:45', '::1'),
+(472, 323, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-04 20:20:52', '::1'),
+(473, 324, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-04 20:23:14', '::1'),
+(474, 325, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-04 21:04:12', '::1'),
+(475, 326, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-04 22:55:12', '::1'),
+(476, 327, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-04 22:59:14', '::1'),
+(477, 328, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-05 09:08:52', '::1'),
+(478, 329, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-05 09:47:53', '::1'),
+(479, 330, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-05 10:45:59', '::1'),
+(480, 331, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-05 10:48:06', '::1'),
+(481, 332, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-05 11:01:15', '::1'),
+(482, 333, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-05 11:02:05', '::1'),
+(483, 334, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-05 14:56:38', '::1'),
+(484, 335, '/lovifans.com/pages/unloged/login_ir.php', '2024-04-05 15:02:42', '::1');
 
 -- --------------------------------------------------------
 
@@ -286,21 +515,12 @@ CREATE TABLE `pass_reset` (
 --
 
 INSERT INTO `pass_reset` (`pwid`, `umail`, `ustrid`, `previous_pw`, `token`, `token_expires_at`, `pwstat`, `pwip`) VALUES
-(6, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', 'a88a698e64085b03941f0936e1b53619fb99a53c3de83cfea6aca47142d0344c', '2024-01-04 03:15:24', 'U', '127.0.0.1'),
-(7, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '509afec7a6fbf705dcd0dba840dcf1c7b086e64bb0cb59e5c5a41e22f7c2e312', '2024-01-04 03:24:30', 'U', '127.0.0.1'),
-(8, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '81a8094dbb78c06e9aa4aa0dbb07885c0aa34d4dc368b3acc0730e27101cdaca', '2024-01-05 13:37:36', 'U', '127.0.0.1'),
-(9, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', 'c428415565c376fe390e4d20d494d8dbe4dffcb8bb439f644a4f489b1e647abd', '2024-01-13 11:10:57', 'U', '127.0.0.1'),
-(10, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '8ee344087cc809a9d9cfaafb8f073b6a08b273b929dde25e78de2529cc867b31', '2024-01-13 11:13:46', 'U', '127.0.0.1'),
-(11, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '866400d6d288265dd7702e825404a8c2640643db5bff59446eb99ca4dbcfbb69', '2024-01-13 11:14:54', 'U', '127.0.0.1'),
-(12, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '2dd44d191de2fa1818722877c4766a01229525736db44bae61c1a127b11400a9', '2024-01-13 11:16:45', 'U', '127.0.0.1'),
-(13, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '43a0e8f8ee5beae00e66a69459dba112d1151bad8c2351e5a544049768faa3ed', '2024-01-13 11:17:11', 'U', '127.0.0.1'),
-(14, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '0abd791c4826ba71b38c04af5b0042ba8c58a1772f804e815f5547aca8b9f905', '2024-01-14 20:08:26', 'U', '127.0.0.1'),
-(15, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', 'c939743de6cd796df78fb9c70fe21effbb343eb7200d6e7967a4fa29761c2abd', '2024-01-14 20:09:59', 'U', '127.0.0.1'),
-(16, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '1b1b78828f53837fa4fae93c841e718d70a8f87e6bebd0e4a88a022e3a48937a', '2024-01-17 18:40:39', 'U', '127.0.0.1'),
-(17, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '394b530b48bfbceed48cce77b8a110926ef09280de7c415a4cec29a64a5c4e90', '2024-01-17 20:06:46', 'U', '127.0.0.1'),
-(18, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '9ef267ad1b212310e38846bea285f0581448d3c77d378897cfe4225630ad5674', '2024-01-17 20:08:47', 'U', '127.0.0.1'),
-(19, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '47cf2a68588e2b45adafa8b25c74ecaec36c323cb837e6df5ea9b7679027ab6f', '2024-01-18 19:55:27', 'U', '127.0.0.1'),
-(20, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '64b4082c58aefbde8b928046cbb049fa3d232873605b9d29147814567d3318bc', '2024-01-22 21:05:03', 'U', '127.0.0.1');
+(23, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', 'e4cbf217ad37227c0499dd75c4465221fc3df3f4e0ad8178e0ac031b548dbaee', '2024-03-19 19:52:19', 'A', '::1'),
+(24, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '8afcb6ca8a114f6737412812c2bec204d2862df7617417c67ac8defb33dafb01', '2024-03-19 19:53:58', 'A', '::1'),
+(25, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '5c164056bb903891d4894e08cc0de3e0d37ee10203955fc92024c86e5b096671', '2024-03-19 19:55:07', 'A', '::1'),
+(26, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '4e229981a4c396d3dd2c2f19160a5ef64af6ee8d3221ccaad285df9acc5a34de', '2024-03-19 19:55:24', 'A', '::1'),
+(27, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', 'cda57ed837494dc3830bc3bd11cf2c636f9c164a8f5a15b35185c0bf4e5c5ac0', '2024-03-19 19:56:29', 'A', '::1'),
+(28, 'becsei.szabi@gmail.com', 'AmIEBqm06lHerdvIlt9h', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', '551d79f435466e975988a719ef3bfcd08ec8d34fbe939e90d8df3a43c72bbc46', '2024-03-19 20:11:56', 'A', '::1');
 
 -- --------------------------------------------------------
 
@@ -312,7 +532,7 @@ CREATE TABLE `post` (
   `pid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
   `plabel` text NOT NULL,
-  `icid` int(11) DEFAULT NULL,
+  `fcid` text DEFAULT NULL,
   `peloz` varchar(100) NOT NULL,
   `pstat` varchar(1) NOT NULL COMMENT 'deleted, aktive, suspensed',
   `pdate` datetime NOT NULL DEFAULT current_timestamp(),
@@ -346,7 +566,8 @@ CREATE TABLE `reaction` (
 CREATE TABLE `users` (
   `uid` int(11) NOT NULL,
   `icid` int(11) DEFAULT NULL,
-  `ustrid` varchar(100) NOT NULL,
+  `bicid` int(11) DEFAULT NULL,
+  `ustrid` varchar(20) NOT NULL,
   `uname` varchar(30) NOT NULL,
   `umail` varchar(50) NOT NULL,
   `upass` varchar(60) NOT NULL,
@@ -360,12 +581,14 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`uid`, `icid`, `ustrid`, `uname`, `umail`, `upass`, `ustat`, `udate`, `ucom`, `uip`) VALUES
-(1, NULL, 'AmIEBqm06lHerdvIlt9h', 'helloka', 'becsei.szabi@gmail.com', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', 'A, NLI', '2024-01-04 01:36:50', NULL, '127.0.0.1'),
-(8, NULL, 'Yuzv1GC0wlgV5m9s3oVQ', 'kukac', 'mr.vendeg748@gmail.com', '$2y$12$AGAhVER3kt4bL.5rWuWbaexoE.R2Xin38yOv8KhTiwWM723I.ZNlC', 'A, NLI', '2024-01-05 18:08:41', NULL, '127.0.0.1'),
-(9, NULL, 'IDMouIORZxEQFRfYhBvs', 'kkkkkkk', 'kkkkkkkkkkkk@gmail.com', '$2y$12$R1PoT/1vH0iJTAnZyf0fbOJhXu6xDivehm26V2Ll2XUgBwEeAnooi', 'A, NLI', '2024-01-05 18:12:52', NULL, '127.0.0.1'),
-(10, NULL, 'RVz9tHMIM1h3Gro1VJly', 'teszt1', 'subject@test1.com', '$2y$12$Xh/PI.lXOXYUqA0z/Gdf5e9zIijHy8gjhNg4xswKmqxy5Vw.g8bVG', 'A,2024.02.36 15:30:36', '2024-02-25 10:49:25', NULL, '127.0.0.1'),
-(11, NULL, 'YuBoERrLuGElKbmAhzlpeqydJCxiAlTyLT5FcgsdeKGQYMfT4SHgWNLctHrjqduma7Bhkkgg3HF8ra56wUW9HvpzsP92tO6KzAoT', 'cicafiju', 'anyad@gmail.com', '$2y$12$YFcKJ/6KS0Vg5sJdeWArfuAicivjIRYbgZG3rD5/oXcbnJ9cDM0eq', 'A, NLI', '2024-02-25 11:12:51', NULL, '127.0.0.1');
+INSERT INTO `users` (`uid`, `icid`, `bicid`, `ustrid`, `uname`, `umail`, `upass`, `ustat`, `udate`, `ucom`, `uip`) VALUES
+(1, NULL, NULL, 'AmIEBqm06lHerdvIlt9h', 'helloka', 'becsei.szabi@gmail.com', '$2y$12$NvgseZMxT60E/Simbcgw8uw5/y0BqZPK782KDtETlhYyKVXsEKNJu', 'A,Online', '2024-01-04 01:36:50', NULL, '127.0.0.1'),
+(10, NULL, NULL, 'RVz9tHMIM1h3Gro1VJly', 'teszt1', 'subject@test1.com', '$2y$12$Xh/PI.lXOXYUqA0z/Gdf5e9zIijHy8gjhNg4xswKmqxy5Vw.g8bVG', 'A,Online', '2024-02-25 10:49:25', NULL, '127.0.0.1'),
+(16, NULL, NULL, 'upqiliFaNQ0RztCfNvjf', 'tesztsub2', 'teszt123@hello.com', '$2y$12$qxtsTi37W5InD1iD/TB5Cu8KgIr/Dr0F9536vvnvNjAzDpSTYFmlK', 'A,2024-03-13 20:25:53', '2024-03-08 17:06:44', NULL, '::1'),
+(17, NULL, NULL, '4HlcOgtudoIqPvh36osi', 'tesztsub3', 'teszt123@hello.com', '$2y$12$1FOgkeWNxfWtkOp.MGWGY.dAK3uu4YRmVF2.HIgqW0U6DSFrn5OlW', 'A,2024-03-13 17:29:13', '2024-03-08 17:07:37', NULL, '::1'),
+(18, NULL, NULL, 'm82B1ktvMC3GYg7GjIyC', 'tesztsub4', 'teszt123@hello.com', '$2y$12$SQ62CjQ/RIKgh2rrtXiIf.t/bi3ru52x/ygZfKwgSk9aXLThOFDmC', 'A,2024-03-13 20:26:38', '2024-03-08 17:08:24', NULL, '::1'),
+(19, NULL, NULL, 'rWWtTJNATVXt8T63tR7w', 'tesztsub5', 'teszt123@hello.com', '$2y$12$A0/IIYJz3xH1q2bQ9H968OkGjRNOi/Vui.xlDAylqIrigiQiXihHu', 'A,2024-04-04 20:20:45', '2024-03-08 17:09:25', NULL, '::1'),
+(20, NULL, NULL, 'z65t4DJVD8K5Bt5OTogI', 'tesztsub6', 'teszt123@hello.com', '$2y$12$2Y7dnbdhSqWLr3RJaxOEAOu5NsCpH7t7mR1kUs./8cDo6c4Oet0ti', 'A,2024-03-12 17:41:12', '2024-03-09 11:07:20', NULL, '::1');
 
 --
 -- Indexes for dumped tables
@@ -382,6 +605,18 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`cid`);
+
+--
+-- Indexes for table `fconnect`
+--
+ALTER TABLE `fconnect`
+  ADD PRIMARY KEY (`fcid`);
+
+--
+-- Indexes for table `files`
+--
+ALTER TABLE `files`
+  ADD PRIMARY KEY (`fiid`);
 
 --
 -- Indexes for table `friends`
@@ -406,18 +641,6 @@ ALTER TABLE `group`
 --
 ALTER TABLE `groupmember`
   ADD PRIMARY KEY (`gmid`);
-
---
--- Indexes for table `image`
---
-ALTER TABLE `image`
-  ADD PRIMARY KEY (`iid`);
-
---
--- Indexes for table `imgconnect`
---
-ALTER TABLE `imgconnect`
-  ADD PRIMARY KEY (`icid`);
 
 --
 -- Indexes for table `login`
@@ -478,10 +701,22 @@ ALTER TABLE `comment`
   MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `fconnect`
+--
+ALTER TABLE `fconnect`
+  MODIFY `fcid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `files`
+--
+ALTER TABLE `files`
+  MODIFY `fiid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `friends`
 --
 ALTER TABLE `friends`
-  MODIFY `fid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `fid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `gpconnect`
@@ -502,40 +737,28 @@ ALTER TABLE `groupmember`
   MODIFY `gmid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `image`
---
-ALTER TABLE `image`
-  MODIFY `iid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `imgconnect`
---
-ALTER TABLE `imgconnect`
-  MODIFY `icid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=336;
 
 --
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `note`
 --
 ALTER TABLE `note`
-  MODIFY `nid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `nid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=485;
 
 --
 -- AUTO_INCREMENT for table `pass_reset`
 --
 ALTER TABLE `pass_reset`
-  MODIFY `pwid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `pwid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `post`
@@ -553,7 +776,7 @@ ALTER TABLE `reaction`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

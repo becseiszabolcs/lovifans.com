@@ -238,35 +238,41 @@ function textheight() {
 
 function sendMessage() {
     var soup = $('#soup').val();
-    var message = $('#message').val();
-    var fileInput = document.getElementById('file'); // get the file input element
+    if(soup!=","){
+        var message = $('#message').val();
+        var fileInput = document.getElementById('file'); // get the file input element
 
 
-    var sendr = r1 + 'pages/loged/send.php';
+        var sendr = r1 + 'pages/loged/send.php';
 
-    if (message || fileInput) {
-        var formData = new FormData();
-        if(message)   formData.append('message', message);
-        if(fileInput) formData.append('file', fileInput);
-        if(soup)      formData.append('soup', soup);
+        if (message || fileInput) {
+            var formData = new FormData();
+            if(message)   formData.append('message', message);
+            if(fileInput) formData.append('file', fileInput);
+            if(soup)      formData.append('soup', soup);
 
-        $.ajax({
-            url: sendr,
-            method: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function () {
-                fetchMessages();
-                $('#message').val('');
-                $('#file').val('');
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error('Error sending message:', errorThrown);
-            }
-        });
+            $.ajax({
+                url: sendr,
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    fetchMessages();
+                    $('#message').val('');
+                    $('#file').val('');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error('Error sending message:', errorThrown);
+                }
+            });
+        }
+        
     }
+    
 }
+//post site
+
 
 
  

@@ -18,7 +18,7 @@
 
         $name   = $from["uname"];
         $toname = $to["uname"];
-        $pic    = $row["icid"];
+        $pic    = $row["fcid"];
         $label  = $row["mlabel"];
         $stat   = $row["mstat"];
         $eloz   = $row["meloz"];

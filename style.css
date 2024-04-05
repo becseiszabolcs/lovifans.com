@@ -906,7 +906,7 @@ form #but{
    
 }
 
-form textarea {
+textarea {
     box-sizing: border-box;
     width: 100%;
     min-height: 35px;
