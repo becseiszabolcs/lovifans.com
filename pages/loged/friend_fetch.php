@@ -65,8 +65,8 @@
                     );
                     */
                     if($time->y>0)                      $st_time = $last->format("Y.m.d"); 
-                    else if($time->m>0)                 $st_time = "month ".$time->m;
-                    else if($time->d>=7)                $st_time = "week ".intval($time->d/7);
+                    else if($time->m>0)                 $st_time = $time->m ." month";
+                    else if($time->d>=7)                $st_time = intval($time->d/7)." week";
                     else if($time->d<7 & $time->d>1)    $st_time = $last->format("l h:i a");
                     else if($time->d == 1)              $st_time = "yesterday ".$last->format("h:i a");
                     else if($time->h>3)                 $st_time = $last->format("h:i a");
