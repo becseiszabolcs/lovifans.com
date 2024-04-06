@@ -19,7 +19,7 @@ while($post = $result->fetch_assoc()){
         $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where fcid=$user[icid]"))["fiid"];
         $file = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where fiid=$fiid and fistat='A' and fitype='image'"));
         if($file) $profil_pic = "$_SESSION[priv]/uploads/image/".explode(" ",$file["fidate"])[1] ."/$file[finname]";
-        else      $profil_pic =NULL;
+        else      $profil_pic = "/lovifans.com/image/default.png";
 
     }else  $profil_pic =NULL;
     
@@ -32,7 +32,6 @@ while($post = $result->fetch_assoc()){
             $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where fcid=$id"))["fiid"];
             $file = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where fiid=$fiid and fistat='A' and fitype='image'"));
             if($file) $files[] = "$_SESSION[priv]/uploads/image/".explode(" ",$file["fidate"])[0] ."/$file[finname]";
-            else      $files[] = NULL;
         }
     } else $files = NULL;
 

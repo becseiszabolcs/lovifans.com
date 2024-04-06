@@ -3,7 +3,7 @@
     if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
     
     include("$_SESSION[priv]/connect.php");
-    $profil = explode(",",$_POST["soup"]);
+    $profil = $_POST["soup"];
     $text = $_POST["message"];
     $bool = str_replace(" ", "", $text);
     $bool = str_replace("\r\n", "", $bool);
@@ -27,13 +27,15 @@
         // Add the last part of the string after the last "\r\n"
         $str .= substr($text, $n) . "<br>";
         $text = $str;
+
     }
-    $friend = mysqli_fetch_array(mysqli_query($dbase,"select * from users where '$profil[1]'=ustrid and '$profil[0]'=uname"));
- 
+    echo"$name";
+    $friend = mysqli_fetch_array(mysqli_query($dbase,"select * from users where '$profil'=ustrid "));
+    
     if($bool){
         mysqli_query($dbase,"
-        INSERT INTO  message  ( mid ,  uid ,  ustrid ,  mtoid ,  mtostrid ,  mlabel ,  icid ,  meloz ,  mstat ,  mdate ,  mip ) 
-        VALUES (NULL, $_SESSION[uid], '$_SESSION[ustrid]', $friend[uid], '$friend[ustrid]', '$text', NULL, NULL, 'A', current_timestamp(), '$_SERVER[REMOTE_ADDR]')
+        INSERT INTO  message  ( mid ,  uid ,  ustrid ,  mtoid ,  mtostrid ,  mlabel ,  fcid ,  meloz ,  mstat ,  mdate ,  mip ) 
+        VALUES (NULL, $_SESSION[uid], '$_SESSION[ustrid]', $friend[uid], '$friend[ustrid]', '$text', '', NULL, 'A', current_timestamp(), '$_SERVER[REMOTE_ADDR]')
         ");
     }
 

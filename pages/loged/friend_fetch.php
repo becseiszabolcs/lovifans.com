@@ -16,16 +16,13 @@
         if($row['uid']!=$_SESSION['uid']) $fuid=$row['uid'];
         else                              $fuid=$row['fuid'];
         $friend = mysqli_fetch_assoc(mysqli_query($dbase,"select * from users where $fuid = uid"));
-        if($friend ["icid"]){
-            $image = mysqli_fetch_row(mysqli_query($dbase,"SELECT iid FROM `imgconnect` WHERE icid=$friend[icid]"));
-            $pic_image = mysqli_fetch_row(mysqli_query($dbase,"SELECT iid FROM `image` WHERE iid=$image[iid] istat = 'A' order by date desc"));
-            if($pic){
-                $pic = "./uploads/$pic_image[inname]";
-            }
-            else{
-                $pic = NULL;
-            }
-        } $pic = $friend["icid"];
+        if($friend["icid"]){
+            $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $friend[icid] = fcid"))["fiid"];
+            $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where $fiid = fiid")); 
+            $day = explode(" ",$pi["fidate"])[0];
+            $pic = "$_SESSION[priv]/uploads/image/$day/$pi[finname]";
+        } else $pic = "$_SESSION[R1]/image/default.png";
+
         if($pic == NULL) $pic="$_SESSION[R1]/image/default.png" ;
         $stat = str_contains($friend["ustat"],"Online");
         if($stat){ 
@@ -110,7 +107,7 @@
         } else $last_mess = "";
 
 
-        $friends[] = ['id' => $friend['ustrid'],'name'=>$friend['uname'],'profil_pic'=>$pic,"lmes"=>$last_mess,'stat'=>$stat,'from_last_log'=>$st_time];
+        $friends[] = ['id' => $friend['ustrid'],'name'=>$friend['uname'],'profil_pic'=>$pic,"lmes"=>$last_mess,'stat'=>$stat,'from_last_log'=>$st_time,'url'=>$_SESSION['R1']."/friends/".str_replace(" ","_",$friend['uname']) ."/$friend[ustrid]"];
     }
     
     // Return JSON response

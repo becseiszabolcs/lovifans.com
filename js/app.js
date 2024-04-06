@@ -154,7 +154,7 @@ function displayfriends(friends,soup) {
         } 
         
         fri=`        
-            <a href="${r1+`friends/${friend.name}/${friend.id}`}" class='friprofile'>
+            <a href="${friend.url}" class='friprofile'>
                 <div class="content">
                     <img src="${friend.profil_pic}" alt="${friend.name} is picture">
                     <div class="details">
@@ -272,6 +272,63 @@ function sendMessage() {
     
 }
 //post site
+function post_fetch(){
+    var chatr = r1+`pages/loged/post_fetch.php?timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`;
+    $.ajax({
+        url: chatr,
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            displaypost(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error fetching messages:', errorThrown);
+        }
+    });
+    
+}
+function displaypost(data){
+    var h="/lovifans.com/image/default.png";
+    
+
+    var post =`
+            <div class="post">
+            <div class="header">
+                <img src="${data.profil_picture}" alt="profil image" id="profimg">
+                <h1 class="profilname_post">
+                    ${data.name}
+                </h1>
+            </div>
+            <hr style="border: 2px solid #ddd; width:100%; border-radius:2px;">
+            <p id="postmess">
+                    ${data.text}
+            </p>
+            <div class="postimg">
+                <img src="/lovifans.com/image/bc_background.jpg" alt="" class="postimg">
+            </div>
+            <hr style="border: 2px solid #ddd; width:100%; border-radius:2px;">
+            <div class="footer">
+                <form>
+                    <textarea id="message" name="message" rows="1" oninput="textheight()" placeholder="Type Comment..."></textarea>
+                    <div class="button">
+                        <button>like</button>
+                        <hr style="border: 1px solid #ddd;">
+                        <button>comments</button>
+                        <hr style="border: 1px solid #ddd;">
+                        <input hidden type="file" name="file" id="file" multiple>
+                        <button id="photos">photo</button>
+                        <hr style="border: 1px solid #ddd;">
+                        <button>send</button>
+                    </div>
+                    
+
+                </form>
+
+            </div>
+        </div>
+    `;
+
+}
 
 
 

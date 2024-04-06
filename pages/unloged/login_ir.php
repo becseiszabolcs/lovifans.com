@@ -17,24 +17,22 @@
             if(!empty($Udata)){
                 if(password_verify($pass,$Udata["upass"])){
                     $bc = "";
-                    $pi = "$_SESSION[R1]/image/default.png";
-                    
                     if($Udata["icid"]) {
-                        $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $Udata[icid] == fcid"))["fiid"];
-                        $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select * from files where $pi == fiid"))["finname"]; 
-                        $day = DateTime::createFromFormat('Y-m-d', $pi["fidate"]);
-                        $pi = "$_SESSION[priv]/uploads/image/$day/$pi[finname]";
-                    }
+                        $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $Udata[icid] = fcid"))["fiid"];
+                        $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where $fiid = fiid")); 
+                        $day = explode(" ",$pi["fidate"])[0];
+                        $pic = "$_SESSION[priv]/uploads/image/$day/$pi[finname]";
+                    } else $pic = "$_SESSION[R1]/image/default.png";
                     if($Udata["bicid"]) {
-                        $bc = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $Udata[bicid] == fcid"))["fiid"];
-                        $bc = mysqli_fetch_assoc(mysqli_query($dbase,"select * from files where $pi == fiid"))["finname"];
-                        $day = DateTime::createFromFormat('Y-m-d', $bc["fidate"]);
+                        $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $Udata[bicid] = fcid"))["fiid"];
+                        $bc = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where $fiid = fiid"));
+                        $day = explode(" ",$bc["fidate"])[0];
                         $bc = "$_SESSION[priv]/uploads/image/$day/$bc[finname]"; 
                     }
    
                     $_SESSION["uid"]            = $Udata["uid"]     ;
                     $_SESSION["ustrid"]         = $Udata["ustrid"]  ;
-                    $_SESSION["profilimg"]      = $pi               ;
+                    $_SESSION["profilimg"]      = $pic              ;
                     $_SESSION["profilbc"]       = $bc               ;
                     $_SESSION["uname"]          = $Udata["uname"]   ;
                     $_SESSION["umail"]          = $Udata["umail"]   ;

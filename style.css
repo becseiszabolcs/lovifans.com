@@ -421,18 +421,18 @@ form .sub:hover{
 }
 .password_reset1 .form-box form #dpass #slide{
     position: absolute;
-    top:140px;
+    top:132px;
 }
 .password_reset1 .form-box form #dpass #slidetext{
-    top:140px;
+    top:132px;
 }
 .password_reset1 form #eyea{
     left: 260px;
-    top: 112px;
+    top: 104px;
 }
 .password_reset1 form #eyeb{
     left: 260px;
-    top: 172px;
+    top: 164px;
 }
 
 .password_reset1 #conditions{

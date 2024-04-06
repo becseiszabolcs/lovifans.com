@@ -13,15 +13,11 @@
     $profil = [];
     while ($row = $result->fetch_assoc()) {
         if($row["icid"]){
-            $image = mysqli_fetch_row(mysqli_query($dbase,"SELECT iid FROM `imgconnect` WHERE icid=$row[icid]"));
-            $pic_image = mysqli_fetch_row(mysqli_query($dbase,"SELECT iid FROM `image` WHERE iid=$image[iid] istat = 'A' order by date desc"));
-            if($pic){
-                $pic = "./uploads/$pic_image[inname]";
-            }
-            else{
-                $pic = NULL;
-            }
-        } $pic = $row["icid"];
+            $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $row[icid] = fcid"))["fiid"];
+            $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where $fiid = fiid")); 
+            $day = explode(" ",$pi["fidate"])[0];
+            $pic = "$_SESSION[priv]/uploads/image/$day/$pi[finname]";
+        } else $pic = "$_SESSION[R1]/image/default.png";
 
         $name   = $row["uname"];
         $profil_id = $row["ustrid"];

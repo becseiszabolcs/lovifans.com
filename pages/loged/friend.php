@@ -33,7 +33,7 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
                     <input hidden type="file" id="file" name="file" multiple>
                     <div class="file-list">
                     </div>
-                    <input hidden type="text" name="soup" id="soup" value="<?=url(1).",".url(2)?>">
+                    <input hidden type="text" name="soup" id="soup" value="<?=url(2)?>">
                     <textarea id="message" name="message" rows="1" oninput="textheight()" placeholder="Type something..."></textarea>
                 </div>
                 <input hidden type="file" name="file" id="file" multiple>
