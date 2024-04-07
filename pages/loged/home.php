@@ -55,7 +55,6 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
                 if(filelist.length>0){
                     for(var file of filelist){
                         formData.append("files[]",file);
-
                     }
                 }
             }

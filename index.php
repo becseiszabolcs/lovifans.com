@@ -10,6 +10,7 @@
     }
     $_SESSION['R1'] ="http://localhost/lovifans.com";
     $_SESSION["priv"]="../../../private";
+    $_SESSION["files"]="get_files.php?";
     if(!isset($_SESSION["uid"])){
         //loged out
         $pages = ["login","signup","about","services","contact","send-password-reset"];
@@ -98,11 +99,11 @@
                             <a class='link' href=' /lovifans.com/finding'>Finding    </a>
                             <a class='link' href=' /lovifans.com/groups'>Groups      </a>
                             <div class='menu'>
-                                <button onclick='window.location.href=\" /lovifans.com/profile\"' class='btnprof'><img src='$prof_img' alt=''><a id='profile_name'>$_SESSION[uname]</a></button>
+                                <button onclick='window.location.href=\" /lovifans.com/profile\"' class='btnprof'><div class='profimg'><img src='$prof_img' alt='Profil image'></div><a id='profile_name'>$_SESSION[uname]</a></button>
                                 <div class='dropdown'>
-                                    <a href='$_SESSION[R1]/profile/'>               <img src='$prof_img' class='profimg' alt='Profil image'>         Profile Page            </a>
-                                    <a href='$_SESSION[R1]/contact/'>               <img src='$_SESSION[R1]/image/connect.png' alt='connect icon'>   Help & Question         </a>
-                                    <a href='$_SESSION[R1]/pages/loged/logout.php'> <img src='$_SESSION[R1]/image/logout.png' alt='logout icon'>     Logout                  </a>
+                                    <a href='$_SESSION[R1]/profile/'>               <div class='profimg'><img src='$prof_img' alt='Profil image'></div>     Profile Page            </a>
+                                    <a href='$_SESSION[R1]/contact/'>               <img class='icon' src='$_SESSION[R1]/image/connect.png' alt='connect icon'>          Help & Question         </a>
+                                    <a href='$_SESSION[R1]/pages/loged/logout.php'> <img class='icon' src='$_SESSION[R1]/image/logout.png' alt='logout icon'>            Logout                  </a>
                                 </div>
                                 
                             </div>

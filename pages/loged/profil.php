@@ -37,12 +37,15 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
     <div class="sections">
         <div class="header">
             <div class="cont">
-                <img src=""  id="bcimage">
+                <img src="<?=$_SESSION['profilbc']?>"  id="bcimage">
             </div>
             
             <div class="details">
-            
-                <img src="<?=$_SESSION["profilimg"]?>" alt="profil image" id="profimg">
+                <div class="profimg">
+                    <img src="<?=$_SESSION["profilimg"]?>" alt="profil image" id="profimg">
+                </div>
+                
+
                 <h1 class="profilname">
                     <?=$_SESSION['uname']?>
                     <p>110 Views</p>

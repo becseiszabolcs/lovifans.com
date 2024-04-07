@@ -8,7 +8,6 @@ if(!isset($_SESSION["uid"])) header("Location: http://localhost/lovifans.com");;
         <nav class ='navigation'>
             <a class="setlink"  href='<?=$_SESSION['R1']?>/settings/'            >Account       </a>
             <a class="setlink"  href='<?=$_SESSION['R1']?>/settings/?p=security' >Security      </a>  
-            <a class="setlink"  href='<?=$_SESSION['R1']?>/settings/?p=image'    >Images        </a>
             <a class="setlink"  href='<?=$_SESSION['R1']?>/settings/?p=data'     >Data          </a> 
                             
         </nav>
