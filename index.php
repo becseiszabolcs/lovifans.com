@@ -10,7 +10,7 @@
     }
     $_SESSION['R1'] ="http://localhost/lovifans.com";
     $_SESSION["priv"]="../../../private";
-    $_SESSION["files"]="get_files.php?";
+    $_SESSION["files"]="http://localhost/private";
     if(!isset($_SESSION["uid"])){
         //loged out
         $pages = ["login","signup","about","services","contact","send-password-reset"];
@@ -97,7 +97,6 @@
                             <a class='link' href=' /lovifans.com/'>Home              </a>
                             <a class='link' href=' /lovifans.com/friends'>Friends    </a>
                             <a class='link' href=' /lovifans.com/finding'>Finding    </a>
-                            <a class='link' href=' /lovifans.com/groups'>Groups      </a>
                             <div class='menu'>
                                 <button onclick='window.location.href=\" /lovifans.com/profile\"' class='btnprof'><div class='profimg'><img src='$prof_img' alt='Profil image'></div><a id='profile_name'>$_SESSION[uname]</a></button>
                                 <div class='dropdown'>

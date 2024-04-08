@@ -21,13 +21,13 @@
                         $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $Udata[icid] = fcid"))["fiid"];
                         $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where $fiid = fiid")); 
                         $day = explode(" ",$pi["fidate"])[0];
-                        $pic = "$_SESSION[files]file=$pi[finname]&image&type=image&date=$day";
+                        $pic = "$_SESSION[files]/uploads/image/$day/$pi[finname]";
                     } else $pic = "$_SESSION[R1]/image/default.png";
                     if($Udata["bicid"]) {
                         $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $Udata[bicid] = fcid"))["fiid"];
                         $bc = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where $fiid = fiid"));
                         $day = explode(" ",$bc["fidate"])[0];
-                        $bc = "/htdocs/private/uploads/image/$day/$bc[finname]"; 
+                        $bc = "$_SESSION[files]/uploads/image/$day/$bc[finname]"; 
                     }
    
                     $_SESSION["uid"]            = $Udata["uid"]     ;

@@ -4,7 +4,7 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
 ?>
 <div class="home sites">
     <div class="form">
-        <div>
+        <div class="textarea">
             <textarea id="message" name="message" rows="1" oninput="textheight()" placeholder="Type something..."></textarea>
         </div>
         <div class="buttons">
@@ -12,13 +12,14 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
             <input hidden type="file" name="file" id="file" multiple>
             <div id="sel"></div>
 
-            <input onclick="post()" type="submit" value="send">
+            <button onclick="post()">send</button>
         </div>
 
     </div>
     <div class="posts">
  
-        </div>
+    </div>
+</div>
     <script>
 
         //document.getElementById('file').click();
@@ -67,8 +68,9 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
             $("#message").val('');
 
         }
+        post_fetch();
+        setInterval(post_fetch,1000);
 
 
         
     </script>
-</div>
