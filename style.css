@@ -1487,6 +1487,14 @@ textarea:focus{
     margin-bottom: 8px;
     font-weight: bold;
 }
+.detsite form .text{
+    width: 100%;
+    height: 35px;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px;
+    margin-left: 0;
+}
 
 .detsite input[type="submit"] {
     background-color: rgb(209, 158, 17);
