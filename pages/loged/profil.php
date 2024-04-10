@@ -1,6 +1,7 @@
 <?php
 
 if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
+include("note.php");
 ?>
 
 <div class="prof sites" id="prof">
@@ -55,41 +56,7 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
             <hr style="border: 2px solid #ddd; width:100%; border-radius:2px;">
 
         </div>
-        <div class="posts">
-            <div class="post">
-                <div class="header">
-                    <img src="/lovifans.com/image/default.png" alt="profil image" id="profimg">
-                    <h1 class="profilname_post">
-                        Profil Name
-                    </h1>
-                </div>
-                <hr style="border: 2px solid #ddd; width:100%; border-radius:2px;">
-                <p id="postmess">
-                        Hello, World!
-                </p>
-                <div class="postimg">
-                    <img src="/lovifans.com/image/bc_background.jpg" alt="" class="postimg">
-                </div>
-                <hr style="border: 2px solid #ddd; width:100%; border-radius:2px;">
-                <div class="footer">
-                    <form>
-                        <textarea id="message" name="message" rows="1" oninput="textheight()" placeholder="Type Comment..."></textarea>
-                        <div class="button">
-                            <button>like</button>
-                            <hr style="border: 1px solid #ddd;">
-                            <button>comments</button>
-                            <hr style="border: 1px solid #ddd;">
-                            <input hidden type="file" name="file" id="file" multiple>
-                            <button id="photos">photo</button>
-                            <hr style="border: 1px solid #ddd;">
-                            <button>send</button>
-                        </div>
-                        
-
-                    </form>
-
-                </div>
-            </div>
+        <div id="posts" class="posts">
         </div>
         <script>
                 document.getElementById('photos').addEventListener('click', function() {
@@ -104,6 +71,8 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
 <script>
     //profilload("<?=url(2)?>");
     //setInterval(profilload("<?=url(2)?>"),5000);
+    post_fetch("<?=$_SESSION["ustrid"]?>");
+    setInterval(post_fetch("<?=$_SESSION["ustrid"]?>"),1000);
 </script>
 </div>
 

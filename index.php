@@ -83,7 +83,7 @@
             elseif($p == "signup")              include("./pages/unloged/regist.html");
             elseif($p == "about")               include("./pages/about.html");
             elseif($p == "services")            include("./pages/services.html");
-            elseif($p == "contact")             include("./pages/contact.html");
+            elseif($p == "contact")             include("./pages/contact.php");
             else                                include("./pages/404.php");
             
         }
@@ -92,7 +92,7 @@
             print"
                 <div class='container' id='loged'>
                     <header id='first_header'>
-                        <img class='plogo' src=' /lovifans.com/image/logo.png'>
+                        <img class='plogo' src='/lovifans.com/image/logo.png'>
                         <nav class ='navigation'>
                             <a class='link' href=' /lovifans.com/'>Home              </a>
                             <a class='link' href=' /lovifans.com/friends'>Friends    </a>
@@ -114,7 +114,7 @@
             else if($p == "friends")    include("./pages/loged/friend.php");
             else if($p == "finding")    include("./pages/loged/find.php");
             else if($p == "profile")    include("./pages/loged/profil.php");
-            else if($p == "contact")    include("./pages/loged/contact.html");
+            else if($p == "contact")    include("./pages/contact.php");
             else if($p == "settings")   include("./pages/loged/settings.php");
             else                        include("./pages/404.php");
             

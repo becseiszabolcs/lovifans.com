@@ -3,7 +3,9 @@ var r1 = 'http://localhost/lovifans.com/';
 //find site
 
 function fetchMembers(sel,search) {
-    var chatr = r1+'pages/loged/find_fetch.php';
+
+    if(search!="") var chatr = r1+`pages/loged/find_fetch.php?search=${search}`;
+    else var chatr = r1+`pages/loged/find_fetch.php`;
     $.ajax({
         url: chatr,
         method: 'GET',
@@ -121,8 +123,9 @@ function addFriend(id) {
 }   
 
 //friends site
-function fetchfriends(soup){
-    var chatr = r1+`pages/loged/friend_fetch.php?timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`;
+function fetchfriends(soup,search=""){
+    if(search!="") var chatr = r1+`pages/loged/friend_fetch.php?timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}&search=${search}`;
+    else var chatr = r1+`pages/loged/friend_fetch.php?timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`;
     $.ajax({
         url: chatr,
         method: 'GET',
@@ -236,44 +239,45 @@ function textheight() {
 }
 
 
-function sendMessage() {
-    var soup = $('#soup').val();
-    if(soup!=","){
-        var message = $('#message').val();
-        var fileInput = document.getElementById('file'); // get the file input element
+
+//post site
+window.plist = [];
 
 
-        var sendr = r1 + 'pages/loged/send.php';
+function fiprevius(post){
+    
+    for(var i = 0; i < window.plist.length; i++){
 
-        if (message || fileInput) {
-            var formData = new FormData();
-            if(message)   formData.append('message', message);
-            if(fileInput) formData.append('file', fileInput);
-            if(soup)      formData.append('soup', soup);
+        if(post == window.plist[i][0] && window.plist[i][0] != 0){
+            $(`#${post}fi${window.plist[i][1]}`).removeClass('sel');
+            $(`#${post}fi${window.plist[i][1]-1}`).addClass('sel');
+            window.plist[i][1] = window.plist[i][1] - 1;
+            break;
 
-            $.ajax({
-                url: sendr,
-                method: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function () {
-                    fetchMessages();
-                    $('#message').val('');
-                    $('#file').val('');
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.error('Error sending message:', errorThrown);
-                }
-            });
         }
-        
     }
     
 }
-//post site
-function post_fetch(){
-    var chatr = r1+`pages/loged/post_fetch.php?timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`;
+
+function finext(post){
+
+    for(var i = 0; i < window.plist.length; i++){
+        if(post == window.plist[i][0] && window.plist[i][0] != window.plist.length-1){
+            $(`#${post}fi${window.plist[i][1]}`).removeClass('sel');
+            $(`#${post}fi${window.plist[i][1]+1}`).addClass('sel');
+            window.plist[i][1] = window.plist[i][1] + 1;
+            break;
+
+        }
+    }
+    
+}
+
+function post_fetch(soup=""){
+    var addsoup ="";
+    if(soup!="") addsoup = "&soup="+soup;
+    
+    var chatr = r1+`pages/loged/post_fetch.php?timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`+addsoup;
     $.ajax({
         url: chatr,
         method: 'GET',
@@ -287,26 +291,84 @@ function post_fetch(){
     });
     
 }
-function displaypost(data){
-    var h="/lovifans.com/image/default.png";
-    
 
-    var post =`
+
+function displaypost(posts){
+    var h="/lovifans.com/image/default.png";
+    $("#posts").html('');
+    indexbtn ="";
+    var bool =true;
+    //if(typeof window.plist === 'undefined') 
+    
+    pid = 0;
+    posts.forEach(function(post){
+        fi="";
+        
+        
+
+        if(post.files!=[]){
+            var Files = "";
+            pname = `#post${pid}`;
+            var id = 0;
+            var d=0;
+            post.files.forEach(function(f){
+                
+                
+                if(window.plist.length>0){
+                    for(var i = 0; i < window.plist.length; i++){
+                        if(pname == window.plist[i][0] && window.plist[i][0] != window.plist.length-1){
+                            d = window.plist[i][1];
+                        }
+                    }
+                }
+                if(id == d) Files += `<img id='#post${pid}fi${id}' src='${f}' class="sel">`;
+                else Files += `<img id='#post${pid}fi${id}' src='${f}'>`;
+                d=0;
+                id++;
+            });
+            fi=`            
+            <div class="postimg">
+                
+                ${Files}
+
+            </div>
+            <hr style="border: 2px solid #ddd; width:100%; border-radius:2px;">`;
+            if(id==0){
+                fi="";
+
+            }
+            if(id>1){
+                indexbtn = `
+                <button onclick="fiprevius('post${pid}');" class="indexbtn">\<</button>
+                
+                <button onclick="finext('post${pid}');" class="indexbtn">\></button>
+                `;
+                
+                window.plist.forEach(function(p){
+                    if(p[0] == `post${id}`) {
+                        bool=false;
+                        return false;
+                    }
+                });
+                if(bool) window.plist.push([`post${id}`,0]);
+            }else indexbtn = "";
+        }
+        
+        var post_blueprint =`
             <div class="post">
             <div class="header">
-                <img src="${data.profil_picture}" alt="profil image" id="profimg">
+                <img src="${post.profil_picture}" alt="profil image" id="profimg">
                 <h1 class="profilname_post">
-                    ${data.name}
+                    ${post.name}
                 </h1>
             </div>
+            ${indexbtn}
             <hr style="border: 2px solid #ddd; width:100%; border-radius:2px;">
             <p id="postmess">
-                    ${data.text}
+                    ${post.text}
             </p>
-            <div class="postimg">
-                <img src="/lovifans.com/image/bc_background.jpg" alt="" class="postimg">
-            </div>
-            <hr style="border: 2px solid #ddd; width:100%; border-radius:2px;">
+            ${fi}
+            
             <div class="footer">
                 <form>
                     <textarea id="message" name="message" rows="1" oninput="textheight()" placeholder="Type Comment..."></textarea>
@@ -326,9 +388,17 @@ function displaypost(data){
 
             </div>
         </div>
-    `;
+        
+    `; 
+    $("#posts").append(post_blueprint);
+    pid++;
+    
+    });
 
+    
+    
 }
+
 
 
 

@@ -1,6 +1,7 @@
 <?php
 
 if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
+include("note.php");
 ?>
 <div class="home sites">
     <div class="form">
@@ -16,12 +17,12 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
         </div>
 
     </div>
-    <div class="posts">
+    <div id="posts" class="posts">
  
     </div>
 </div>
     <script>
-
+        window.selfiles = [];
         //document.getElementById('file').click();
         function waitfile(){
             return new Promise(function(resolve,reject){
@@ -35,7 +36,6 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
         $("#photos").click(function(){
             $("#file").click();
             waitfile().then(function(){
-                if(!window.selfiles) window.selfiles = [];
                 filelist = $("#file")[0].files;
                 for(var file of filelist){
                     window.selfiles.push(file);
@@ -69,7 +69,7 @@ if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
 
         }
         post_fetch();
-        setInterval(post_fetch,1000);
+        setInterval(post_fetch,6000);
 
 
         

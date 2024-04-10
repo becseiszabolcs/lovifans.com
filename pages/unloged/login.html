@@ -23,29 +23,31 @@
 </div>
 
 <script>
-    $(document).ready(function(){
-        $("#loginForm").on("submit",function(e){
-            e.preventDefault();
+$(document).ready(function(){
+    $("#loginForm").on("submit", function(e){
+        e.preventDefault();
 
-            $.ajax({
-                type: "POST",
-                url: "/lovifans.com/pages/unloged/login_ir.php",
-                data: $(this).serialize()
-            }).then(function(res){
-                let data = JSON.parse(res);
+        $.ajax({
+            type: "POST",
+            url: "/lovifans.com/pages/unloged/login_ir.php",
+            data: $(this).serialize()
+        }).done(function(res){
+            let data = JSON.parse(res);
 
-                if("error" in data){
-                    $("#error").removeClass('d-done').html(data.error);
-                }
-                if("token" in data){
-                    localStorage.setItem('token', data.token);
+            if("error" in data){
+                $("#error").removeClass('d-done').html(data.error);
+            }
+            else if("token" in data){
+                localStorage.setItem('token', data.token);
+                $("#successMessage").removeClass('d-done').html("Login successful. Redirecting...");
+                setTimeout(function(){
                     window.location.href = "http://localhost/lovifans.com/";
-                }
-            
-            }).fail(function(res){
-                //$("#error").removeClass('d-done').html("there was an error in login");
-                window.location.href = "http://localhost/lovifans.com/";
-            })
+                }, 10); // Redirect after 2 seconds
+            }
+        }).fail(function(jqXHR, textStatus, errorThrown){
+            $("#error").removeClass('d-done').html("There was an error in login: " + errorThrown);ű
         });
     });
+});
+
 </script>

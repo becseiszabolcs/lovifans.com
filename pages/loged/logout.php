@@ -25,10 +25,7 @@ if(isset($_SESSION["uid"])) {
     unset($_SESSION["key"]    );
     unset($_SESSION["sid"]    );
 
-    mysqli_query($dbase,"
-        INSERT INTO  note  ( nid , lid, nurl ,  ndate ,  nip ) 
-        VALUES ( NULL, '$_SESSION[lid]', '$_SERVER[REQUEST_URI]', current_timestamp(), '$_SERVER[REMOTE_ADDR]')
-    ");
+    include("$_SESSION[R1]/note.php");
     unset($_SESSION["lid"]);
 }
 

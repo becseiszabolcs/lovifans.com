@@ -8,6 +8,7 @@
 
     //header('Content-Type: application/json');
     if($_SERVER["REQUEST_METHOD"] == "POST"){
+
         $userid = $_POST["uname"];
         $pass = $_POST["upass"];
         $bool = true;
@@ -51,10 +52,7 @@
                     ");
                     $_SESSION["lid"] = mysqli_insert_id($dbase);
 
-                    mysqli_query($dbase,"
-                        INSERT INTO  note  ( nid, lid,  nurl,  ndate,  nip  ) 
-                        VALUES ( NULL, '$_SESSION[lid]', '$_SERVER[REQUEST_URI]', current_timestamp(), '$_SERVER[REMOTE_ADDR]')
-                    ");
+                    include("$_SESSION[R1]/note.php");
                     //$_SERVER[REMOTE_ADDR]
 
                     /*
@@ -82,7 +80,7 @@
                     
                     mysqli_close($dbase);
                     //if(!$bool) include("./logout.php");
-                     
+                    //print_r(['token' => $_SESSION['key']]);
                     $jsonEncoded = json_encode(['token' => $_SESSION['key']]);
                     if ($jsonEncoded === false) {
                         echo json_encode(['error' => 'JSON encoding error: ' . json_last_error_msg()]);
@@ -99,7 +97,7 @@
         }
     }            
 
-    mysqli_close($dbase);
+
 
 ?>
 

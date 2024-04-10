@@ -1,6 +1,7 @@
 
 <?
 session_start();
+include("note.php");
 if(!isset($_SESSION["uid"])) header("Location: http://localhost/lovifans.com");;
 ?>
 <div class="settings">
