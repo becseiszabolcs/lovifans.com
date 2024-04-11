@@ -9,7 +9,7 @@ if ($file !== null && $type !== null && $date !== null) {
     // Validate $type if necessary (e.g., check if it's 'image')
 
     // Construct the file path based on parameters
-    $filePath = "C:\\xampp\\htdocs\\privte\\uploads\\$type\\$date\\$file";
+    $filePath = "$_SESIOSS[priv]/uploads/$type/$date/$file";
 
     // Check if the file exists
     if (file_exists($filePath)) {

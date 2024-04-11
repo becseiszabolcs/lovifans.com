@@ -11,21 +11,34 @@
     $mes = [];
 
     while ($row = $result->fetch_assoc()) {
-        $from = mysqli_fetch_array(mysqli_query($dbase,"SELECT uname FROM `users` WHERE uid=$row[uid]"));
+        $from = mysqli_fetch_array(mysqli_query($dbase,"SELECT uname,icid FROM `users` WHERE uid=$row[uid]"));
         $to = mysqli_fetch_array(mysqli_query($dbase,"SELECT uname FROM `users` WHERE uid=$row[mtoid]"));
-        //$image = mysqli_fetch_array(mysqli_query($dbase,"SELECT iid FROM `imgconnect` WHERE icid=$row[icid]"));
+        if($from["icid"]){
+        $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $from[icid] = fcid"))["fiid"];
+        $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where $fiid = fiid")); 
+        $day = explode(" ",$pi["fidate"])[0];
+        $frompic = "$_SESSION[files]/uploads/image/$day/$pi[finname]";
+        } else $frompic = "$_SESSION[R1]/image/default.png";
+        if($row["fcid"]){
+            $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $row[fcid] = fcid"))["fiid"];
+            $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where $fiid = fiid")); 
+            $day = explode(" ",$pi["fidate"])[0];
+            $image = "$_SESSION[files]/uploads/image/$day/$pi[finname]";
+        } else $image = NULL;
+
+        //$image = mysqli_fetch_array(mysqli_query($dbase,"SELECT fiid FROM `fconnect` WHERE fcid=$row[icid]"));
         
 
-        $name   = $from["uname"];
-        $toname = $to["uname"];
-        $pic    = $row["fcid"];
-        $label  = $row["mlabel"];
-        $stat   = $row["mstat"];
-        $eloz   = $row["meloz"];
-        $date   = $row["mdate"];
+        $name       = $from["uname"];
+        $toname     = $to["uname"];
+        $pic        = $image;
+        $label      = $row["mlabel"];
+        $stat       = $row["mstat"];
+        $eloz       = $row["meloz"];
+        $date       = $row["mdate"];
 
 
-        $mes[] = ["from"=>$name, "to"=> $toname, "message"=>$label, "picture"=>$pic, "eloz"=>$eloz, "stat"=>$stat, "date"=>$date];
+        $mes[] = ["from"=>$name, "to"=> $toname, "message"=>$label,"profpic"=> $frompic, "picture"=>$pic, "eloz"=>$eloz, "stat"=>$stat, "date"=>$date];
     }
     
     // Return JSON response

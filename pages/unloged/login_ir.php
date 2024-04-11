@@ -52,7 +52,11 @@
                     ");
                     $_SESSION["lid"] = mysqli_insert_id($dbase);
 
-                    include("$_SESSION[R1]/note.php");
+                    mysqli_query($dbase,"
+                    INSERT INTO  note  ( nid , lid, nurl ,  ndate ,  nip ) 
+                    VALUES ( NULL, '$_SESSION[lid]', '$_SERVER[REQUEST_URI]', current_timestamp(), '$_SERVER[REMOTE_ADDR]'
+                    )");
+                    
                     //$_SERVER[REMOTE_ADDR]
 
                     /*

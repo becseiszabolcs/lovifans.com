@@ -8,20 +8,23 @@
         $options = ["cost" => 12];
         $pass = password_hash($_POST["upass1"],PASSWORD_BCRYPT,$options);
         $uids = mysqli_fetch_array(mysqli_query($dbase,"select ustrid from users"));
-
-        while(true){
-            $bool = false;
-            $usrtid = randoms();
-            foreach($uids as $id){
-                if($id == $usrtid){
-                    $bool = true;
-                    break;
+        if($uids){
+            while(true){
+                $bool = false;
+                $usrtid = randoms();
+                
+                foreach($uids as $id){
+                    if($id == $usrtid){
+                        $bool = true;
+                        break;
+                    }
                 }
+                if(!$bool) break;
             }
-            if(!$bool) break;
-        }
-        //$yes = mysqli_fetch_array(mysqli_query($dbase,"select * from users umail='$umail'"));
-        //if($yes) die("<script>alert('Sorry, someone already registered with this email address.');window.location.href='$_SESSION[R1]/?page=reg'</script>");
+        } else $usrtid = randoms();
+
+        $yes = mysqli_fetch_array(mysqli_query($dbase,"select * from users where  umail='$umail'"));
+        if($yes!=NULL) die("<script>alert('Sorry, someone already registered with this email address.');window.location.href='$_SESSION[R1]/signup'</script>");
         if(!empty($usern) && !empty($pass) && !is_numeric($usern)){
             if($_POST["upass1"] == $_POST["upass2"]){
                 mysqli_query($dbase, "
@@ -47,7 +50,6 @@
                     parent.location.href='$_SESSION[R1]/signup';
                 </script>
                 ";
-                die();
             } 
 
         }
@@ -58,7 +60,6 @@
                 parent.location.href='$_SESSION[R1]/signup';
             </script>
             ";
-            die();
         }
     }
 ?>

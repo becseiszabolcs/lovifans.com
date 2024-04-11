@@ -1,4 +1,5 @@
 <?php
+if(session_id() === "") session_start();
 include("../private/connect.php");
 mysqli_query($dbase,"
 INSERT INTO  note  ( nid , lid, nurl ,  ndate ,  nip ) 
