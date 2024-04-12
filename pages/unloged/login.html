@@ -42,7 +42,7 @@ $(document).ready(function(){
                 $("#successMessage").removeClass('d-done').html("Login successful. Redirecting...");
                 setTimeout(function(){
                     window.location.href = "http://localhost/lovifans.com/";
-                }, 10); // Redirect after 2 seconds
+                }, 10); 
             }
         }).fail(function(jqXHR, textStatus, errorThrown){
             $("#error").removeClass('d-done').html("There was an error in login: " + errorThrown);ű

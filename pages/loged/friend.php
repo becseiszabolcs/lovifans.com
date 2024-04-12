@@ -24,7 +24,7 @@ include("note.php");
         </div>
         
         <div id="privmessages">
-            <!--<p>select someone to chat whit</p-->
+            <p>select someone to chat whit</p>
 
         </div>
 
