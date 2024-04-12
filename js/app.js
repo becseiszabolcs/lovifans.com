@@ -139,7 +139,9 @@ function fetchfriends(soup,search=""){
     });
 }
 function displayfriends(friends,soup) {
-    $('#friendslist').empty();
+    
+    if($('#friendslist')=="") $('#friendslist').html(" <a href='http://localhost/lovifans.com/finding' class='friprofile'>Search for friends</a>");
+    else $('#friendslist').empty();
     var head=`
         <img src=" /lovifans.com/image/default.png" alt="">
         <span></span>
@@ -170,6 +172,8 @@ function displayfriends(friends,soup) {
             </a>`;
         
         $('#friendslist').append(fri);
+        
+        
 
     });
 }
@@ -182,7 +186,7 @@ function fetchMessages(soup) {
         method: 'GET',
         dataType: 'json',
         success: function(data) {
-            displayMessages(data);
+            displayMessages(data,soup);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.error('Error fetching messages:', errorThrown);
@@ -190,8 +194,11 @@ function fetchMessages(soup) {
     });
 }
 
-function displayMessages(messages) {
-    $('#privmessages').empty();
+function displayMessages(messages,soup) {
+    if(soup==""){
+        $('#privmessages').html('<p>select someone to chat whit</p>');
+    } else $('#privmessages').empty();
+    
 
     messages.forEach(function(message) {
 
@@ -226,6 +233,8 @@ function displayMessages(messages) {
         }
         
         $('#privmessages').append(mes);
+        if(soup=="") $('#privmessages').append('<p>select someone to chat whit</p>');
+        
 
     });
 }
