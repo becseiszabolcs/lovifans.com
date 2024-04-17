@@ -10,7 +10,7 @@
     }
     $_SESSION['R1'] ="http://localhost/lovifans.com";
     $_SESSION["priv"]="../../../private";
-    $_SESSION["files"]="http://localhost/private";
+    $_SESSION["files"]="$_SESSION[R1]/get_files.php?";
     if(!isset($_SESSION["uid"])){
         //loged out
         $pages = ["login","signup","about","services","contact","send-password-reset"];
@@ -47,11 +47,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro">
-    <link rel="icon" href="/lovifans.com/image/logo.png" type="image/x-icon">
+    <link rel="icon" href="<?=$_SESSION['R1']?>/image/logo.png" type="image/x-icon">
     
     <title><?=ucfirst($p)?> > LoviFans</title>
 
-    <link rel="stylesheet" href="/lovifans.com/style.css">
+    <link rel="stylesheet" href="<?=$_SESSION['R1']?>/style.css">
     <script src="<?=$_SESSION['R1']?>/js/jquery.js"></script>
     <script src="<?=$_SESSION['R1']?>/js/script.js"></script>
     <script src="<?=$_SESSION['R1']?>/js/app.js"></script>
@@ -66,7 +66,7 @@
             print"
                 <div class ='container' id=un>
                     <header>
-                        <img class='plogo' src='/lovifans.com/image/logo.png'>
+                        <img class='plogo' src='$_SESSION[R1]/image/logo.png'>
                         <h1 class='logo'>LoviFans</h1>
                         <nav class ='navigation'>
                             <a class='link' href='$_SESSION[R1]/about'>About</a>
@@ -77,12 +77,12 @@
                     </header>
             ";   
 
-            if    ($p == "login")               include("./pages/unloged/login.html");
+            if    ($p == "login")               include("./pages/unloged/login.php");
             elseif($p == "password-reset")      header("Location: ./password-reset.php");
-            elseif($p == "send-password-reset") header("Location: ./send-password-reset.html");
-            elseif($p == "signup")              include("./pages/unloged/regist.html");
-            elseif($p == "about")               include("./pages/about.html");
-            elseif($p == "services")            include("./pages/services.html");
+            elseif($p == "send-password-reset") header("Location: ./send-password-reset.php");
+            elseif($p == "signup")              include("./pages/unloged/regist.php");
+            elseif($p == "about")               include("./pages/about.php");
+            elseif($p == "services")            include("./pages/services.php");
             elseif($p == "contact")             include("./pages/contact.php");
             else                                include("./pages/404.php");
             
@@ -92,13 +92,13 @@
             print"
                 <div class='container' id='loged'>
                     <header id='first_header'>
-                        <img class='plogo' src='/lovifans.com/image/logo.png'>
+                        <img class='plogo' src='$_SESSION[R1]/image/logo.png'>
                         <nav class ='navigation'>
-                            <a class='link' href=' /lovifans.com/'>Home              </a>
-                            <a class='link' href=' /lovifans.com/friends'>Friends    </a>
-                            <a class='link' href=' /lovifans.com/finding'>Finding    </a>
+                            <a class='link' href=' $_SESSION[R1]'>Home              </a>
+                            <a class='link' href=' $_SESSION[R1]/friends'>Friends    </a>
+                            <a class='link' href=' $_SESSION[R1]/finding'>Finding    </a>
                             <div class='menu'>
-                                <button onclick='window.location.href=\" /lovifans.com/profile\"' class='btnprof'><div class='profimg'><img src='$prof_img' alt='Profil image'></div><a id='profile_name'>$_SESSION[uname]</a></button>
+                                <button onclick='window.location.href=\" $_SESSION[R1]/profile\"' class='btnprof'><div class='profimg'><img src='$prof_img' alt='Profil image'></div><a id='profile_name'>$_SESSION[uname]</a></button>
                                 <div class='dropdown'>
                                     <a href='$_SESSION[R1]/profile/'>               <div class='profimg'><img src='$prof_img' alt='Profil image'></div>     Profile Page            </a>
                                     <a href='$_SESSION[R1]/contact/'>               <img class='icon' src='$_SESSION[R1]/image/connect.png' alt='connect icon'>          Help & Question         </a>

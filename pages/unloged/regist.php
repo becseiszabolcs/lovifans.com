@@ -1,7 +1,7 @@
 <div class="wrapper signup">
     <div class="form-box">
         <h1>Sign Up</h1>
-        <form action=" /lovifans.com/pages/unloged/regin_ir.php" method="post">
+        <form action=" <?=$_SESSION['R1']?>/pages/unloged/regin_ir.php" method="post">
             
             <input type="text" name="uname" class="text" placeholder="username" id="uname" ><br>
             <input type="email" name="umail" class="text" placeholder="email" id="email"><br>
@@ -9,7 +9,7 @@
             <div id="dpass">
                 <input type="password" name="upass1" class="text" id="ptext1" placeholder=" password" onkeyup="passwordStrength(this.value);">
                 <a class="aeye" id="eyea" onclick="apper('#ptext1','#eye1')">
-                    <img class="eye" id="eye1"  src=" /lovifans.com/image/eye.png" alt="">
+                    <img class="eye" id="eye1"  src=" <?=$_SESSION['R1']?>/image/eye.png" alt="">
                 </a><br>
                 
                 <div id="slidetext"></div>
@@ -19,7 +19,7 @@
 
             <input type="password" name="upass2" class="text" id="ptext2" placeholder=" repeat password">
             <a class="aeye" id="eyeb" onclick="apper('#ptext2','#eye2')">
-                <img class="eye" id="eye2"  src=" /lovifans.com/image/eye.png" alt="">
+                <img class="eye" id="eye2"  src=" <?=$_SESSION['R1']?>/image/eye.png" alt="">
             </a><br>
 
             <input disabled type="submit" value="Sign Up" class="sub" id="signup"><br><br>
@@ -32,7 +32,7 @@
                 
             </div>
             <div class="spanbox">
-            <span>Have you registered yet? </span><a href=" /lovifans.com/">Log in</a><br>
+            <span>Have you registered yet? </span><a href="<?=$_SESSION['R1']?>">Log in</a><br>
             </div>
             
         </form>

@@ -43,11 +43,13 @@ include("note.php");
                 <button onclick="sendMessage()">send</button>
 
             </div>
+            
         </div>
 
         <script>
         //document.getElementById('file').click();
-        window.selfiles = [];
+        $(document).ready(function(){
+            window.selfiles = [];
         function waitfile(){
             return new Promise(function(resolve,reject){
                 $("#file").on("change",function(){
@@ -69,38 +71,56 @@ include("note.php");
             });
 
         });
-        function sendMessage(){
-            
-            var sendr = r1 + 'pages/loged/send.php';
 
-            var filein = document.getElementById('file');
-            var formData = new FormData();
-            var xhr = new XMLHttpRequest();
-            if(window.selfiles) {
-                var filelist = window.selfiles;
-                if(filelist.length>0){
-                    for(var file of filelist){
-                        formData.append("files[]",file);
-
+            var fend=15;
+            var fworking=false;
+            fetchfriends("<?=url(2)?>",fend,"<?=isset($_GET['search']) ? $_GET['search'] : '' ?>");
+            $("#friendslist").hover(function(){
+                setTimeout(fetchfriends,3000,"<?=url(2)?>",fend,"<?=isset($_GET['search']) ? $_GET['search'] : '' ?>");
+            });
+            $("#friendslist").scroll(function(){
+                if($(this).scrollTop() + 1 >= $("#friendslist").height() - $(window).height()){
+                    if(fworking==false){
+                        fworking=true
+                        fend+=5;
+                        fetchfriends("<?=url(2)?>",fend,"<?=isset($_GET['search']) ? $_GET['search'] : '' ?>");
+                        setTimeout(function(){
+                            fworking=false;
+                        },2000);
                     }
+
                 }
-            }
-            if($("#message").val()!=""){
-                formData.append("message",$("#message").val());             
-                if(soup)      formData.append('soup', $("#soup").val());
-                
-            }
-            xhr.open("post",sendr);
-            xhr.send(formData);
-            window.selfiles = [];
-            $("#message").val('');
+            });
 
-        }
+            
+            var end=15;
+            var working=false;
+            fetchMessages("<?=url(2)?>",end);
+            $("#privmessages").hover(function(){
+                setTimeout(fetchMessages,3000,"<?=url(2)?>",end);
+            });
+            $("#privmessages").scroll(function(){
+                if($(this).scrollTop() + 1 >= $("#privmessages").height() - $(window).height()){
+                    if(working==false){
+                        working=true
+                        end+=5;
+                        fetchMessages("<?=url(2)?>",end);
+                        setTimeout(function(){
+                            working=false;
+                        },2000);
+                    }
 
-            fetchfriends("<?=url(2)?>");
-            setInterval(fetchfriends("<?=url(2)?>","<?=isset($_GET['search']) ? $_GET['search'] : '' ?>"), 1000);
-            fetchMessages("<?=url(2)?>");
-            setInterval(fetchMessages("<?=url(2)?>"), 1000);
+                }
+            });
+
+
+            
+                //setTimeout(fetchMessages,1000,"<?=url(2)?>",end);
+ 
+
+        
+        });
+        
         </script>
     </div>
 </div>

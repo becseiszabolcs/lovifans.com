@@ -18,8 +18,8 @@ mysqli_query($dbase,"
 ");
 
 
-echo"<script>alert('password is successfully changed');window.location.href='http://localhost/lovifans.com';</script>";
+echo"<script>alert('password is successfully changed');window.location.href='$_SESSION[R1]/';</script>";
 mysqli_close($dbase);
 ?>
-<script>window.location.href='http://localhost/lovifans.com'</script>
+<script>window.location.href='<?=$_SESSION['R1']?>/'</script>
 

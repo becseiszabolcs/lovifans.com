@@ -2,10 +2,9 @@ var r1 = 'http://localhost/lovifans.com/';
 
 //find site
 
-function fetchMembers(sel,search) {
+function fetchMembers(sel="",end=20,search) {
 
-    if(search!="") var chatr = r1+`pages/loged/find_fetch.php?search=${search}`;
-    else var chatr = r1+`pages/loged/find_fetch.php`;
+    var chatr = r1+`pages/loged/find_fetch.php?sel=${sel}&end=${end}&search=${search}`;
     $.ajax({
         url: chatr,
         method: 'GET',
@@ -123,9 +122,9 @@ function addFriend(id) {
 }   
 
 //friends site
-function fetchfriends(soup,search=""){
-    if(search!="") var chatr = r1+`pages/loged/friend_fetch.php?timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}&search=${search}`;
-    else var chatr = r1+`pages/loged/friend_fetch.php?timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`;
+function fetchfriends(soup,end=10,search=""){
+    if(search!="") var chatr = r1+`pages/loged/friend_fetch.php?end=${end}&timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}&search=${search}`;
+    else var chatr = r1+`pages/loged/friend_fetch.php?end=${end}&timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`;
     $.ajax({
         url: chatr,
         method: 'GET',
@@ -137,6 +136,7 @@ function fetchfriends(soup,search=""){
             console.error('Error fetching messages:', errorThrown);
         }
     });
+    //if(soup!="") setTimeout(fetchfriends,1000,soup,search);
 }
 function displayfriends(friends,soup) {
     
@@ -179,8 +179,8 @@ function displayfriends(friends,soup) {
 }
 
 
-function fetchMessages(soup) {
-    var chatr = r1+`pages/loged/chat.php?id=${soup}`;
+function fetchMessages(soup,end=15) {
+    var chatr = r1+`pages/loged/chat.php?id=${soup}&end=${end}`;
     $.ajax({
         url: chatr,
         method: 'GET',
@@ -192,12 +192,14 @@ function fetchMessages(soup) {
             console.error('Error fetching messages:', errorThrown);
         }
     });
+    //if(soup!="") setTimeout(fetchMessages,1000,soup,end);
 }
 
 function displayMessages(messages,soup) {
     if(soup==""){
         $('#privmessages').html('<p>select someone to chat whit</p>');
-    } else $('#privmessages').empty();
+    } else $('#privmessages').html('');
+    
     
 
     messages.forEach(function(message) {
@@ -235,7 +237,7 @@ function displayMessages(messages,soup) {
         $('#privmessages').append(mes);
         if(soup=="") $('#privmessages').append('<p>select someone to chat whit</p>');
         
-
+        
     });
 }
 function textheight() {
@@ -245,6 +247,33 @@ function textheight() {
 
     $("#message").css("height", `${formh * 20}px`);
     $("#send_mes").css("height", `${formh * 20}px`);
+}
+function sendMessage(){
+            
+    var sendr = r1 + 'pages/loged/send.php';
+
+    var filein = document.getElementById('file');
+    var formData = new FormData();
+    var xhr = new XMLHttpRequest();
+    if(window.selfiles) {
+        var filelist = window.selfiles;
+        if(filelist.length>0){
+            for(var file of filelist){
+                formData.append("files[]",file);
+
+            }
+        }
+    }
+    if($("#message").val()!=""){
+        formData.append("message",$("#message").val());             
+        if(soup)      formData.append('soup', $("#soup").val());
+        
+    }
+    xhr.open("post",sendr);
+    xhr.send(formData);
+    window.selfiles = [];
+    $("#message").val('');
+
 }
 
 
@@ -282,11 +311,11 @@ function finext(post){
     
 }
 
-function post_fetch(soup=""){
+function post_fetch(end=10,soup=""){
     var addsoup ="";
     if(soup!="") addsoup = "&soup="+soup;
     
-    var chatr = r1+`pages/loged/post_fetch.php?timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`+addsoup;
+    var chatr = r1+`pages/loged/post_fetch.php?end=${end}&timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`+addsoup;
     $.ajax({
         url: chatr,
         method: 'GET',
@@ -298,13 +327,19 @@ function post_fetch(soup=""){
             console.error('Error fetching messages:', errorThrown);
         }
     });
+
+    //setTimeout(post_fetch,2000,soup);
+
     
 }
 
 
 function displaypost(posts){
-    var h="/lovifans.com/image/default.png";
-    $("#posts").html('');
+    var h= r1 + "/image/default.png";
+    $("#posts").html("");
+
+
+
     indexbtn ="";
     var bool =true;
     //if(typeof window.plist === 'undefined') 
@@ -385,9 +420,6 @@ function displaypost(posts){
                         <button>like</button>
                         <hr style="border: 1px solid #ddd;">
                         <button>comments</button>
-                        <hr style="border: 1px solid #ddd;">
-                        <input hidden type="file" name="file" id="file" multiple>
-                        <button id="photos">photo</button>
                         <hr style="border: 1px solid #ddd;">
                         <button>send</button>
                     </div>

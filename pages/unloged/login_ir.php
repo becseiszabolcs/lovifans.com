@@ -20,15 +20,15 @@
                     $bc = "";
                     if($Udata["icid"]) {
                         $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $Udata[icid] = fcid"))["fiid"];
-                        $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where $fiid = fiid")); 
+                        $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate,fitype from files where $fiid = fiid")); 
                         $day = explode(" ",$pi["fidate"])[0];
-                        $pic = "$_SESSION[files]/uploads/image/$day/$pi[finname]";
+                        $pic = "$_SESSION[files]type=$pi[fitype]&date=$day&file=$pi[finname]";
                     } else $pic = "$_SESSION[R1]/image/default.png";
                     if($Udata["bicid"]) {
                         $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $Udata[bicid] = fcid"))["fiid"];
-                        $bc = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where $fiid = fiid"));
+                        $bc = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate,fitype from files where $fiid = fiid"));
                         $day = explode(" ",$bc["fidate"])[0];
-                        $bc = "$_SESSION[files]/uploads/image/$day/$bc[finname]"; 
+                        $bc = "$_SESSION[files]type=$pi[fitype]&date=$day&file=$pi[finname]"; 
                     }
    
                     $_SESSION["uid"]            = $Udata["uid"]     ;

@@ -27,7 +27,7 @@ if($any){
     $mail->Subject = "Password Reset";
     $mail->Body = <<<END
     
-    Click <a href="http://localhost/lovifans.com/password-reset.php?token=$rnd">here</a> to reset your password
+    Click <a href="$_SESSION[R1]/password-reset.php?token=$rnd">here</a> to reset your password
 
     END;
 
@@ -43,11 +43,11 @@ if($any){
     
 
 
-    echo"<script>window.location.href='http://localhost/lovifans.com/'</script>";
+    echo"<script>window.location.href='$_SESSION[R1]/'</script>";
     die();
 
 
-} else echo"<script>window.location.href='http://localhost/lovifans.com/?page=reset'</script>";
+} else echo"<script>window.location.href='$_SESSION[R1]/?page=reset'</script>";
 
 mysqli_close($dbase);
 ?>

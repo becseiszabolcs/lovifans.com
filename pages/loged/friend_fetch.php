@@ -4,9 +4,9 @@
     if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
 
     $clientTimezone = isset($_GET['timezone']) ? $_GET['timezone'] : 'UTC';
-    
+    $end = isset($_GET['end']) ? $_GET['end'] : 10;
     // Fetch messages from the database
-    $query = "select uid,fuid from friends where (uid=$_SESSION[uid] or fuid=$_SESSION[uid]) and  fstat = 'A' ";
+    $query = "select uid,fuid from friends where (uid=$_SESSION[uid] or fuid=$_SESSION[uid]) and  fstat = 'A' limit 10";
     $result = mysqli_query($dbase,$query); //$dbase->query($query);
 
     
@@ -22,7 +22,7 @@
                 $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $friend[icid] = fcid"))["fiid"];
                 $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where $fiid = fiid")); 
                 $day = explode(" ",$pi["fidate"])[0];
-                $pic = "$_SESSION[priv]/uploads/image/$day/$pi[finname]";
+                $pic = "$_SESSION[files]type=$pi[fitype]&date=$day&file=$pi[finname]";
             } else $pic = "$_SESSION[R1]/image/default.png";
     
             if($pic == NULL) $pic="$_SESSION[R1]/image/default.png" ;

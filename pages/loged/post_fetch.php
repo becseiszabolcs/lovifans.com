@@ -2,11 +2,11 @@
 session_start();
 include("$_SESSION[priv]/connect.php");
 if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
-
+$end = isset($_GET['end']) ? $_GET['end'] : 10;
 $clientTimezone = isset($_GET['timezone']) ? $_GET['timezone'] : 'UTC';
     
 // Fetch messages from the database
-$query = "select * from post where pstat='A'";
+$query = "select * from post where pstat='A' order by pdate desc limit $end";
 $result = mysqli_query($dbase,$query); //$dbase->query($query);
 $posts=[];
 if($result){
@@ -20,7 +20,7 @@ if($result){
             $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where $user[icid] = fcid"))["fiid"];
             $pi = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate from files where $fiid = fiid")); 
             $day = explode(" ",$pi["fidate"])[0];
-            $profil_pic = "$_SESSION[files]/uploads/image/$day/$pi[finname]";
+            $profil_pic = "$_SESSION[files]type=$file[fitype]&date=$day&file=$file[finname]";
         }else  $profil_pic ="$_SESSION[R1]/image/default.png";
         
         $label = $post["plabel"];
@@ -35,7 +35,7 @@ if($result){
                     $fiid = mysqli_fetch_assoc(mysqli_query($dbase,"select fiid from fconnect where fcid=$id"))["fiid"];
                     $file = mysqli_fetch_assoc(mysqli_query($dbase,"select finname,fidate,fitype from files where fiid=$fiid and fistat='A'"));
                     $day  = explode(" ",$file["fidate"])[0];
-                    $files[] = "$_SESSION[files]/uploads/$file[fitype]/$day/$file[finname]";
+                    $files[] = "$_SESSION[files]type=$file[fitype]&date=$day&file=$file[finname]";
                 }
     
             }

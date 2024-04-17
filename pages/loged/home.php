@@ -14,14 +14,17 @@ include("note.php");
             <div id="sel"></div>
 
             <button onclick="post()">send</button>
+
         </div>
 
     </div>
     <div id="posts" class="posts">
- 
+
     </div>
 </div>
     <script>
+
+
         window.selfiles = [];
         //document.getElementById('file').click();
         function waitfile(){
@@ -32,6 +35,7 @@ include("note.php");
                 });
             });
         } 
+        $("#photos")
 
         $("#photos").click(function(){
             $("#file").click();
@@ -68,8 +72,25 @@ include("note.php");
             $("#message").val('');
 
         }
+        var end=10;
+        var working=false;
         post_fetch();
-        setInterval(post_fetch,6000);
+        $(window).scroll(function(){
+            if($(this).scrollTop() + 1 >= $("body").height() - $(window).height()){
+                if(working==false){
+                    working=true
+                    end+=5;
+                    post_fetch(end);
+                    setTimeout(function(){
+                        working=false;
+                    },4000);
+                }
+
+            }
+        });
+        
+
+
 
 
         

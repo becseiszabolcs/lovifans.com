@@ -25,6 +25,7 @@ include("note.php");
                     </div>
                 </div>
             </a>   
+            <!--
             <a href=" /lovifans.com/finding/friendsof">
                 <div class="content">
                     <div class="details">
@@ -32,6 +33,7 @@ include("note.php");
                     </div>
                 </div>
             </a>
+            -->
             <a href=" /lovifans.com/finding/unknown">
                 <div class="content">
                     <div class="details">
@@ -56,8 +58,24 @@ include("note.php");
     </div>
 
     <script>
-        fetchMembers("<?url(1)?>","<?=isset($_GET['search']) ? $_GET['search'] : '' ?>");
-        setInterval(fetchMembers("<?url(1)?>","<?=isset($_GET['search']) ? $_GET['search'] : '' ?>"), 1000);
+        var end=20;
+        var working=false;
+        fetchMembers("<?=url(1)?>",end,"<?=isset($_GET['search']) ? $_GET['search'] : '' ?>");
+        $(window).scroll(function(){
+            if($(this).scrollTop() + 1 >= $("body").height() - $(window).height()){
+                if(working==false){
+                    working=true
+                    end+=5;
+                    fetchMembers("<?=url(1)?>",end,"<?=isset($_GET['search']) ? $_GET['search'] : '' ?>");
+                    setTimeout(function(){
+                        working=false;
+                    },4000);
+                }
+
+            }
+        });
+        
+
     </script>
     </div>
 </div>

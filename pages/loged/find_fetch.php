@@ -4,7 +4,8 @@
     if(!isset($_SESSION["uid"])) header("Location: $_SESSION[R1]");
        
     // Fetch messages from the database
-
+    $sel = isset($_GET["sel"]) ? $_GET["sel"] : "";
+    $end = isset($_GET["end"]) ? $_GET["end"] : 20;
     if(isset($_GET["search"]) ? $_GET["search"]!="" : false )   $query = "SELECT * FROM users where uid != $_SESSION[uid] and ustat like 'A%' and (uname like '%$_GET[search]%')";
     else                                                        $query = "SELECT * FROM users where uid != $_SESSION[uid] and ustat like 'A%' ";
     
@@ -30,8 +31,16 @@
                     else                                  $fstat = "D2";
                 } else $fstat = $fstat["fstat"];
             } 
-    
-            $profil[] = ["name"=>$name,"profile_id"=> $profil_id, "profil_pic"=>$pic,"pic_alt"=>"$name's image", "stat"=>$stat, "fstat"=>$fstat];
+
+            if($sel!=""){
+                if($fstat){
+                    if($sel=="request" && ($fstat=="D2"||$fstat=="D1")) $profil[] = ["name"=>$name,"profile_id"=> $profil_id, "profil_pic"=>$pic,"pic_alt"=>"$name's image", "stat"=>$stat, "fstat"=>$fstat];
+                    else if($sel=="friends" && $fstat=="A") $profil[] = ["name"=>$name,"profile_id"=> $profil_id, "profil_pic"=>$pic,"pic_alt"=>"$name's image", "stat"=>$stat, "fstat"=>$fstat];
+                    
+                }else if($sel=="unknown") $profil[] = ["name"=>$name,"profile_id"=> $profil_id, "profil_pic"=>$pic,"pic_alt"=>"$name's image", "stat"=>$stat, "fstat"=>$fstat];
+            } else $profil[] = ["name"=>$name,"profile_id"=> $profil_id, "profil_pic"=>$pic,"pic_alt"=>"$name's image", "stat"=>$stat, "fstat"=>$fstat];
+
+            
         }
     }
     

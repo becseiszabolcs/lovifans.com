@@ -4,8 +4,9 @@
     include("$_SESSION[priv]/connect.php");
     //    
     // Fetch messages from the database
+    $end = isset($_GET["end"]) ? $_GET["end"] : 15;
     $id = isset($_GET["id"]) ? $_GET["id"] : "";
-    $query = "SELECT * FROM message where (ustrid='$_SESSION[ustrid]' or  mtostrid='$_SESSION[ustrid]') and (ustrid='$id' or  mtostrid='$id') ORDER BY  mdate DESC";
+    $query = "SELECT * FROM message where (ustrid='$_SESSION[ustrid]' or  mtostrid='$_SESSION[ustrid]') and (ustrid='$id' or  mtostrid='$id') ORDER BY  mdate DESC limit $end";
     $result = mysqli_query($dbase,$query); //$dbase->query($query);
 
     $mes = [];
