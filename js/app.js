@@ -1,10 +1,10 @@
-var r1 = 'http://localhost/lovifans.com/';
+var r1 = 'http://localhost/lovifans.com';
 
 //find site
 
 function fetchMembers(sel="",end=20,search) {
 
-    var chatr = r1+`pages/loged/find_fetch.php?sel=${sel}&end=${end}&search=${search}`;
+    var chatr = r1+`/pages/loged/find_fetch.php?sel=${sel}&end=${end}&search=${search}`;
     $.ajax({
         url: chatr,
         method: 'GET',
@@ -23,7 +23,7 @@ function displayMembers(members) {
     var id = 0; 
     members.forEach(function(member) {
         var profil = "";
-        var img_root = "/lovifans.com/image/default.png";
+        var img_root = r1 + "/image/default.png";
         if(member.profil_pic != null) img_root = member.profil_pic;
         if(member.fstat==null | member.fstat =="I"){
             profil=`
@@ -101,7 +101,7 @@ function displayMembers(members) {
 function addFriend(id) {
 
     var profil = $(`#profile${id}`).val();
-    var reqr = r1+'pages/loged/friend_req.php';
+    var reqr = r1 + '/pages/loged/friend_req.php';
     var reqData = new FormData();
 
     if(profil){
@@ -123,8 +123,8 @@ function addFriend(id) {
 
 //friends site
 function fetchfriends(soup,end=10,search=""){
-    if(search!="") var chatr = r1+`pages/loged/friend_fetch.php?end=${end}&timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}&search=${search}`;
-    else var chatr = r1+`pages/loged/friend_fetch.php?end=${end}&timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`;
+    if(search!="") var chatr = r1+`/pages/loged/friend_fetch.php?end=${end}&timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}&search=${search}`;
+    else var chatr = r1+`/pages/loged/friend_fetch.php?end=${end}&timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`;
     $.ajax({
         url: chatr,
         method: 'GET',
@@ -140,10 +140,10 @@ function fetchfriends(soup,end=10,search=""){
 }
 function displayfriends(friends,soup) {
     
-    if($('#friendslist')=="") $('#friendslist').html(" <a href='http://localhost/lovifans.com/finding' class='friprofile'>Search for friends</a>");
+    if($('#friendslist')=="") $('#friendslist').html(` <a href='${r1}/finding' class='friprofile'>Search for friends</a>`);
     else $('#friendslist').empty();
     var head=`
-        <img src=" /lovifans.com/image/default.png" alt="">
+        <img src=" ${r1}/image/default.png" alt="">
         <span></span>
     `;
     $('#header').html(head);
@@ -180,7 +180,7 @@ function displayfriends(friends,soup) {
 
 
 function fetchMessages(soup,end=15) {
-    var chatr = r1+`pages/loged/chat.php?id=${soup}&end=${end}`;
+    var chatr = r1+`/pages/loged/chat.php?id=${soup}&end=${end}`;
     $.ajax({
         url: chatr,
         method: 'GET',
@@ -250,7 +250,7 @@ function textheight() {
 }
 function sendMessage(){
             
-    var sendr = r1 + 'pages/loged/send.php';
+    var sendr = r1 + '/pages/loged/send.php';
 
     var filein = document.getElementById('file');
     var formData = new FormData();
@@ -315,7 +315,7 @@ function post_fetch(end=10,soup=""){
     var addsoup ="";
     if(soup!="") addsoup = "&soup="+soup;
     
-    var chatr = r1+`pages/loged/post_fetch.php?end=${end}&timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`+addsoup;
+    var chatr = r1+`/pages/loged/post_fetch.php?end=${end}&timezone=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`+addsoup;
     $.ajax({
         url: chatr,
         method: 'GET',

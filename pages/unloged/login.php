@@ -41,7 +41,7 @@ $(document).ready(function(){
                 localStorage.setItem('token', data.token);
                 $("#successMessage").removeClass('d-done').html("Login successful. Redirecting...");
                 setTimeout(function(){
-                    window.location.href = "<?$_SESSION['R1']?>/";
+                    window.location.href = "<?=$_SESSION['R1']?>/";
                 }, 10); 
             }
         }).fail(function(jqXHR, textStatus, errorThrown){
