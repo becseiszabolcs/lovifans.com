@@ -283,29 +283,40 @@ window.plist = [];
 
 
 function fiprevius(post){
+
     
     for(var i = 0; i < window.plist.length; i++){
 
-        if(post == window.plist[i][0] && window.plist[i][0] != 0){
-            $(`#${post}fi${window.plist[i][1]}`).removeClass('sel');
-            $(`#${post}fi${window.plist[i][1]-1}`).addClass('sel');
-            window.plist[i][1] = window.plist[i][1] - 1;
+        if(post == window.plist[i][0]){
+            
+            if(window.plist[i][2] > 0){
+                $(`#${post}fi${window.plist[i][2]}`).removeClass('sel');
+                $(`#${post}fi${window.plist[i][2]-1}`).addClass('sel');
+                window.plist[i][2] = window.plist[i][2] - 1;
+                console.log(`#${post}fi${window.plist[i][2]}`);
+               
+            }
             break;
-
         }
     }
+    
     
 }
 
 function finext(post){
-
+    
+    
     for(var i = 0; i < window.plist.length; i++){
-        if(post == window.plist[i][0] && window.plist[i][0] != window.plist.length-1){
-            $(`#${post}fi${window.plist[i][1]}`).removeClass('sel');
-            $(`#${post}fi${window.plist[i][1]+1}`).addClass('sel');
-            window.plist[i][1] = window.plist[i][1] + 1;
-            break;
 
+        if(post == window.plist[i][0]){
+            if(window.plist[i][1]-1 > window.plist[i][2]){
+                $(`#${post}fi${window.plist[i][2]}`).removeClass('sel');
+                $(`#${post}fi${window.plist[i][2]+1}`).addClass('sel');
+                window.plist[i][2] = window.plist[i][2] + 1;
+                console.log(`#${post}fi${window.plist[i][2]}`);
+                
+            }
+            break;
         }
     }
     
@@ -361,12 +372,12 @@ function displaypost(posts){
                 if(window.plist.length>0){
                     for(var i = 0; i < window.plist.length; i++){
                         if(pname == window.plist[i][0] && window.plist[i][0] != window.plist.length-1){
-                            d = window.plist[i][1];
+                            d = window.plist[i][2];
                         }
                     }
                 }
-                if(id == d) Files += `<img id='#post${pid}fi${id}' src='${f}' class="sel">`;
-                else Files += `<img id='#post${pid}fi${id}' src='${f}'>`;
+                if(id == d) Files += `<img id='post${pid}fi${id}' src='${f}' class="sel">`;
+                else Files += `<img id='post${pid}fi${id}' src='${f}'>`;
                 d=0;
                 id++;
             });
@@ -394,12 +405,12 @@ function displaypost(posts){
                         return false;
                     }
                 });
-                if(bool) window.plist.push([`post${id}`,0]);
+                if(bool) window.plist.push([`post${pid}`,post.files.length,0]);
             }else indexbtn = "";
         }
         
         var post_blueprint =`
-            <div class="post">
+            <div class="post" id="post${pid}">
             <div class="header">
                 <img src="${post.profil_picture}" alt="profil image" id="profimg">
                 <h1 class="profilname_post">

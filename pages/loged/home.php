@@ -50,7 +50,7 @@ include("note.php");
 
         });
         function post(){
-            var sendr = r1 + 'pages/loged/post.php';
+            var sendr = r1 + '/pages/loged/post.php';
 
             var filein = document.getElementById('file');
             var formData = new FormData();
