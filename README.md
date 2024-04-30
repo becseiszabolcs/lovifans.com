@@ -1,1 +1,1 @@
-The private zip have to extract the same location as the web page folder in.
+The private zip file should be extracted to the same location as your website folder.
